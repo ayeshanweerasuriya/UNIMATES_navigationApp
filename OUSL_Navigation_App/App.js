@@ -24,7 +24,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import OpenScreen from './OpenScreen';
-// import Home from './Home';
+import Home from './Home';
 // import Direction from './Direction';
 // import Settings from './Settings';
 // import AboutUs from './AboutUs';
@@ -37,8 +37,8 @@ const AppNavigator = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="OpenScreen">
         <Stack.Screen name="OpenScreen" component={OpenScreen} options={{headerShown: false}} />
-        {/* <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
-        <Stack.Screen name="Direction" component={Direction} options={{headerShown: false}} />
+        <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
+        {/* <Stack.Screen name="Direction" component={Direction} options={{headerShown: false}} />
         <Stack.Screen name="Settings" component={Settings} options={{headerShown: false}} />
         <Stack.Screen name="AboutUs" component={AboutUs} options={{headerShown: false}} />
         <Stack.Screen name="SavedLocations" component={SavedLocations} options={{headerShown: false}} /> */}

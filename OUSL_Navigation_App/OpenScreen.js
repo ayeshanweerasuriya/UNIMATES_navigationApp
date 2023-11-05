@@ -1,27 +1,44 @@
-import React, { useEffect } from 'react'; // import useEffect
-import { useNavigation } from '@react-navigation/native'; // import useNavigation
+import React, { useEffect, useRef } from 'react'; // import useEffect
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, Animated } from 'react-native';
 
-export default function OpenScreen() {
-  const navigation = useNavigation();
+export default function OpenScreen({ navigation }) {
+
+  const fadeAnim = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
+    // This will run only once after the component mounts
+    // Wait for 5 seconds before starting the fade out animation
     const timer = setTimeout(() => {
-      // Navigate to 'Home' after 5 seconds
-      navigation.navigate('Home');
-    }, 5000); // 5000 ms = 5 seconds
+      // Animate the opacity from 1 to 0 over a duration of 1000 milliseconds (1 second)
+      Animated.timing(fadeAnim, {
+        toValue: 0,
+        duration: 1000,
+        useNativeDriver: true, // Add this line to ensure that native driver is used for better performance
+      }).start(() => {
+        // After the animation is done, navigate to the Home screen
+        navigation.navigate('Home');
+      });
+    }, 4000); // Start fading out after 4 seconds
 
     // Clear the timer when the component unmounts
     return () => clearTimeout(timer);
-  }, [navigation]);
+  }, [fadeAnim, navigation]);
 
   return (
-    <View style={styles.container}>
+    <Animated.View
+      style={[
+        styles.container,
+        {
+          // Bind the animated value to the opacity property
+          opacity: fadeAnim
+        }
+      ]}
+    >
       <Image source={require('./assets/Logo-OUSL.png')} style={styles.img} />
       <Text style={styles.text}>OPEN UNIVERSITY OF SRI LANKA</Text>
       <StatusBar style="auto" />
-    </View>
+    </Animated.View>
   );
 }
 
