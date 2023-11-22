@@ -7,7 +7,7 @@ import {
   ScrollView,
 } from "react-native";
 
-const privayPolicy = () => {
+const PrivacyPolicy = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.mainTitle}>
@@ -107,4 +107,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default privayPolicy;
+export default PrivacyPolicy;

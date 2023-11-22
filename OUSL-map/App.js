@@ -1,21 +1,56 @@
-import { StatusBar } from 'expo-status-bar';
+// import { StatusBar } from "expo-status-bar";
+// import { StyleSheet, Text, View } from "react-native";
+
+// export default function App() {
+//   return (
+//     <View style={styles.container}>
+//       <Text>Open up App.js to start working on your app!</Text>
+//       <StatusBar style="auto" />
+//     </View>
+//   );
+// }
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: "#fff",
+//     alignItems: "center",
+//     justifyContent: "center",
+//   },
+// });
+
 import React from 'react';
-import { SafeAreaView, View, TouchableOpacity, Text } from 'react-native';
-import MapComponent from './MapComponent';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+import LaunchScreen from './LaunchScreen';
+import Home from './Home';
 import BottomToolbar from './BottomToolbar';
+import Search from './Search';
+import PrivacyPolicy from './Privacy_Policy';
+// import Direction from './Direction';
+// import Settings from './Settings';
+// import AboutUs from './AboutUs';
+// import SavedLocations from './SavedLocations';
 
-const App = () => {
+const Stack = createNativeStackNavigator();
+
+const AppNavigator = () => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <StatusBar style='auto' />
-      <MapComponent />
-      <View style={{ bottom: 0, position: 'absolute', marginBottom: 120, marginLeft: 18}}>
-        <Text style={{fontWeight: 500, fontSize: 14 }}>UNIMATES</Text>
-        <Text>&copy; 2023</Text>
-      </View>
-      <BottomToolbar />
-    </SafeAreaView>
-  );
-};
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="LaunchScreen">
+        <Stack.Screen name="LaunchScreen" component={LaunchScreen} options={{headerShown: false}} />
+        <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
+        <Stack.Screen name="BottomToolbar" component={BottomToolbar} options={{headerShown: false}} />
+        <Stack.Screen name="Search" component={Search} options={{headerShown: false}} />
+        <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} options={{headerShown: false}}/>
+        {/* <Stack.Screen name="Direction" component={Direction} options={{headerShown: false}} />
+        <Stack.Screen name="Settings" component={Settings} options={{headerShown: false}} />
+        <Stack.Screen name="AboutUs" component={AboutUs} options={{headerShown: false}} />
+        <Stack.Screen name="SavedLocations" component={SavedLocations} options={{headerShown: false}} /> */}
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
+}
 
-export default App;
+export default AppNavigator;
