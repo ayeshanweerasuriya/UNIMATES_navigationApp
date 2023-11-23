@@ -1,8 +1,10 @@
-import React from 'react';
-import {} from 'react-native';
+import React from "react";
+import {} from "react-native";
 
-const Settings () => {};
+const Settings = () => {
+  return <View>Hello</View>;
+};
 
-const styles = create.StyleSheet ({});
+const styles = StyleSheet.create({});
 
 export default Settings;
