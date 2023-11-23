@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import {
   View,
+  StyleSheet,
   Text,
   TouchableOpacity,
   Animated,
   Easing,
-  StyleSheet,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
@@ -33,57 +33,47 @@ const CustomSwitch = () => {
 
   return (
     <View style={styles.container}>
-      <DarkModeSwitch
-        isEnabled={isEnabled}
-        onToggle={toggleSwitch}
-        togglePosition={togglePosition}
-      />
-      <OtherOption text="About Us" icon="chevron-right" />
-      <OtherOption text="Privacy Policy" icon="chevron-right" />
-      <ReportBug />
+      <View style={styles.darkModeContainer}>
+        <Text style={styles.OptionText}>Dark Mode</Text>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={toggleSwitch}
+          style={[
+            styles.switchStyle,
+            { backgroundColor: isEnabled ? "#BA7815" : "#767577" },
+          ]}
+        >
+          <View style={styles.toggleContainer}>
+            <Animated.View
+              style={[
+                styles.toggleButton,
+                { transform: [{ translateX: togglePosition }] },
+              ]}
+            />
+          </View>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.otherContainers}>
+        <TouchableOpacity style={styles.otherContainersAlign}>
+          <Text style={styles.OptionText}>About Us</Text>
+          <Icon name="chevron-right" size={20} color="#000000" />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.otherContainers}>
+        <TouchableOpacity style={styles.otherContainersAlign}>
+          <Text style={styles.OptionText}>Privacy Policy</Text>
+          <Icon name="chevron-right" size={20} color="#000000" />
+        </TouchableOpacity>
+      </View>
+
+      <TouchableOpacity style={styles.bug}>
+        <Icon name="bug" size={15} color="#000000" />
+        <Text style={styles.bugText}>Report a Bug</Text>
+      </TouchableOpacity>
       <Text style={styles.versionNum}>V 0.1</Text>
     </View>
   );
 };
-
-const DarkModeSwitch = ({ isEnabled, onToggle, togglePosition }) => (
-  <View style={styles.darkModeContainer}>
-    <Text style={styles.optionText}>Dark Mode</Text>
-    <TouchableOpacity
-      activeOpacity={0.8}
-      onPress={onToggle}
-      style={[
-        styles.switchStyle,
-        { backgroundColor: isEnabled ? "#BA7815" : "#767577" },
-      ]}
-    >
-      <View style={styles.toggleContainer}>
-        <Animated.View
-          style={[
-            styles.toggleButton,
-            { transform: [{ translateX: togglePosition }] },
-          ]}
-        />
-      </View>
-    </TouchableOpacity>
-  </View>
-);
-
-const OtherOption = ({ text, icon }) => (
-  <View style={styles.otherContainers}>
-    <TouchableOpacity style={styles.otherContainersAlign}>
-      <Text style={styles.optionText}>{text}</Text>
-      <Icon name={icon} size={20} color="#000000" />
-    </TouchableOpacity>
-  </View>
-);
-
-const ReportBug = () => (
-  <TouchableOpacity style={styles.bug}>
-    <Icon name="bug" size={15} color="#000000" />
-    <Text style={styles.bugText}>Report a Bug</Text>
-  </TouchableOpacity>
-);
 
 const styles = StyleSheet.create({
   container: {
@@ -102,7 +92,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
 
-  optionText: {
+  OptionText: {
     fontWeight: "bold",
     fontSize: 15,
   },
@@ -135,6 +125,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   otherContainers: {
+    // backgroundColor: "#F4F4F4",
     backgroundColor: "#ffffff",
     padding: 20,
     borderRadius: 10,
