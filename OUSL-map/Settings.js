@@ -30,7 +30,8 @@ const CustomSwitch = () => {
 
   const togglePosition = toggleAnim.interpolate({
     inputRange: [0, 1],
-    outputRange: ["0%", "100%"],
+    outputRange: [0, 20], // Adjust this value according to your needs
+    extrapolate: "clamp", // Add this line
   });
 
   return (
