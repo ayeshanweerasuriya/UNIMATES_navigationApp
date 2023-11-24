@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     alignItems: "flex-start",
     flexDirection: "row",
+
     ...Platform.select({
       ios: {
         shadowColor: "black",
@@ -40,14 +41,15 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginTop: 10, // Adjust the space between icon and text
+    marginRight: -25,
   },
   headerText: {
-    marginLeft: 20,
+    marginTop: 15, // Adjust margin as needed
+    flex: 1,
+    textAlign: "center", // Center the text horizontally
     fontSize: 20,
     fontWeight: "bold",
     color: "#fff",
-    alignSelf: "center", // White text color
-    marginTop: 10, // Adjust the marginTop to move the text down
   },
 });
 
