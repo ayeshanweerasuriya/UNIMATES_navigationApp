@@ -44,6 +44,51 @@ const PrivacyPolicy = ({ navigation }) => {
               If you have any questions or concerns about this Privacy Policy or
               your data, please contact us at [email].
             </Text>
+            {/* Duplicate Content to Check Scroll View | Delete After This */}
+            <Text style={[styles.subHeading, isDarkMode && styles.darkText]}>
+              1. Information We Collect
+            </Text>
+            <Text style={[styles.paragraph, isDarkMode && styles.darkText]}>
+              information about how you use the App, including your interactions
+              with the App, the routes you take, and other navigation-related
+              data.
+            </Text>
+            <Text style={[styles.subHeading, isDarkMode && styles.darkText]}>
+              2. How We Use Your Information
+            </Text>
+            <Text style={[styles.paragraph, isDarkMode && styles.darkText]}>
+              We use your location information to provide navigation and
+              location-based services.
+            </Text>
+            <Text style={[styles.subHeading, isDarkMode && styles.darkText]}>
+              3. Contact Us
+            </Text>
+            <Text style={[styles.paragraph, isDarkMode && styles.darkText]}>
+              If you have any questions or concerns about this Privacy Policy or
+              your data, please contact us at [email].
+            </Text>
+            <Text style={[styles.subHeading, isDarkMode && styles.darkText]}>
+              1. Information We Collect
+            </Text>
+            <Text style={[styles.paragraph, isDarkMode && styles.darkText]}>
+              information about how you use the App, including your interactions
+              with the App, the routes you take, and other navigation-related
+              data.
+            </Text>
+            <Text style={[styles.subHeading, isDarkMode && styles.darkText]}>
+              2. How We Use Your Information
+            </Text>
+            <Text style={[styles.paragraph, isDarkMode && styles.darkText]}>
+              We use your location information to provide navigation and
+              location-based services.
+            </Text>
+            <Text style={[styles.subHeading, isDarkMode && styles.darkText]}>
+              3. Contact Us
+            </Text>
+            <Text style={[styles.paragraph, isDarkMode && styles.darkText]}>
+              If you have any questions or concerns about this Privacy Policy or
+              your data, please contact us at [email].
+            </Text>
             <Text
               style={[styles.AgreeParagraph, isDarkMode && styles.darkText]}
             >
