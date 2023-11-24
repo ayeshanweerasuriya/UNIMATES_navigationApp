@@ -6,49 +6,53 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import CustomHeader from './Header';
+import CustomHeader from "./Header";
+import { useTheme } from "./ThemeContext";
 
-const PrivacyPolicy = ( {navigation} ) => {
+const PrivacyPolicy = ({ navigation }) => {
+  const { isDarkMode } = useTheme();
   return (
     <>
-    <CustomHeader title="Privacy Policy" navigation={navigation}/>
-    <View style={styles.container}>
-      <Text style={styles.mainTitle}>
-        We may collect the following types of information when you use our App
-      </Text>
-      <ScrollView style={styles.ScrollView}>
-        <View style={styles.policy}>
-          <Text style={styles.subHeading}>
-            1. Information We Collect We collect
-          </Text>
-          <Text style={styles.paragraph}>
-            information about how you use the App, including your interactions
-            with the App, the routes you take, and other navigation-related
-            data.
-          </Text>
-          <Text style={styles.subHeading}>2. How We Use Your Information</Text>
-          <Text style={styles.paragraph}>
-            We use your location information to provide navigation and
-            location-based services.
-          </Text>
-          <Text style={styles.subHeading}>3. Contact Us</Text>
-          <Text style={styles.paragraph}>
-            If you have any questions or concerns about this Privacy Policy or
-            your data, please contact us at [email].
-          </Text>
-          <Text style={styles.permission}>
-            By using our App, you acknowledge that you have read and understood
-            this Privacy Policy and consent to the collection and use of your
-            information as described herein.
-          </Text>
-          {/* delete from here */}
-          {/* delete from here */}
-        </View>
-      </ScrollView>
-      <TouchableOpacity style={styles.agreeBtn}>
-        <Text style={styles.btnText}>I Agree</Text>
-      </TouchableOpacity>
-    </View>
+      <CustomHeader title="Privacy Policy" navigation={navigation} />
+      <View style={[styles.container, isDarkMode && styles.darkTheme]}>
+        <Text style={[styles.mainTitle, isDarkMode && styles.darkText]}>
+          We may collect the following types of information when you use our App
+        </Text>
+        <ScrollView style={styles.ScrollView}>
+          <View style={styles.policy}>
+            <Text style={styles.subHeading}>
+              1. Information We Collect We collect
+            </Text>
+            <Text style={styles.paragraph}>
+              information about how you use the App, including your interactions
+              with the App, the routes you take, and other navigation-related
+              data.
+            </Text>
+            <Text style={styles.subHeading}>
+              2. How We Use Your Information
+            </Text>
+            <Text style={styles.paragraph}>
+              We use your location information to provide navigation and
+              location-based services.
+            </Text>
+            <Text style={styles.subHeading}>3. Contact Us</Text>
+            <Text style={styles.paragraph}>
+              If you have any questions or concerns about this Privacy Policy or
+              your data, please contact us at [email].
+            </Text>
+            <Text style={styles.permission}>
+              By using our App, you acknowledge that you have read and
+              understood this Privacy Policy and consent to the collection and
+              use of your information as described herein.
+            </Text>
+            {/* delete from here */}
+            {/* delete from here */}
+          </View>
+        </ScrollView>
+        <TouchableOpacity style={styles.agreeBtn}>
+          <Text style={styles.btnText}>I Agree</Text>
+        </TouchableOpacity>
+      </View>
     </>
   );
 };
@@ -56,8 +60,9 @@ const PrivacyPolicy = ( {navigation} ) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 20,
-    marginTop: 80,
+    padding: 20,
+    paddingTop: 80,
+    backgroundColor: "#ffffff",
   },
 
   mainTitle: {
@@ -95,7 +100,7 @@ const styles = StyleSheet.create({
 
   agreeBtn: {
     marginBottom: 30,
-    backgroundColor: "#BA7815",
+    backgroundColor: "#FFA500",
     width: 100,
     borderRadius: 5,
     paddingVertical: 10,

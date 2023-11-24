@@ -1,24 +1,32 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { useTheme } from "./ThemeContext";
 
-export default function AboutUs( {navigation} ) {
+export default function AboutUs({ navigation }) {
+  const { isDarkMode } = useTheme();
 
   return (
     <View style={styles.container}>
-      <Image
-        source={require('./assets/coverPhoto.jpg')}
-        style={styles.aboutUsImage}
-      />
-      <Text style={styles.aboutUsText}>About Us</Text>
-      <Text style={styles.aboutUsParagraph}>
-      Three futuristic minds united in code, we're your developers from the future. With tech wizardry at our fingertips, we craft software solutions that seem like they're from another dimension. From web galaxies to mobile universes, we're on a mission to turn your sci-fi dreams into digital realities. Beam us up for out-of-this-world code!</Text>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.goBack()}
-      >
-        <Text style={styles.buttonText}>Go Back</Text>
-      </TouchableOpacity>
-      <StatusBar style="auto" />
+      <View style={styles.wrapper}>
+        <Image
+          source={require("./assets/coverPhoto.jpg")}
+          style={styles.aboutUsImage}
+        />
+        <Text style={styles.aboutUsText}>About Us</Text>
+        <Text style={styles.aboutUsParagraph}>
+          Three futuristic minds united in code, we're your developers from the
+          future. With tech wizardry at our fingertips, we craft software
+          solutions that seem like they're from another dimension. From web
+          galaxies to mobile universes, we're on a mission to turn your sci-fi
+          dreams into digital realities. Beam us up for out-of-this-world code!
+        </Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.goBack()}
+        >
+          <Text style={styles.buttonText}>Go Back</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -26,46 +34,55 @@ export default function AboutUs( {navigation} ) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#ffffff",
+    paddingTop: 150,
+  },
+
+  wrapper: {
     margin: 20,
   },
+
   aboutUsText: {
-    color: '#9D9D9D',
-    textAlign: 'center',
+    marginTop: 30,
+    color: "#9D9D9D",
+    textAlign: "center",
     fontSize: 24,
-    fontWeight: '400',
-    marginTop: 20,
+    fontWeight: "bold",
   },
+
   aboutUsImage: {
-    width: 300,
-    height: 150,
+    width: "100%",
+    height: 200,
     borderRadius: 15,
-    alignSelf: 'center', // Align the image in the center
-    marginTop: 10, // Add margin to separate the image from the text
   },
   aboutUsParagraph: {
-    color: '#343434',
-    fontSize: 16,
-    textAlign: 'justify',
-    fontWeight: '400',
-    marginTop: 10,
-    marginLeft: 10, // Add margin to the left to align with the image
-    marginRight: 10, // Add margin to the right to align with the image
+    textAlign: "justify",
+    paddingTop: 20,
+    color: "#343434",
+    lineHeight: 24,
+    letterSpacing: 1,
+    fontWeight: "500",
   },
   button: {
-    backgroundColor: '#BA7815',
-    padding: 10,
+    marginTop: 100,
+    backgroundColor: "#FFA500",
+    width: 100,
     borderRadius: 5,
-    marginTop: 50,
-    width: 150,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    alignItems: "center",
+    justifyContent: "center",
+    alignSelf: "center",
   },
   buttonText: {
-    color: 'white',
-    textAlign: 'center',
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
+    color: "white",
+  },
+
+  darkTheme: {
+    backgroundColor: "#1E1E1E",
+  },
+  darkText: {
+    color: "#FFFFFF",
   },
 });
-

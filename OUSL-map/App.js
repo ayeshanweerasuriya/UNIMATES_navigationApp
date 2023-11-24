@@ -19,16 +19,17 @@
 //   },
 // });
 
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { ThemeProvider } from "./ThemeContext";
 
-import LaunchScreen from './LaunchScreen';
-import Home from './Home';
-import Search from './Search';
-import Settings from './Settings';
-import PrivacyPolicy from './Privacy_Policy';
-import AboutUs from './AboutUs';
+import LaunchScreen from "./LaunchScreen";
+import Home from "./Home";
+import Search from "./Search";
+import Settings from "./Settings";
+import PrivacyPolicy from "./Privacy_Policy";
+import AboutUs from "./AboutUs";
 // import Direction from './Direction';
 // import Settings from './Settings';
 // import AboutUs from './AboutUs';
@@ -38,21 +39,47 @@ const Stack = createNativeStackNavigator();
 
 const AppNavigator = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="LaunchScreen">
-        <Stack.Screen name="LaunchScreen" component={LaunchScreen} options={{headerShown: false}} />
-        <Stack.Screen name="Home" component={Home} options={{headerShown: false}} />
-        <Stack.Screen name="Search" component={Search} options={{headerShown: false}} />
-        <Stack.Screen name="Settings" component={Settings} options={{headerShown: false}}/>
-        <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} options={{headerShown: false}}/>
-        <Stack.Screen name="AboutUs" component={AboutUs} options={{headerShown: false}}/>
-        {/* <Stack.Screen name="Direction" component={Direction} options={{headerShown: false}} />
+    <ThemeProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="LaunchScreen">
+          <Stack.Screen
+            name="LaunchScreen"
+            component={LaunchScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Search"
+            component={Search}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Settings"
+            component={Settings}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="PrivacyPolicy"
+            component={PrivacyPolicy}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="AboutUs"
+            component={AboutUs}
+            options={{ headerShown: false }}
+          />
+          {/* <Stack.Screen name="Direction" component={Direction} options={{headerShown: false}} />
         <Stack.Screen name="Settings" component={Settings} options={{headerShown: false}} />
         <Stack.Screen name="AboutUs" component={AboutUs} options={{headerShown: false}} />
         <Stack.Screen name="SavedLocations" component={SavedLocations} options={{headerShown: false}} /> */}
-      </Stack.Navigator>
-    </NavigationContainer>
-  )
-}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ThemeProvider>
+  );
+};
 
 export default AppNavigator;

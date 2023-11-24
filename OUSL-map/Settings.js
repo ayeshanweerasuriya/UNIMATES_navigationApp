@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-const Settings = ( {navigation} ) => {
+const Settings = ({ navigation }) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const toggleAnim = useRef(new Animated.Value(0)).current;
@@ -57,7 +57,10 @@ const Settings = ( {navigation} ) => {
         </TouchableOpacity>
       </View>
       <View style={styles.otherContainers}>
-        <TouchableOpacity style={styles.otherContainersAlign} onPress={() => navigation.navigate('AboutUs')}>
+        <TouchableOpacity
+          style={styles.otherContainersAlign}
+          onPress={() => navigation.navigate("AboutUs")}
+        >
           <Text style={[styles.OptionText, isDarkMode && styles.darkText]}>
             About Us
           </Text>
@@ -69,7 +72,10 @@ const Settings = ( {navigation} ) => {
         </TouchableOpacity>
       </View>
       <View style={styles.otherContainers}>
-        <TouchableOpacity style={styles.otherContainersAlign} onPress={() => navigation.navigate('PrivacyPolicy')}>
+        <TouchableOpacity
+          style={styles.otherContainersAlign}
+          onPress={() => navigation.navigate("PrivacyPolicy")}
+        >
           <Text style={[styles.OptionText, isDarkMode && styles.darkText]}>
             Privacy Policy
           </Text>
@@ -99,6 +105,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 150,
     padding: 20,
+    backgroundColor: "#ffffff",
   },
 
   darkTheme: {
