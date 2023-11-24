@@ -10,7 +10,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Image
-        source={require('./img/Source/img2.jpg')}
+        source={require('./assets/coverPhoto.jpg')}
         style={styles.aboutUsImage}
       />
       <Text style={styles.aboutUsText}>About Us</Text>
