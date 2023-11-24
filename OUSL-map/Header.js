@@ -11,7 +11,10 @@ import Icon from "react-native-vector-icons/AntDesign";
 const CustomHeader = ({ title, navigation }) => {
   return (
     <View style={styles.headerContainer}>
-      <TouchableOpacity onPress={() => navigation.goBack()}>
+      <TouchableOpacity
+        onPress={() => navigation.goBack()}
+        style={styles.touchableArea}
+      >
         <Icon name="arrowleft" size={25} color="#fff" style={styles.icon} />
       </TouchableOpacity>
       <Text style={styles.headerText}>{title}</Text>
@@ -21,12 +24,12 @@ const CustomHeader = ({ title, navigation }) => {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    backgroundColor: "#FFA500", // Orange color
-    paddingVertical: 40,
+    paddingTop: 30,
+    backgroundColor: "#FFA500",
+    paddingVertical: 5,
     paddingHorizontal: 20,
-    alignItems: "flex-start",
     flexDirection: "row",
-
+    alignItems: "center",
     ...Platform.select({
       ios: {
         shadowColor: "black",
@@ -39,22 +42,22 @@ const styles = StyleSheet.create({
       },
     }),
   },
+  touchableArea: {
+    padding: 10, // Increase the padding to expand the touchable area
+    paddingRight: 25,
+  },
   icon: {
-    marginTop: 10, // Adjust the space between icon and text
-    marginRight: -25,
+    paddingHorizontal: 5,
+    paddingVertical: 10,
   },
   headerText: {
-    marginTop: 15, // Adjust margin as needed
     flex: 1,
-    textAlign: "center", // Center the text horizontally
+    textAlign: "center",
     fontSize: 20,
     fontWeight: "bold",
     color: "#fff",
+    marginLeft: -75,
   },
 });
 
 export default CustomHeader;
-
-// Example Usage:
-// import CustomHeader from './Header';
-// <CustomHeader title="Your Screen Title" navigation={navigation}/>

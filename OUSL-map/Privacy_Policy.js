@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    paddingTop: 80,
+    paddingTop: 50,
     backgroundColor: "#ffffff",
   },
 
@@ -121,6 +121,7 @@ const styles = StyleSheet.create({
   },
 
   policy: {
+    marginTop: 1,
     margin: 20,
   },
 
@@ -141,7 +142,6 @@ const styles = StyleSheet.create({
   },
 
   permission: {
-    marginTop: 40,
     textAlign: "justify",
   },
 
