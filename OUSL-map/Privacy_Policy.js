@@ -23,7 +23,7 @@ const PrivacyPolicy = ({ navigation }) => {
         >
           <View style={styles.policy}>
             <Text style={[styles.subHeading, isDarkMode && styles.darkText]}>
-              1. Information We Collect We collect
+              1. Information We Collect
             </Text>
             <Text style={[styles.paragraph, isDarkMode && styles.darkText]}>
               information about how you use the App, including your interactions
