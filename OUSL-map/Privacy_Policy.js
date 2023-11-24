@@ -6,9 +6,12 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
+import CustomHeader from './Header';
 
-const PrivacyPolicy = () => {
+const PrivacyPolicy = ( {navigation} ) => {
   return (
+    <>
+    <CustomHeader title="Privacy Policy" navigation={navigation}/>
     <View style={styles.container}>
       <Text style={styles.mainTitle}>
         We may collect the following types of information when you use our App
@@ -46,6 +49,7 @@ const PrivacyPolicy = () => {
         <Text style={styles.btnText}>I Agree</Text>
       </TouchableOpacity>
     </View>
+    </>
   );
 };
 
@@ -53,7 +57,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     margin: 20,
-    marginTop: 150,
+    marginTop: 80,
   },
 
   mainTitle: {

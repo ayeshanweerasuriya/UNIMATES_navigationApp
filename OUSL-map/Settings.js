@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-const CustomSwitch = () => {
+const Settings = ( {navigation} ) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const toggleAnim = useRef(new Animated.Value(0)).current;
@@ -69,7 +69,7 @@ const CustomSwitch = () => {
         </TouchableOpacity>
       </View>
       <View style={styles.otherContainers}>
-        <TouchableOpacity style={styles.otherContainersAlign}>
+        <TouchableOpacity style={styles.otherContainersAlign} onPress={() => navigation.navigate('PrivacyPolicy')}>
           <Text style={[styles.OptionText, isDarkMode && styles.darkText]}>
             Privacy Policy
           </Text>
@@ -177,4 +177,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CustomSwitch;
+export default Settings;
