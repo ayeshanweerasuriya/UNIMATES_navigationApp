@@ -18,35 +18,39 @@ const PrivacyPolicy = ({ navigation }) => {
         <Text style={[styles.mainTitle, isDarkMode && styles.darkText]}>
           We may collect the following types of information when you use our App
         </Text>
-        <ScrollView style={styles.ScrollView}>
+        <ScrollView
+          style={[styles.ScrollView, isDarkMode && styles.darkThemeForScroll]}
+        >
           <View style={styles.policy}>
-            <Text style={styles.subHeading}>
+            <Text style={[styles.subHeading, isDarkMode && styles.darkText]}>
               1. Information We Collect We collect
             </Text>
-            <Text style={styles.paragraph}>
+            <Text style={[styles.paragraph, isDarkMode && styles.darkText]}>
               information about how you use the App, including your interactions
               with the App, the routes you take, and other navigation-related
               data.
             </Text>
-            <Text style={styles.subHeading}>
+            <Text style={[styles.subHeading, isDarkMode && styles.darkText]}>
               2. How We Use Your Information
             </Text>
-            <Text style={styles.paragraph}>
+            <Text style={[styles.paragraph, isDarkMode && styles.darkText]}>
               We use your location information to provide navigation and
               location-based services.
             </Text>
-            <Text style={styles.subHeading}>3. Contact Us</Text>
-            <Text style={styles.paragraph}>
+            <Text style={[styles.subHeading, isDarkMode && styles.darkText]}>
+              3. Contact Us
+            </Text>
+            <Text style={[styles.paragraph, isDarkMode && styles.darkText]}>
               If you have any questions or concerns about this Privacy Policy or
               your data, please contact us at [email].
             </Text>
-            <Text style={styles.permission}>
+            <Text
+              style={[styles.AgreeParagraph, isDarkMode && styles.darkText]}
+            >
               By using our App, you acknowledge that you have read and
               understood this Privacy Policy and consent to the collection and
               use of your information as described herein.
             </Text>
-            {/* delete from here */}
-            {/* delete from here */}
           </View>
         </ScrollView>
         <TouchableOpacity style={styles.agreeBtn}>
@@ -85,6 +89,12 @@ const styles = StyleSheet.create({
     textAlign: "justify",
   },
 
+  AgreeParagraph: {
+    marginTop: 40,
+    fontSize: 12,
+    textAlign: "justify",
+  },
+
   permission: {
     marginTop: 40,
     textAlign: "justify",
@@ -113,6 +123,18 @@ const styles = StyleSheet.create({
   btnText: {
     fontWeight: "bold",
     color: "white",
+  },
+
+  darkTheme: {
+    backgroundColor: "#1E1E1E",
+  },
+
+  darkThemeForScroll: {
+    backgroundColor: "#2e2e2e",
+  },
+
+  darkText: {
+    color: "#FFFFFF",
   },
 });
 

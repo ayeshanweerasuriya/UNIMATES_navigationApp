@@ -6,14 +6,14 @@ export default function AboutUs({ navigation }) {
   const { isDarkMode } = useTheme();
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, isDarkMode && styles.darkTheme]}>
       <View style={styles.wrapper}>
         <Image
           source={require("./assets/coverPhoto.jpg")}
           style={styles.aboutUsImage}
         />
         <Text style={styles.aboutUsText}>About Us</Text>
-        <Text style={styles.aboutUsParagraph}>
+        <Text style={[styles.aboutUsParagraph, isDarkMode && styles.darkText]}>
           Three futuristic minds united in code, we're your developers from the
           future. With tech wizardry at our fingertips, we craft software
           solutions that seem like they're from another dimension. From web

@@ -8,10 +8,11 @@ import {
   Easing,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { useTheme } from "./ThemeContext";
 
 const Settings = ({ navigation }) => {
+  const { isDarkMode, toggleDarkMode } = useTheme();
   const [isEnabled, setIsEnabled] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
   const toggleAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -25,13 +26,13 @@ const Settings = ({ navigation }) => {
 
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
-    setIsDarkMode((previousState) => !previousState);
+    toggleDarkMode(); // Update theme context
   };
 
   const togglePosition = toggleAnim.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, 20], // Adjust this value according to your needs
-    extrapolate: "clamp", // Add this line
+    outputRange: [0, 20],
+    extrapolate: "clamp",
   });
 
   return (
@@ -43,7 +44,7 @@ const Settings = ({ navigation }) => {
           onPress={toggleSwitch}
           style={[
             styles.switchStyle,
-            { backgroundColor: isEnabled ? "#BA7815" : "#767577" },
+            { backgroundColor: isEnabled ? "#FFA500" : "#767577" },
           ]}
         >
           <View style={styles.toggleContainer}>

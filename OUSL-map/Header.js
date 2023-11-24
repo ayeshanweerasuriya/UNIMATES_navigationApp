@@ -1,6 +1,12 @@
-import React from 'react';
-import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Platform,
+  TouchableOpacity,
+} from "react-native";
+import Icon from "react-native-vector-icons/AntDesign";
 
 const CustomHeader = ({ title, navigation }) => {
   return (
@@ -15,14 +21,14 @@ const CustomHeader = ({ title, navigation }) => {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    backgroundColor: '#FFA500', // Orange color
+    backgroundColor: "#FFA500", // Orange color
     paddingVertical: 40,
     paddingHorizontal: 20,
-    alignItems: 'flex-start',
-    flexDirection: 'row',
+    alignItems: "flex-start",
+    flexDirection: "row",
     ...Platform.select({
       ios: {
-        shadowColor: 'black',
+        shadowColor: "black",
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.3,
         shadowRadius: 4,
@@ -38,20 +44,15 @@ const styles = StyleSheet.create({
   headerText: {
     marginLeft: 20,
     fontSize: 20,
-    fontWeight: 'bold',
-    color: '#fff',
-    alignSelf: 'center', // White text color
+    fontWeight: "bold",
+    color: "#fff",
+    alignSelf: "center", // White text color
     marginTop: 10, // Adjust the marginTop to move the text down
   },
 });
 
-
 export default CustomHeader;
 
-// Example Usage: 
+// Example Usage:
 // import CustomHeader from './Header';
 // <CustomHeader title="Your Screen Title" navigation={navigation}/>
-
-
-
-
