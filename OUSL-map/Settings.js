@@ -57,7 +57,7 @@ const Settings = ( {navigation} ) => {
         </TouchableOpacity>
       </View>
       <View style={styles.otherContainers}>
-        <TouchableOpacity style={styles.otherContainersAlign}>
+        <TouchableOpacity style={styles.otherContainersAlign} onPress={() => navigation.navigate('AboutUs')}>
           <Text style={[styles.OptionText, isDarkMode && styles.darkText]}>
             About Us
           </Text>

@@ -28,6 +28,7 @@ import Home from './Home';
 import Search from './Search';
 import Settings from './Settings';
 import PrivacyPolicy from './Privacy_Policy';
+import AboutUs from './AboutUs';
 // import Direction from './Direction';
 // import Settings from './Settings';
 // import AboutUs from './AboutUs';
@@ -44,6 +45,7 @@ const AppNavigator = () => {
         <Stack.Screen name="Search" component={Search} options={{headerShown: false}} />
         <Stack.Screen name="Settings" component={Settings} options={{headerShown: false}}/>
         <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} options={{headerShown: false}}/>
+        <Stack.Screen name="AboutUs" component={AboutUs} options={{headerShown: false}}/>
         {/* <Stack.Screen name="Direction" component={Direction} options={{headerShown: false}} />
         <Stack.Screen name="Settings" component={Settings} options={{headerShown: false}} />
         <Stack.Screen name="AboutUs" component={AboutUs} options={{headerShown: false}} />

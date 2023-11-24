@@ -1,11 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 
-export default function App() {
-  const handleButtonPress = () => {
-    // Add functionality for button press here
-    alert('Button Pressed!');
-  };
+export default function AboutUs( {navigation} ) {
 
   return (
     <View style={styles.container}>
@@ -18,7 +14,7 @@ export default function App() {
       Three futuristic minds united in code, we're your developers from the future. With tech wizardry at our fingertips, we craft software solutions that seem like they're from another dimension. From web galaxies to mobile universes, we're on a mission to turn your sci-fi dreams into digital realities. Beam us up for out-of-this-world code!</Text>
       <TouchableOpacity
         style={styles.button}
-        onPress={handleButtonPress}
+        onPress={() => navigation.goBack()}
       >
         <Text style={styles.buttonText}>Go Back</Text>
       </TouchableOpacity>
