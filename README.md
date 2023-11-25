@@ -14,6 +14,13 @@ Make sure to run these commands in the root directory of your project using a te
 ### Description:
 Welcome to the UNIMATES OUSL Colombo Navigation Application repository! This repository houses the collaborative efforts of our team members Melani, Thizitha, and Ayeshan, as we work together to develop a cutting-edge mobile application using React Native and JavaScript.
 
+### Contributors
+<p align="center">
+  <img src="[URL_TO_IMAGE_1](https://github.com/ayeshanweerasuriya/UNIMATES_navigationApp/blob/main/images/Thizitha%20Review%20Card.png)" width="300" />
+  <img src="[URL_TO_IMAGE_2](https://github.com/ayeshanweerasuriya/UNIMATES_navigationApp/blob/main/images/Melani%20Review%20Card.png)" width="300" />
+  <img src="[URL_TO_IMAGE_3](https://github.com/ayeshanweerasuriya/UNIMATES_navigationApp/blob/main/images/Ayeshan%20Review%20Card.png)" width="300" />
+</p>
+
 ### Project Overview:
 Our goal with the "OUSL Colombo Navigation Application" is to create a user-friendly, intuitive mobile app designed specifically for students and faculty at the Open University of Sri Lanka (OUSL) in Colombo. This application aims to streamline the navigation experience within the campus, making it easier for users to find their way around, access essential information, and enhance their overall experience at OUSL.
 
