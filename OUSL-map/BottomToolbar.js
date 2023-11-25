@@ -4,7 +4,6 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  Dimensions,
 } from "react-native";
 import IconAnt from "react-native-vector-icons/AntDesign";
 import IconEnt from "react-native-vector-icons/Entypo";
