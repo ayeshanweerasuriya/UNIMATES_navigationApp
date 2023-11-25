@@ -11,19 +11,6 @@ npm i react-native-maps
 
 <a class="btn" id="copy-button" onclick="copyToClipboard(`npm install\nnpm i react-native-maps`)">Copy to Clipboard</a>
 
-<!-- Add the following script to enable the copy-to-clipboard functionality -->
-<script>
-  function copyToClipboard(text) {
-    const el = document.createElement('textarea');
-    el.value = text;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-    alert('Copied to clipboard!');
-  }
-</script>
-
 Make sure to run these commands in the root directory of your project using a terminal or command prompt. These commands will install the necessary packages and dependencies for your React Native application to function correctly.
 
 Description:
