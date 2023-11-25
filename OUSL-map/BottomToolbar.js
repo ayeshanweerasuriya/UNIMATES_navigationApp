@@ -12,9 +12,9 @@ import IconFea from "react-native-vector-icons/Feather";
 
 const BottomToolbar = ({ navigation }) => {
   return (
-    <View style={styles.toolbar}>
+    <View style={[styles.toolbar,  styles.shadow]}>
       <TouchableOpacity
-        style={[styles.tools, styles.shadow]}
+        style={styles.tools}
         onPress={() => navigation.navigate("Search")}
       >
         <IconAnt name="search1" size={25} color="#fff" />

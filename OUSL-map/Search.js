@@ -1,61 +1,105 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, FlatList, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
+import {
+  View,
+  Text,
+  TextInput,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
+import { placesArray } from './data';
+import Icon from 'react-native-vector-icons/Ionicons';
 
-const Search = ({ navigation }) => {
+const SearchBar = ({ navigation }) => {
   const [query, setQuery] = useState('');
   const [filteredData, setFilteredData] = useState([]);
-  const dataArray = ['Open University Bridge', 'Dormitory', 'Computer Labroatory', 'Exam Hall 01', 'Grape', 'Lemon', 'Orange', 'Peach', 'Pear', 'Plum'];
+  const [searchText, setSearchText] = useState('');
+
+  const clearSearch = () => {
+    setSearchText('');
+  };
 
   const handleInputChange = (text) => {
-    // Filter the data based on the input text
-    const filtered = dataArray.filter(item => item.toLowerCase().includes(text.toLowerCase()));
+    const filtered = placesArray.filter((place) =>
+      place.name.toLowerCase().includes(text.toLowerCase())
+    );
     setFilteredData(filtered);
     setQuery(text);
   };
 
+  const handlePlaceSelect = (place) => {
+    navigation.navigate('MapScreen', { place });
+  };
+
   const renderAutocompleteItem = ({ item }) => (
-    <Text style={styles.autocompleteItem}>{item}</Text>
+    <TouchableOpacity onPress={() => handlePlaceSelect(item)}>
+      <Text style={styles.autocompleteItem}>{item.name}</Text>
+    </TouchableOpacity>
   );
 
   return (
-    <View style={styles.container}>
-      <View style={[styles.input, styles.boxShadow]}>
-        <Icon name="search1" size={22} color="#000" style={{ marginRight: 15 }} />
-        <TextInput
-          style={{ fontSize: 17 }}
-          placeholder="Type to search"
-          value={query}
-          onChangeText={handleInputChange}
+    <>
+      <View style={styles.container}>
+        <View style={styles.searchBar}>
+          <Icon name="search-sharp" size={20} color="grey" style={{ marginRight: 10 }} />
+          <TextInput
+          placeholder="Search..."
+          placeholderTextColor="grey"
+          value={searchText}
+          onChangeText={(text) => {
+            handleInputChange(text);
+            setSearchText(text);
+          }}
+          style={{width: 200}}
         />
+        {searchText !== '' && (
+          <TouchableOpacity style={styles.clearButtonContainer} onPress={clearSearch}>
+            <Icon name="close" size={20} color="red" />
+          </TouchableOpacity>
+        )}
       </View>
-
-      {/* Display autocomplete results using FlatList */}
+        <TouchableOpacity style={styles.cancelButton} onPress={() => navigation.navigate("Home")} >
+          <Text style={styles.cancelButtonText}>Cancel</Text>
+        </TouchableOpacity>
+      </View>
       {filteredData.length > 0 && (
         <FlatList
           data={filteredData}
           renderItem={renderAutocompleteItem}
-          keyExtractor={(item) => item}
+          keyExtractor={(item) => item.name}
           style={styles.autocompleteList}
         />
       )}
-    </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginTop: 20,
-  },
-  input: {
-    display: 'flex',
-    height: 48,
-    margin: 10,
-    padding: 12,
     flexDirection: 'row',
-    borderRadius: 20,
-    alignItems: 'flex-start'
+    alignItems: 'center',
+    backgroundColor: '#FFFFFF',
+    padding: 16,
+    paddingTop: 40,
+  },
+  searchBar: {
+    flex: 1,
+    backgroundColor: '#F2F2F2',
+    padding: 8,
+    borderRadius: 7,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  clearButtonContainer: {
+    position: 'absolute',
+    right: 8,
+  },
+  cancelButton: {
+    marginLeft: 10,
+  },
+  cancelButtonText: {
+    color: '#007AFF',
+    fontSize: 16,
   },
   autocompleteList: {
     maxHeight: 200,
@@ -65,7 +109,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
   },
-}
-);
+});
 
-export default Search;
+export default SearchBar;

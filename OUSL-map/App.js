@@ -30,6 +30,7 @@ import Search from "./Search";
 import Settings from "./Settings";
 import PrivacyPolicy from "./Privacy_Policy";
 import AboutUs from "./AboutUs";
+import MapScreen from './MapScreen';
 // import Direction from './Direction';
 // import Settings from './Settings';
 // import AboutUs from './AboutUs';
@@ -55,6 +56,11 @@ const AppNavigator = () => {
           <Stack.Screen
             name="Search"
             component={Search}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="MapScreen"
+            component={MapScreen}
             options={{ headerShown: false }}
           />
           <Stack.Screen
