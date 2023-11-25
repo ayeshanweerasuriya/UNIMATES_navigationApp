@@ -13,7 +13,7 @@ import CustomHeader from "./Header";
 
 const Settings = ({ navigation }) => {
   const { isDarkMode, toggleDarkMode } = useTheme();
-  const [isEnabled, setIsEnabled] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(isDarkMode);
   const toggleAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -26,8 +26,8 @@ const Settings = ({ navigation }) => {
   }, [isEnabled, toggleAnim]);
 
   const toggleSwitch = () => {
-    setIsEnabled((previousState) => !previousState);
-    toggleDarkMode(); // Update theme context
+    setIsEnabled((prev) => !prev);
+    toggleDarkMode();
   };
 
   const togglePosition = toggleAnim.interpolate({
@@ -36,12 +36,16 @@ const Settings = ({ navigation }) => {
     extrapolate: "clamp",
   });
 
+  const navigateToScreen = (screenName) => {
+    navigation.navigate(screenName);
+  };
+
   return (
     <>
       <CustomHeader title="Settings" navigation={navigation} />
       <View style={[styles.container, isDarkMode && styles.darkTheme]}>
         <View style={styles.darkModeContainer}>
-          <Text style={styles.OptionText}>Dark Mode</Text>
+          <Text style={styles.optionText}>Dark Mode</Text>
           <TouchableOpacity
             activeOpacity={0.8}
             onPress={toggleSwitch}
@@ -60,53 +64,51 @@ const Settings = ({ navigation }) => {
             </View>
           </TouchableOpacity>
         </View>
-        <View style={styles.otherContainers}>
-          <TouchableOpacity
-            style={styles.otherContainersAlign}
-            onPress={() => navigation.navigate("AboutUs")}
-          >
-            <Text style={[styles.OptionText, isDarkMode && styles.darkText]}>
-              About Us
-            </Text>
-            <Icon
-              name="chevron-right"
-              size={20}
-              color={isDarkMode ? "#FFFFFF" : "#000000"}
-            />
-          </TouchableOpacity>
-        </View>
-        <View style={styles.otherContainers}>
-          <TouchableOpacity
-            style={styles.otherContainersAlign}
-            onPress={() => navigation.navigate("PrivacyPolicy")}
-          >
-            <Text style={[styles.OptionText, isDarkMode && styles.darkText]}>
-              Privacy Policy
-            </Text>
-            <Icon
-              name="chevron-right"
-              size={20}
-              color={isDarkMode ? "#FFFFFF" : "#000000"}
-            />
-          </TouchableOpacity>
-        </View>
+        {renderOption("About Us", "AboutUs")}
+        {renderOption("Privacy Policy", "PrivacyPolicy")}
 
-        <TouchableOpacity style={styles.bug}>
-          <Icon
-            name="bug"
-            size={15}
-            color={isDarkMode ? "#FFFFFF" : "#000000"}
-          />
-          <Text style={[styles.bugText, isDarkMode && styles.darkText]}>
-            Report a Bug
-          </Text>
-        </TouchableOpacity>
+        {renderBugReport()}
+
         <Text style={[styles.versionNum, isDarkMode && styles.darkText]}>
           V 0.1
         </Text>
       </View>
     </>
   );
+
+  function renderOption(optionText, screenName) {
+    return (
+      <View style={styles.otherContainers}>
+        <TouchableOpacity
+          style={styles.otherContainersAlign}
+          onPress={() => navigateToScreen(screenName)}
+        >
+          <Text style={[styles.optionText, isDarkMode && styles.darkText]}>
+            {optionText}
+          </Text>
+          <Icon
+            name="chevron-right"
+            size={20}
+            color={isDarkMode ? "#FFFFFF" : "#000000"}
+          />
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  function renderBugReport() {
+    return (
+      <TouchableOpacity
+        style={styles.bug}
+        onPress={() => navigateToScreen("BugReport")}
+      >
+        <Icon name="bug" size={15} color={isDarkMode ? "#FFFFFF" : "#000000"} />
+        <Text style={[styles.bugText, isDarkMode && styles.darkText]}>
+          Report a Bug
+        </Text>
+      </TouchableOpacity>
+    );
+  }
 };
 
 const styles = StyleSheet.create({
@@ -131,7 +133,7 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
 
-  OptionText: {
+  optionText: {
     fontWeight: "bold",
     fontSize: 15,
   },

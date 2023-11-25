@@ -62,4 +62,12 @@ const styles = StyleSheet.create({
     fontWeight: "bold", // Use 'bold' instead of 700
     margin: 5,
   },
+
+  darkTheme: {
+    backgroundColor: "#1E1E1E",
+  },
+
+  darkText: {
+    color: "#FFFFFF",
+  },
 });
