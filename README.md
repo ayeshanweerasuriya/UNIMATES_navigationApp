@@ -16,9 +16,9 @@ Welcome to the UNIMATES OUSL Colombo Navigation Application repository! This rep
 
 ### Contributors
 <p align="center">
-  <img src="[URL_TO_IMAGE_1](https://github.com/ayeshanweerasuriya/UNIMATES_navigationApp/blob/main/images/Thizitha%20Review%20Card.png)" width="300" />
-  <img src="[URL_TO_IMAGE_2](https://github.com/ayeshanweerasuriya/UNIMATES_navigationApp/blob/main/images/Melani%20Review%20Card.png)" width="300" />
-  <img src="[URL_TO_IMAGE_3](https://github.com/ayeshanweerasuriya/UNIMATES_navigationApp/blob/main/images/Ayeshan%20Review%20Card.png)" width="300" />
+  <img src="https://github.com/ayeshanweerasuriya/UNIMATES_navigationApp/blob/main/images/Thizitha%20Review%20Card.png" width="300" />
+  <img src="https://github.com/ayeshanweerasuriya/UNIMATES_navigationApp/blob/main/images/Melani%20Review%20Card.png" width="300" />
+  <img src="https://github.com/ayeshanweerasuriya/UNIMATES_navigationApp/blob/main/images/Ayeshan%20Review%20Card.png" width="300" />
 </p>
 
 ### Project Overview:
