@@ -41,12 +41,13 @@ const styles = StyleSheet.create({
   toolbar: {
     bottom: 0,
     position: "absolute",
-    width: Dimensions.get("window").width,
+    width: "92%",
     height: 85,
     flexDirection: "row",
     justifyContent: "space-between",
     backgroundColor: "#FFA500",
-    paddingBottom: 20,
+    margin: "4%",
+    borderRadius: 25
   },
   tools: {
     marginLeft: 25,
