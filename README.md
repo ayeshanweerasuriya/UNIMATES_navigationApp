@@ -1,8 +1,8 @@
 # OUSL-Nav-App-by-UNIMATES
-OUSL Colombo Navigation App by UNIMATES - React Native &amp; JS. Simplify OUSL navigation. Real-time maps and info for students and faculty.
+OUSL Colombo Navigation App by UNIMATES - React Native & JS. Simplify OUSL navigation. Real-time maps and info for students and faculty.
 
-Getting Started:
-**To run this React Native application locally, you need to install the required dependencies:**
+## Getting Started
+To run this React Native application locally, you need to install the required dependencies by executing the following commands:
 
 ```bash
 npm install
@@ -11,7 +11,7 @@ npm i react-native-maps
 Click the button below to copy the commands:
 
 <!-- Add the following HTML code for the copy-to-clipboard button -->
-<a class="btn" id="copy-button" onclick="copyToClipboard('{{ steps.build.outputs.clipboardContent }}')">Copy to Clipboard</a>
+<a class="btn" id="copy-button" onclick="copyToClipboard(`npm install\nnpm i react-native-maps`)">Copy to Clipboard</a>
 
 <!-- Add the following script to enable the copy-to-clipboard functionality -->
 <script>
@@ -25,8 +25,6 @@ Click the button below to copy the commands:
     alert('Copied to clipboard!');
   }
 </script>
-
-This modification includes the `{{ steps.build.outputs.clipboardContent }}` placeholder, which will be replaced by the GitHub Action with the actual content during the workflow run.
 
 Make sure to run these commands in the root directory of your project using a terminal or command prompt. These commands will install the necessary packages and dependencies for your React Native application to function correctly.
 
