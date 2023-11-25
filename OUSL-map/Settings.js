@@ -13,7 +13,7 @@ import CustomHeader from "./Header";
 
 const Settings = ({ navigation }) => {
   const { isDarkMode, toggleDarkMode } = useTheme();
-  const [isEnabled, setIsEnabled] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(isDarkMode); // Initialize state based on global dark mode state
   const toggleAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
