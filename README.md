@@ -1,6 +1,27 @@
 # OUSL-Nav-App-by-UNIMATES
 OUSL Colombo Navigation App by UNIMATES - React Native &amp; JS. Simplify OUSL navigation. Real-time maps and info for students and faculty.
 
+Getting Started:
+To run this React Native application locally, you need to install the required dependencies by executing the following commands:
+
+<!-- Add the following HTML code for the copy-to-clipboard button -->
+<a class="btn" onclick="copyToClipboard(`npm install\nnpm i react-native-maps`)">Copy to Clipboard</a>
+
+<!-- Add the following script to enable the copy-to-clipboard functionality -->
+<script>
+  function copyToClipboard(text) {
+    const el = document.createElement('textarea');
+    el.value = text;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    alert('Copied to clipboard!');
+  }
+</script>
+
+Make sure to run these commands in the root directory of your project using a terminal or command prompt. These commands will install the necessary packages and dependencies for your React Native application to function correctly.
+
 Description:
 Welcome to the UNIMATES OUSL Colombo Navigation Application repository! This repository houses the collaborative efforts of our team members Melani, Thizitha, and Ayeshan, as we work together to develop a cutting-edge mobile application using React Native and JavaScript.
 
@@ -8,10 +29,10 @@ Project Overview:
 Our goal with the "OUSL Colombo Navigation Application" is to create a user-friendly, intuitive mobile app designed specifically for students and faculty at the Open University of Sri Lanka (OUSL) in Colombo. This application aims to streamline the navigation experience within the campus, making it easier for users to find their way around, access essential information, and enhance their overall experience at OUSL.
 
 Key Technologies:
-
 React Native: We chose React Native to build a cross-platform mobile application that can run seamlessly on both Android and iOS devices. This technology allows us to develop a single codebase, resulting in greater efficiency and cost-effectiveness.
 
-JavaScript: JavaScript is the core programming language that powers our application. It enables us to create interactive, dynamic, and responsive user interfaces, ensuring a smooth user experience.
+JavaScript:
+JavaScript is the core programming language that powers our application. It enables us to create interactive, dynamic, and responsive user interfaces, ensuring a smooth user experience.
 
 Features:
 Our application will offer a range of features, including:
