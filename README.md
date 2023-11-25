@@ -6,7 +6,6 @@ To run this React Native application locally, you need to install the required d
 
 ```bash
 npm install
-npm i react-native-maps
 ```
 
 Make sure to run these commands in the root directory of your project using a terminal or command prompt. These commands will install the necessary packages and dependencies for your React Native application to function correctly.
