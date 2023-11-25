@@ -15,10 +15,10 @@ Make sure to run these commands in the root directory of your project using a te
 Welcome to the UNIMATES OUSL Colombo Navigation Application repository! This repository houses the collaborative efforts of our team members Melani, Thizitha, and Ayeshan, as we work together to develop a cutting-edge mobile application using React Native and JavaScript.
 
 ### Contributors
-<p align="center">
-  <img src="https://github.com/ayeshanweerasuriya/UNIMATES_navigationApp/blob/main/images/Thizitha%20Review%20Card.png" width="835" />
-  <img src="https://github.com/ayeshanweerasuriya/UNIMATES_navigationApp/blob/main/images/Melani%20Review%20Card.png" width="835" />
-  <img src="https://github.com/ayeshanweerasuriya/UNIMATES_navigationApp/blob/main/images/Ayeshan%20Review%20Card.png" width="835" />
+<p align="center; display: flex; justify-content: space-around;'>
+  <img src="https://github.com/ayeshanweerasuriya/UNIMATES_navigationApp/blob/main/images/Thizitha%20Review%20Card.png" width="300" />
+  <img src="https://github.com/ayeshanweerasuriya/UNIMATES_navigationApp/blob/main/images/Melani%20Review%20Card.png" width="300" />
+  <img src="https://github.com/ayeshanweerasuriya/UNIMATES_navigationApp/blob/main/images/Ayeshan%20Review%20Card.png" width="300" />
 </p>
 
 ### Project Overview:
