@@ -3,6 +3,13 @@ OUSL Colombo Navigation App by UNIMATES - React Native & JS. Simplify OUSL navig
 
 ## Getting Started
 To run this React Native application locally, you need to install the required dependencies by executing the following commands:
+
+To run this React Native application locally, you need to install the required dependencies by executing the following commands:
+
+```bash
+npm install
+npm i react-native-maps
+
 Click the button below to copy the commands:
 
 <!-- Add the following HTML code for the copy-to-clipboard button -->
@@ -20,6 +27,7 @@ Click the button below to copy the commands:
     alert('Copied to clipboard!');
   }
 </script>
+```
 
 Make sure to run these commands in the root directory of your project using a terminal or command prompt. These commands will install the necessary packages and dependencies for your React Native application to function correctly.
 
