@@ -2,13 +2,13 @@
 OUSL Colombo Navigation App by UNIMATES - React Native & JS. Simplify OUSL navigation. Real-time maps and info for students and faculty.
 
 ## Getting Started
-To run this React Native application locally, you need to install the required dependencies by executing the following commands:
+To run this React Native application locally, you need to install the required dependencies by executing the following command:
 
 ```bash
 npm install
 ```
 
-Make sure to run these commands in the root directory of your project using a terminal or command prompt. These commands will install the necessary packages and dependencies for your React Native application to function correctly.
+Make sure to run this command in the root directory of your project using a terminal or command prompt. This command will install the necessary packages and dependencies for your React Native application to function correctly.
 
 ### Description:
 Welcome to the UNIMATES OUSL Colombo Navigation Application repository! This repository houses the collaborative efforts of our team members Melani, Thizitha, and Ayeshan, as we work together to develop a cutting-edge mobile application using React Native and JavaScript.
