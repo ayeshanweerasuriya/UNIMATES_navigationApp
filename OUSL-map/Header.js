@@ -5,20 +5,23 @@ import {
   StyleSheet,
   Platform,
   TouchableOpacity,
+  StatusBar,
+  SafeAreaView
 } from "react-native";
 import Icon from "react-native-vector-icons/AntDesign";
 
 const CustomHeader = ({ title, navigation }) => {
   return (
-    <View style={styles.headerContainer}>
+    <SafeAreaView style={styles.headerContainer}>
+    <StatusBar backgroundColor="#FFA500" barStyle="light-content" />
       <TouchableOpacity
         onPress={() => navigation.goBack()}
         style={styles.touchableArea}
       >
-        <Icon name="arrowleft" size={25} color="#fff" style={styles.icon} />
+        <Icon name="left" size={25} color="#fff" style={styles.icon} />
       </TouchableOpacity>
       <Text style={styles.headerText}>{title}</Text>
-    </View>
+    </SafeAreaView>
   );
 };
 

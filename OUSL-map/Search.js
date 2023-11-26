@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#FFA500',
     padding: 16,
     paddingTop: 40,
   },
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   cancelButtonText: {
-    color: '#007AFF',
+    color: '#191970',
     fontSize: 16,
   },
   autocompleteList: {
