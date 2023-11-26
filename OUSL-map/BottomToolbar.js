@@ -4,7 +4,7 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  Dimensions,
+  Platform
 } from "react-native";
 import IconAnt from "react-native-vector-icons/AntDesign";
 import IconEnt from "react-native-vector-icons/Entypo";
@@ -12,7 +12,7 @@ import IconFea from "react-native-vector-icons/Feather";
 
 const BottomToolbar = ({ navigation }) => {
   return (
-    <View style={[styles.toolbar,  styles.shadow]}>
+    <View style={styles.toolbar}>
       <TouchableOpacity
         style={styles.tools}
         onPress={() => navigation.navigate("Search")}
@@ -47,20 +47,24 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     backgroundColor: "#FFA500",
     margin: "4%",
-    borderRadius: 25
+    borderRadius: 25,
+        ...Platform.select({
+      ios: {
+        shadowColor: "black",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 4,
+      },
+    }),
   },
   tools: {
     marginLeft: 25,
     marginRight: 25,
     justifyContent: "center",
     alignItems: "center",
-  },
-  shadow: {
-    shadowColor: "rgba(0, 0, 0, 0.25)",
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 1,
-    shadowRadius: 10,
-    elevation: 2,
   },
 });
 

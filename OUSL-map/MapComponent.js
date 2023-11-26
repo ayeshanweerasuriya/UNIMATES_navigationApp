@@ -5,6 +5,7 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 // import CustomRoad from './CustomRoad';
 
 const MapComponent = () => {
+  
   const customMapStyle = [
     {
       featureType: "poi",
@@ -88,6 +89,7 @@ const MapComponent = () => {
           </View>
         </Marker>
       </MapView>
+      <View style={styles.overlay} />
     </View>
   );
 };
@@ -98,6 +100,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-end",
     alignItems: "center",
+    marginBottom: 20,
   },
   map: {
     ...StyleSheet.absoluteFillObject,

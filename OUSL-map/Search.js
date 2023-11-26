@@ -6,6 +6,7 @@ import {
   FlatList,
   StyleSheet,
   TouchableOpacity,
+  StatusBar
 } from 'react-native';
 import { placesArray } from './data';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -39,25 +40,26 @@ const SearchBar = ({ navigation }) => {
 
   return (
     <>
+      <StatusBar backgroundColor="#FFA500" barStyle="light-content" />
       <View style={styles.container}>
         <View style={styles.searchBar}>
           <Icon name="search-sharp" size={20} color="grey" style={{ marginRight: 10 }} />
           <TextInput
-          placeholder="Search..."
-          placeholderTextColor="grey"
-          value={searchText}
-          onChangeText={(text) => {
-            handleInputChange(text);
-            setSearchText(text);
-          }}
-          style={{width: 200}}
-        />
-        {searchText !== '' && (
-          <TouchableOpacity style={styles.clearButtonContainer} onPress={clearSearch}>
-            <Icon name="close" size={20} color="red" />
-          </TouchableOpacity>
-        )}
-      </View>
+            placeholder="Search..."
+            placeholderTextColor="grey"
+            value={searchText}
+            onChangeText={(text) => {
+              handleInputChange(text);
+              setSearchText(text);
+            }}
+            style={{ width: 200 }}
+          />
+          {searchText !== '' && (
+            <TouchableOpacity style={styles.clearButtonContainer} onPress={clearSearch}>
+              <Icon name="close" size={20} color="red" />
+            </TouchableOpacity>
+          )}
+        </View>
         <TouchableOpacity style={styles.cancelButton} onPress={() => navigation.navigate("Home")} >
           <Text style={styles.cancelButtonText}>Cancel</Text>
         </TouchableOpacity>
