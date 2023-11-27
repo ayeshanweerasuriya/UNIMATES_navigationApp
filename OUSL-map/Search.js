@@ -15,6 +15,7 @@ const SearchBar = ({ navigation }) => {
   const [query, setQuery] = useState('');
   const [filteredData, setFilteredData] = useState([]);
   const [searchText, setSearchText] = useState('');
+  const [searchedPlace, setSearchedPlace] = useState(null);
 
   const clearSearch = () => {
     setSearchText('');
@@ -29,7 +30,8 @@ const SearchBar = ({ navigation }) => {
   };
 
   const handlePlaceSelect = (place) => {
-    navigation.navigate('MapScreen', { place });
+    setSearchedPlace(place);
+    navigation.navigate('Home', { selectedPlace: place });
   };
 
   const renderAutocompleteItem = ({ item }) => (

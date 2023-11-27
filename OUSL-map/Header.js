@@ -47,7 +47,8 @@ const styles = StyleSheet.create({
   },
   touchableArea: {
     padding: 10,
-    marginRight: 30
+    marginRight: 30,
+    right: 10
   },
   icon: {
     paddingHorizontal: 5,
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     color: "#fff",
-    right: 50
+    right: 40,
   },
 });
 
