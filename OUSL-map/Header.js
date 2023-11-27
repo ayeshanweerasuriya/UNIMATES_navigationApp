@@ -13,12 +13,12 @@ import Icon from "react-native-vector-icons/AntDesign";
 const CustomHeader = ({ title, navigation }) => {
   return (
     <SafeAreaView style={styles.headerContainer}>
-    <StatusBar backgroundColor="#FFA500" barStyle="light-content" />
+      <StatusBar backgroundColor="#FFA500" barStyle="light-content" />
       <TouchableOpacity
         onPress={() => navigation.goBack()}
         style={styles.touchableArea}
       >
-        <Icon name="left" size={25} color="#fff" style={styles.icon} />
+        <Icon name="left" size={22} color="#fff" style={styles.icon} />
       </TouchableOpacity>
       <Text style={styles.headerText}>{title}</Text>
     </SafeAreaView>
@@ -41,13 +41,13 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
       },
       android: {
-        elevation: 4,
+  	elevation: 4,
       },
     }),
   },
   touchableArea: {
-    padding: 10, // Increase the padding to expand the touchable area
-    paddingRight: 25,
+    padding: 10,
+    marginRight: 30
   },
   icon: {
     paddingHorizontal: 5,
@@ -56,11 +56,13 @@ const styles = StyleSheet.create({
   headerText: {
     flex: 1,
     textAlign: "center",
+    alignSelf: "center",
     fontSize: 20,
     fontWeight: "bold",
     color: "#fff",
-    marginLeft: -75,
+    right: 50
   },
 });
 
 export default CustomHeader;
+

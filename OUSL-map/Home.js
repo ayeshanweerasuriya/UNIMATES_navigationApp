@@ -11,7 +11,6 @@ const Home = ({ navigation }) => {
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={isDarkMode ? '#333' : '#fff'} // Change background color as needed
       />
       <MapComponent />
       <View style={{ bottom: 0, position: 'absolute', marginBottom: 120, marginLeft: 18 }}>
