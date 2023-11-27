@@ -18,7 +18,7 @@ const CustomHeader = ({ title, navigation }) => {
         onPress={() => navigation.goBack()}
         style={styles.touchableArea}
       >
-        <Icon name="left" size={22} color="#fff" style={styles.icon} />
+        <Icon name="arrowleft" size={25} color="#fff" style={styles.icon} />
       </TouchableOpacity>
       <Text style={styles.headerText}>{title}</Text>
     </SafeAreaView>

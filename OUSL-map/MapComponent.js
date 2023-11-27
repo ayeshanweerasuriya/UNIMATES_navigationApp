@@ -1,5 +1,5 @@
 //mapcomponent.js
-import React, { useState } from "react";
+import React, { useRef, useState } from 'react';
 import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from "react-native-maps";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -317,9 +317,41 @@ const MapComponent = ({ selectedPlace }) => {
     : {
       latitude: 6.883,
       longitude: 79.8868,
-      latitudeDelta: 0.000922,
-      longitudeDelta: 0.000421,
+      latitudeDelta: 0.00922,
+      longitudeDelta: 0.00421,
     };
+    
+      const north = 6.88934;
+  const east = 79.88693;
+  const south = 6.88231;
+  const west = 79.88059;
+
+  const mapViewRef = useRef(null);
+
+  const [region, setRegion] = useState({
+    latitude: (north + south) / 2,
+    longitude: (east + west) / 2,
+    latitudeDelta: Math.abs(north - south) * 0.5,
+    longitudeDelta: Math.abs(east - west) * 0.5,
+  });
+
+  const onRegionChangeComplete = (newRegion) => {
+    // Check if the new region is within the allowed boundaries
+    if (
+      newRegion.latitude < south ||
+      newRegion.latitude > north ||
+      newRegion.longitude < west ||
+      newRegion.longitude > east
+    ) {
+      // If outside the boundaries, update the map to the last valid region
+      mapViewRef.current.animateToRegion(region, 500); // You can adjust the duration as needed
+    } else {
+      // If inside the boundaries, update the region state
+      setRegion(newRegion);
+    }
+  };
+
+
 
   return (
     <View style={styles.container}>
@@ -354,11 +386,13 @@ const MapComponent = ({ selectedPlace }) => {
         </View>
       </View>
       <MapView
+        ref={mapViewRef}
         style={styles.map}
         initialRegion={initialRegion}
         provider={PROVIDER_GOOGLE}
         customMapStyle={selectedMapStyle}
         minZoomLevel={18}
+        onRegionChangeComplete={onRegionChangeComplete}
       >
         {placesArray.map((place, index) => (
           <Marker
