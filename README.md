@@ -27,7 +27,7 @@ Welcome to the UNIMATES OUSL Colombo Navigation Application repository! This rep
 </p>
 
 ### Project Overview:
-Our goal with the "OUSL Colombo Navigation Application" is to create a user-friendly, intuitive mobile app designed specifically for students and faculty at the Open University of Sri Lanka (OUSL) in Colombo. This application aims to streamline the navigation experience within the campus, making it easier for users to find their way around, access essential information, and enhance their overall experience at OUSL.
+Our goal with the "OUSL Colombo Navigation Application" is to create a user-friendly, intuitive mobile app designed specifically for students and faculty at [the Open University of Sri Lanka (OUSL) in Colombo.](https://ou.ac.lk/) This application aims to streamline the navigation experience within the campus, making it easier for users to find their way around, access essential information, and enhance their overall experience at OUSL.
 
 ### Key Technologies:
 React Native: We chose React Native to build a cross-platform mobile application that can run seamlessly on both Android and iOS devices. This technology allows us to develop a single codebase, resulting in greater efficiency and cost-effectiveness.
