@@ -1,5 +1,5 @@
 //mapcomponent.js
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from "react-native-maps";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -306,7 +306,7 @@ const MapComponent = ({ selectedPlace }) => {
   ];
 
   const selectedMapStyle = isDarkMode ? customDarkMapStyle : customMapStyle;
-
+  
   const initialRegion = selectedPlace
     ? {
       latitude: selectedPlace.coordinates[0],
@@ -351,8 +351,6 @@ const MapComponent = ({ selectedPlace }) => {
     }
   };
 
-
-
   return (
     <View style={styles.container}>
       <View
@@ -388,11 +386,13 @@ const MapComponent = ({ selectedPlace }) => {
       <MapView
         ref={mapViewRef}
         style={styles.map}
-        initialRegion={initialRegion}
+        region={initialRegion}
         provider={PROVIDER_GOOGLE}
         customMapStyle={selectedMapStyle}
         minZoomLevel={18}
         onRegionChangeComplete={onRegionChangeComplete}
+        showsUserLocation
+        followsUserLocation
       >
         {placesArray.map((place, index) => (
           <Marker
