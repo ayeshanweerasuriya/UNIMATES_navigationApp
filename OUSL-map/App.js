@@ -26,7 +26,7 @@ import { ThemeProvider } from "./ThemeContext";
 
 import LaunchScreen from "./LaunchScreen";
 import Home from "./Home";
-import Search from "./Search";
+import SearchBar from "./SearchBar";
 import Settings from "./Settings";
 import PrivacyPolicy from "./Privacy_Policy";
 import AboutUs from "./AboutUs";
@@ -54,8 +54,8 @@ const AppNavigator = () => {
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="Search"
-            component={Search}
+            name="SearchBar"
+            component={SearchBar}
             options={{ headerShown: false }}
           />
           <Stack.Screen

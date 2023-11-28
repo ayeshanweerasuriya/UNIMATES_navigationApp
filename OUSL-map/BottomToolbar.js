@@ -1,43 +1,59 @@
-import React from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Platform
-} from "react-native";
+// BottomToolbar.js
+
+import React, { useState } from "react";
+import { View, TouchableOpacity, StyleSheet, Platform } from "react-native";
 import IconAnt from "react-native-vector-icons/AntDesign";
 import IconEnt from "react-native-vector-icons/Entypo";
 import IconFea from "react-native-vector-icons/Feather";
+import Modal from "react-native-modal";
+import SearchBar from "./SearchBar";
 
 const BottomToolbar = ({ navigation }) => {
+  const [isSearchModalVisible, setSearchModalVisible] = useState(false);
+
+  const toggleSearchModal = () => {
+    setSearchModalVisible(!isSearchModalVisible);
+  };
+
   return (
-    <View style={styles.toolbar}>
-      <TouchableOpacity
-        style={styles.tools}
-        onPress={() => navigation.navigate("Search")}
+    <View style={styles.container}>
+      <View style={styles.toolbar}>
+        <TouchableOpacity style={styles.tools} onPress={toggleSearchModal}>
+          <IconAnt name="search1" size={25} color="#fff" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.tools}>
+          <IconEnt name="direction" size={25} color="#fff" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.tools}>
+          <IconEnt name="save" size={25} color="#fff" />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.tools}>
+          <IconFea
+            name="settings"
+            size={25}
+            color="#fff"
+            onPress={() => navigation.navigate("Settings")}
+          />
+        </TouchableOpacity>
+      </View>
+
+      <Modal
+        isVisible={isSearchModalVisible}
+        onBackdropPress={toggleSearchModal}
+        animationIn="slideInUp"
+        animationOut="slideOutDown"
       >
-        <IconAnt name="search1" size={25} color="#fff" />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.tools}>
-        <IconEnt name="direction" size={25} color="#fff" />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.tools}>
-        <IconEnt name="save" size={25} color="#fff" />
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.tools}>
-        <IconFea
-          name="settings"
-          size={25}
-          color="#fff"
-          onPress={() => navigation.navigate("Settings")}
-        />
-      </TouchableOpacity>
+        {/* Use the SearchBar component */}
+        <SearchBar onClose={toggleSearchModal} navigation={navigation}/>
+      </Modal>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   toolbar: {
     bottom: 0,
     position: "absolute",
@@ -48,7 +64,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFA500",
     margin: "4%",
     borderRadius: 25,
-        ...Platform.select({
+    ...Platform.select({
       ios: {
         shadowColor: "black",
         shadowOffset: { width: 0, height: 2 },
@@ -69,3 +85,4 @@ const styles = StyleSheet.create({
 });
 
 export default BottomToolbar;
+
