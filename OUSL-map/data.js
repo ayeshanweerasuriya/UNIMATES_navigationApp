@@ -15,6 +15,9 @@ export const placesArray = [
     { name: 'Block 9 Lecture Hall', coordinates: [6.883185831013677, 79.88515251846407], description:'' },
     { name: 'Faculty of Health Sciences', coordinates: [6.882886352221996, 79.8853738495279], description:'' },
     { name: 'Block 10 Lecture Halls', coordinates: [6.8829997643255005, 79.88496867087501], description:'' },
+    { name: 'Zoology Biodiversity Museum', coordinates: [6.883141194987321, 79.88458784522956], description:'' },
+    { name: 'Center for Environmental Studies and Sustainable Development', coordinates: [6.883104681918063, 79.8847454658258], description:'' },
+    { name: 'Block 6 Textile & Apparel Technology Laboratories', coordinates: [6.882703037970817, 79.88469817964693], description:'' },
     // ... other places
   ];
   
