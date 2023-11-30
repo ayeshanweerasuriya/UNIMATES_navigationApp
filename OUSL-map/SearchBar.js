@@ -92,7 +92,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 80,
     width: Dimensions.get('window').width - 35,
-    maxHeight: 400,
     borderRadius: 10,
   },
   suggestionItem: {
