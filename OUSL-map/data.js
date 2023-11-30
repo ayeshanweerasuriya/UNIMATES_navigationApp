@@ -11,13 +11,21 @@ export const placesArray = [
     { name: 'Block 19', coordinates: [6.883009809764903, 79.8855902334538], description:'' },
     { name: 'BOC ATM', coordinates: [6.8828221635785924, 79.88587039648], description:'' },
     { name: 'Block 7 Auditorium', coordinates: [6.883625915510159, 79.88528387853664], description:'' },
-    { name: 'Block 8 Lecture Hall', coordinates: [6.883409415177609, 79.88518457055308], description:'' },
+    { name: 'Block 8 Lecture Hall', coordinates: [6.883420985943724, 79.88500013814777], description:'' },
+    { name: 'Software Engineering Laboratory', coordinates: [6.883373054177451, 79.88539978726443], description:'' },
     { name: 'Block 9 Lecture Hall', coordinates: [6.883185831013677, 79.88515251846407], description:'' },
     { name: 'Faculty of Health Sciences', coordinates: [6.882886352221996, 79.8853738495279], description:'' },
     { name: 'Block 10 Lecture Halls', coordinates: [6.8829997643255005, 79.88496867087501], description:'' },
     { name: 'Zoology Biodiversity Museum', coordinates: [6.883141194987321, 79.88458784522956], description:'' },
     { name: 'Center for Environmental Studies and Sustainable Development', coordinates: [6.883104681918063, 79.8847454658258], description:'' },
     { name: 'Block 6 Textile & Apparel Technology Laboratories', coordinates: [6.882703037970817, 79.88469817964693], description:'' },
+    { name: 'Faculty of Education Open University', coordinates: [6.882721740873599, 79.884126893186], description:'' },
+    { name: 'Pre school, OUSL', coordinates: [6.8827349175566175, 79.88380835728336], description:'' },
+    { name: 'Open University student car park', coordinates: [6.883095958528819, 79.88387206446387], description:'' },
+    { name: 'Medical Center and staff Day care', coordinates: [6.883127582542498, 79.88360130894664], description:'' },
+    { name: 'Exam Hall NO.02', coordinates: [6.883424274683942, 79.8842590012181], description:'' },
+    { name: 'Press', coordinates: [6.883436871571155, 79.88401538501986], description:'' },
+    { name: 'DISPATCH', coordinates: [6.883499856002221, 79.88373877912811], description:'' },
     // ... other places
   ];
   
