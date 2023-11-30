@@ -7,9 +7,11 @@ import IconEnt from "react-native-vector-icons/Entypo";
 import IconFea from "react-native-vector-icons/Feather";
 import Modal from "react-native-modal";
 import SearchBar from "./SearchBar";
+import { useTheme } from './ThemeContext';
 
 const BottomToolbar = ({ navigation }) => {
   const [isSearchModalVisible, setSearchModalVisible] = useState(false);
+  const { isDarkMode } = useTheme();
 
   const toggleSearchModal = () => {
     setSearchModalVisible(!isSearchModalVisible);
@@ -42,6 +44,8 @@ const BottomToolbar = ({ navigation }) => {
         onBackdropPress={toggleSearchModal}
         animationIn="slideInUp"
         animationOut="slideOutDown"
+        backdropColor= {isDarkMode ? '#333333' : '#FFE5B4'}
+        backdropOpacity={0.9}
       >
         {/* Use the SearchBar component */}
         <SearchBar onClose={toggleSearchModal} navigation={navigation}/>

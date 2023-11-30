@@ -4,16 +4,19 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, FlatList, StyleSheet, TouchableOpacity, Dimensions, StatusBar } from 'react-native';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import { placesArray } from './data';
+import { useTheme } from './ThemeContext';
 
 const SearchBar = ({ onClose, navigation }) => {
   const [query, setQuery] = useState('');
   const [filteredData, setFilteredData] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [searchedPlace, setSearchedPlace] = useState(null);
+  const { isDarkMode } = useTheme();
 
   const handleInputChange = (text) => {
-    const filtered = placesArray.filter((place) =>
-      place.name.toLowerCase().includes(text.toLowerCase())
+    // Filter suggestions based on the first letter the user typed
+    const filtered = placesArray.filter(
+      (place) => place.name.toLowerCase().startsWith(text.toLowerCase())
     );
     setFilteredData(filtered);
     setQuery(text);
@@ -28,18 +31,19 @@ const SearchBar = ({ onClose, navigation }) => {
   const renderAutocompleteItem = ({ item }) => (
     <TouchableOpacity onPress={() => handlePlaceSelect(item)}>
       <View style={styles.suggestionItem}>
-        <IconAnt name="search1" size={18} color="#333" />
-        <Text style={styles.suggestionText}>{item.name}</Text>
+        <IconAnt name="search1" size={18} color= {isDarkMode ? '#fff' : '#333'} />
+        <Text style={[styles.suggestionText, isDarkMode && styles.darkText]}>{item.name}</Text>
       </View>
     </TouchableOpacity>
   );
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, isDarkMode && styles.darkInput]}>
     <StatusBar backgroundColor="#FFA500" barStyle="light-content" />
       <TextInput
-        style={styles.input}
+        style={[styles.input, isDarkMode && styles.darkText]}
         placeholder="Search..."
+        placeholderTextColor={isDarkMode ? '#fff' : '#000'}
         value={searchText}
         onChangeText={(text) => {
           handleInputChange(text);
@@ -48,7 +52,7 @@ const SearchBar = ({ onClose, navigation }) => {
         // Add any additional props or styles for your TextInput
       />
       <TouchableOpacity onPress={onClose} style={styles.closeButton}>
-        <IconAnt name="close" size={20} color="#000" />
+        <IconAnt name="close" size={20} color= {isDarkMode ? '#fff' : '#333'} />
       </TouchableOpacity>
 
       {filteredData.length > 0 && (
@@ -68,7 +72,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#fff',
-    borderRadius: 25,
+    borderRadius: 20,
     paddingVertical: 10,
     paddingHorizontal: 20,
     margin: 1,
@@ -87,24 +91,26 @@ const styles = StyleSheet.create({
     marginLeft: 1,
     position: 'absolute',
     top: 80,
-    width: Dimensions.get('window').width - 38,
-    maxHeight: 200,
-    backgroundColor: '#fff',
+    width: Dimensions.get('window').width - 35,
+    maxHeight: 400,
     borderRadius: 10,
-    elevation: 5,
   },
   suggestionItem: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
   },
   suggestionText: {
     fontSize: 15,
     marginLeft: 10,
-    color: '#333',
+    color: '#000',
   },
+  darkText: {
+    color: '#fff',
+  },
+  darkInput : {
+    backgroundColor: '#808080',
+  }
 });
 
 export default SearchBar;
