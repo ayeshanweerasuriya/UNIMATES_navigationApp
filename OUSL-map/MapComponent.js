@@ -351,6 +351,17 @@ const MapComponent = ({ selectedPlace }) => {
     }
   };
 
+  const [zoomLevel, setZoomLevel] = useState(null);
+
+  const onZoomChangeComplete = (region) => {
+    // Calculate the zoom level based on latitudeDelta or longitudeDelta
+    const zoom = Math.log2(360 / region.longitudeDelta);
+
+    // Set the zoom level state
+    setZoomLevel(zoom);
+  };
+
+
   return (
     <View style={styles.container}>
       <View
@@ -438,11 +449,10 @@ const styles = StyleSheet.create({
   markerText: {
     fontSize: 11,
     color: '#000',
-    width: 150,
+    width: 130,
     textAlign: 'center'
   },
   darkText: {
-    fontSize: 11,
     color: '#fff'
   },
 });
