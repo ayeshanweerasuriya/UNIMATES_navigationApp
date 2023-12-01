@@ -412,7 +412,7 @@ const MapComponent = ({ selectedPlace }) => {
         {selectedPlace && (
           <Marker
             coordinate={{
-              latitude: selectedPlace.coordinates[0],
+              latitude: selectedPlace.coordinates[0] + 0.00001,
               longitude: selectedPlace.coordinates[1],
             }}
             title={selectedPlace.name}
@@ -437,7 +437,9 @@ const styles = StyleSheet.create({
   },
   markerText: {
     fontSize: 11,
-    color: '#000'
+    color: '#000',
+    width: 150,
+    textAlign: 'center'
   },
   darkText: {
     fontSize: 11,
