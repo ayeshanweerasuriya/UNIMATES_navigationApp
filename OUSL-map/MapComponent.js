@@ -306,7 +306,7 @@ const MapComponent = ({ selectedPlace }) => {
   ];
 
   const selectedMapStyle = isDarkMode ? customDarkMapStyle : customMapStyle;
-  
+
   const initialRegion = selectedPlace
     ? {
       latitude: selectedPlace.coordinates[0],
@@ -320,19 +320,19 @@ const MapComponent = ({ selectedPlace }) => {
       latitudeDelta: 0.00922,
       longitudeDelta: 0.00421,
     };
-    
-      const north = 6.88934;
+
+  const north = 6.88934;
   const east = 79.88693;
   const south = 6.88231;
-  const west = 79.88059;
+  const west = 79.87867;
 
   const mapViewRef = useRef(null);
 
   const [region, setRegion] = useState({
     latitude: (north + south) / 2,
     longitude: (east + west) / 2,
-    latitudeDelta: Math.abs(north - south) * 0.5,
-    longitudeDelta: Math.abs(east - west) * 0.5,
+    latitudeDelta: Math.abs(north - south) * 1.2,
+    longitudeDelta: Math.abs(east - west) * 1.2,
   });
 
   const onRegionChangeComplete = (newRegion) => {
@@ -389,7 +389,7 @@ const MapComponent = ({ selectedPlace }) => {
         region={initialRegion}
         provider={PROVIDER_GOOGLE}
         customMapStyle={selectedMapStyle}
-        minZoomLevel={18}
+        minZoomLevel={19}
         onRegionChangeComplete={onRegionChangeComplete}
         showsUserLocation
         followsUserLocation
