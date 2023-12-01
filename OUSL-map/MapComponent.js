@@ -306,7 +306,7 @@ const MapComponent = ({ selectedPlace }) => {
   ];
 
   const selectedMapStyle = isDarkMode ? customDarkMapStyle : customMapStyle;
-  
+
   const initialRegion = selectedPlace
     ? {
       latitude: selectedPlace.coordinates[0],
@@ -320,19 +320,19 @@ const MapComponent = ({ selectedPlace }) => {
       latitudeDelta: 0.00922,
       longitudeDelta: 0.00421,
     };
-    
-      const north = 6.88934;
+
+  const north = 6.88934;
   const east = 79.88693;
   const south = 6.88231;
-  const west = 79.88059;
+  const west = 79.87867;
 
   const mapViewRef = useRef(null);
 
   const [region, setRegion] = useState({
     latitude: (north + south) / 2,
     longitude: (east + west) / 2,
-    latitudeDelta: Math.abs(north - south) * 0.5,
-    longitudeDelta: Math.abs(east - west) * 0.5,
+    latitudeDelta: Math.abs(north - south) * 1.2,
+    longitudeDelta: Math.abs(east - west) * 1.2,
   });
 
   const onRegionChangeComplete = (newRegion) => {
@@ -344,7 +344,7 @@ const MapComponent = ({ selectedPlace }) => {
       newRegion.longitude > east
     ) {
       // If outside the boundaries, update the map to the last valid region
-      mapViewRef.current.animateToRegion(region, 500); // You can adjust the duration as needed
+      mapViewRef.current.animateToRegion(region, 10); // You can adjust the duration as needed
     } else {
       // If inside the boundaries, update the region state
       setRegion(newRegion);
@@ -389,7 +389,7 @@ const MapComponent = ({ selectedPlace }) => {
         region={initialRegion}
         provider={PROVIDER_GOOGLE}
         customMapStyle={selectedMapStyle}
-        minZoomLevel={18}
+        minZoomLevel={19}
         onRegionChangeComplete={onRegionChangeComplete}
         showsUserLocation
         followsUserLocation
@@ -412,7 +412,7 @@ const MapComponent = ({ selectedPlace }) => {
         {selectedPlace && (
           <Marker
             coordinate={{
-              latitude: selectedPlace.coordinates[0],
+              latitude: selectedPlace.coordinates[0] + 0.00001,
               longitude: selectedPlace.coordinates[1],
             }}
             title={selectedPlace.name}
@@ -437,10 +437,11 @@ const styles = StyleSheet.create({
   },
   markerText: {
     fontSize: 11,
-    color: '#000'
+    color: '#000',
+    width: 130,
+    textAlign: 'center'
   },
   darkText: {
-    fontSize: 11,
     color: '#fff'
   },
 });

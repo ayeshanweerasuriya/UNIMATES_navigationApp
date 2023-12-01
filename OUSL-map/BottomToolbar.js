@@ -44,7 +44,7 @@ const BottomToolbar = ({ navigation }) => {
         onBackdropPress={toggleSearchModal}
         animationIn="slideInUp"
         animationOut="slideOutDown"
-        backdropColor= {isDarkMode ? '#333333' : '#F0EAD6'}
+        backdropColor= {isDarkMode ? '#333333' : '#FDF5E6'}
         backdropOpacity={0.9}
       >
         {/* Use the SearchBar component */}
