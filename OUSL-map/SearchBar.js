@@ -16,10 +16,15 @@ const SearchBar = ({ onClose, navigation }) => {
   const handleInputChange = (text) => {
     // Filter suggestions based on the first letter the user typed
     const filtered = placesArray.filter(
-      (place) => place.name.toLowerCase().startsWith(text.toLowerCase())
+      (place) => place.name.toLowerCase().startsWith(text.toLowerCase()) &&
+        place.name.toLowerCase().includes(text.toLowerCase()) //this need to change with place.description
     );
     setFilteredData(filtered);
     setQuery(text);
+  };
+
+  const clearSearch = () => {
+    setSearchText('');
   };
 
   const handlePlaceSelect = (place) => {
@@ -31,7 +36,7 @@ const SearchBar = ({ onClose, navigation }) => {
   const renderAutocompleteItem = ({ item }) => (
     <TouchableOpacity onPress={() => handlePlaceSelect(item)}>
       <View style={styles.suggestionItem}>
-        <IconAnt name="search1" size={18} color= {isDarkMode ? '#fff' : '#333'} />
+        <IconAnt name="search1" size={18} color={isDarkMode ? '#fff' : '#333'} />
         <Text style={[styles.suggestionText, isDarkMode && styles.darkText]}>{item.name}</Text>
       </View>
     </TouchableOpacity>
@@ -39,7 +44,7 @@ const SearchBar = ({ onClose, navigation }) => {
 
   return (
     <View style={[styles.container, isDarkMode && styles.darkInput]}>
-    <StatusBar backgroundColor="#FFA500" barStyle="light-content" />
+      <StatusBar backgroundColor="#FFA500" barStyle="light-content" />
       <TextInput
         style={[styles.input, isDarkMode && styles.darkText]}
         placeholder="Search..."
@@ -49,11 +54,12 @@ const SearchBar = ({ onClose, navigation }) => {
           handleInputChange(text);
           setSearchText(text);
         }}
-        // Add any additional props or styles for your TextInput
       />
-      <TouchableOpacity onPress={onClose} style={styles.closeButton}>
-        <IconAnt name="close" size={20} color= {isDarkMode ? '#fff' : '#333'} />
-      </TouchableOpacity>
+      {searchText !== '' && (
+        <TouchableOpacity style={styles.clearButtonContainer} onPress={clearSearch}>
+          <IconAnt name="close" size={20} color={isDarkMode ? '#fff' : '#333'} />
+        </TouchableOpacity>
+      )}
 
       {filteredData.length > 0 && (
         <FlatList
@@ -106,7 +112,7 @@ const styles = StyleSheet.create({
   darkText: {
     color: '#fff',
   },
-  darkInput : {
+  darkInput: {
     backgroundColor: '#808080',
   }
 });
