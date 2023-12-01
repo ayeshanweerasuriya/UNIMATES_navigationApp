@@ -344,23 +344,12 @@ const MapComponent = ({ selectedPlace }) => {
       newRegion.longitude > east
     ) {
       // If outside the boundaries, update the map to the last valid region
-      mapViewRef.current.animateToRegion(region, 500); // You can adjust the duration as needed
+      mapViewRef.current.animateToRegion(region, 10); // You can adjust the duration as needed
     } else {
       // If inside the boundaries, update the region state
       setRegion(newRegion);
     }
   };
-
-  const [zoomLevel, setZoomLevel] = useState(null);
-
-  const onZoomChangeComplete = (region) => {
-    // Calculate the zoom level based on latitudeDelta or longitudeDelta
-    const zoom = Math.log2(360 / region.longitudeDelta);
-
-    // Set the zoom level state
-    setZoomLevel(zoom);
-  };
-
 
   return (
     <View style={styles.container}>
