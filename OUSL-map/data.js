@@ -51,6 +51,7 @@ export const placesArray = [
     { name: 'CRC class room', coordinates: [6.883152072530323, 79.88629741084871], description:'' },
     { name: 'Stores', coordinates: [6.883178609173903, 79.88621187711726], description:'' },
     { name: 'Department of Health Sciences', coordinates: [6.883282102069653, 79.88623860640834], description:'' },
+    { name: 'Play Ground', coordinates: [6.887925780220665, 79.88118339893444], description:'' },
     // ... other places
   ];
   
