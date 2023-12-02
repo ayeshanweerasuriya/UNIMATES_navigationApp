@@ -1,7 +1,7 @@
 //mapcomponent.js
 import React, { useRef, useState, useEffect } from 'react';
 import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from "react-native-maps";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity, Modal } from "react-native";
 // import CustomRoad from './CustomRoad';
 import { useTheme } from "./ThemeContext";
 import { placesArray } from './data';
@@ -346,9 +346,12 @@ const MapComponent = ({ selectedPlace }) => {
       mapViewRef.current.animateToRegion(region, 10); // You can adjust the duration as needed
     } else {
       // If inside the boundaries, update the region state
+      mapViewRef.current.animateToRegion(newRegion, 3000);
       setRegion(newRegion);
     }
   };
+
+
 
   return (
     <View style={styles.container}>
@@ -369,7 +372,7 @@ const MapComponent = ({ selectedPlace }) => {
               latitude: place.coordinates[0],
               longitude: place.coordinates[1],
             }}
-            title={place.name} // Display the name as the marker title
+            // Display the name as the marker title
           // You can also use description={place.name} if you want a description
           >
             <View style={styles.markerContainer}>
@@ -411,6 +414,22 @@ const styles = StyleSheet.create({
   },
   darkText: {
     color: '#fff'
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  closeButton: {
+    marginTop: 10,
+    color: 'blue', // You can customize the color
   },
 });
 
