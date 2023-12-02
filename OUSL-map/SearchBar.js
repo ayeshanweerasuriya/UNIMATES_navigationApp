@@ -5,6 +5,7 @@ import { View, Text, TextInput, FlatList, StyleSheet, TouchableOpacity, Dimensio
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import { placesArray } from './data';
 import { useTheme } from './ThemeContext';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const SearchBar = ({ onClose, navigation }) => {
   const [query, setQuery] = useState('');
@@ -45,6 +46,12 @@ const SearchBar = ({ onClose, navigation }) => {
   return (
     <View style={[styles.container, isDarkMode && styles.darkInput]}>
       <StatusBar backgroundColor="#FFA500" barStyle="light-content" />
+	<Icon
+       onPress={onClose}
+        name="arrow-back"
+        size={30}
+        style={styles.backIcon}
+      />
       <TextInput
         style={[styles.input, isDarkMode && styles.darkText]}
         placeholder="Search..."
