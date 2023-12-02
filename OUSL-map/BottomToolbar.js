@@ -2,12 +2,20 @@
 
 import React, { useState } from "react";
 import { View, TouchableOpacity, StyleSheet, Platform } from "react-native";
-import IconAnt from "react-native-vector-icons/AntDesign";
-import IconEnt from "react-native-vector-icons/Entypo";
-import IconFea from "react-native-vector-icons/Feather";
+import Icon from "react-native-vector-icons/Feather";
 import Modal from "react-native-modal";
 import SearchBar from "./SearchBar";
 import { useTheme } from './ThemeContext';
+
+const Tool = (props) => {
+  return (
+    <>
+      <TouchableOpacity style={styles.tools} onPress={props.onPress}>
+        <Icon name={props.iconName} size={25} color="#fff" />
+      </TouchableOpacity>
+    </>
+  )
+}
 
 const BottomToolbar = ({ navigation }) => {
   const [isSearchModalVisible, setSearchModalVisible] = useState(false);
@@ -20,23 +28,10 @@ const BottomToolbar = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.toolbar}>
-        <TouchableOpacity style={styles.tools} onPress={toggleSearchModal}>
-          <IconAnt name="search1" size={25} color="#fff" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.tools}>
-          <IconEnt name="direction" size={25} color="#fff" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.tools}>
-          <IconEnt name="save" size={25} color="#fff" />
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.tools}>
-          <IconFea
-            name="settings"
-            size={25}
-            color="#fff"
-            onPress={() => navigation.navigate("Settings")}
-          />
-        </TouchableOpacity>
+        <Tool onPress={toggleSearchModal} iconName="search" />
+        <Tool onPress={toggleSearchModal} iconName="navigation" />
+        <Tool onPress={toggleSearchModal} iconName="bookmark" />
+        <Tool onPress={() => navigation.navigate("Settings")} iconName="settings" />
       </View>
 
       <Modal
@@ -44,11 +39,10 @@ const BottomToolbar = ({ navigation }) => {
         onBackdropPress={toggleSearchModal}
         animationIn="slideInUp"
         animationOut="slideOutDown"
-        backdropColor= {isDarkMode ? '#333333' : '#FDF5E6'}
+        backdropColor={isDarkMode ? '#333333' : '#FDF5E6'}
         backdropOpacity={0.9}
       >
-        {/* Use the SearchBar component */}
-        <SearchBar onClose={toggleSearchModal} navigation={navigation}/>
+        <SearchBar onClose={toggleSearchModal} navigation={navigation} />
       </Modal>
     </View>
   );

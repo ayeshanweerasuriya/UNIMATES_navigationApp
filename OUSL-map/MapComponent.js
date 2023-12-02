@@ -5,10 +5,24 @@ import { StyleSheet, View, Text, TouchableOpacity, Modal } from "react-native";
 // import CustomRoad from './CustomRoad';
 import { useTheme } from "./ThemeContext";
 import { placesArray } from './data';
+import SelectedLocation from './SelectedLocation';
 
 const MapComponent = ({ selectedPlace }) => {
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [selectedMarker, setSelectedMarker] = useState(null);
 
   const { isDarkMode } = useTheme();
+  
+    // Function to handle marker press
+  const handleMarkerPress = (marker) => {
+    setSelectedMarker(marker);
+    setModalVisible(true);
+  };
+
+  // Function to close the modal
+  const closeModal = () => {
+    setModalVisible(false);
+  };
 
   const customMapStyle = [
     {
@@ -372,6 +386,7 @@ const MapComponent = ({ selectedPlace }) => {
               latitude: place.coordinates[0],
               longitude: place.coordinates[1],
             }}
+            onPress={() => handleMarkerPress(place.name)}
             // Display the name as the marker title
           // You can also use description={place.name} if you want a description
           >
@@ -391,6 +406,21 @@ const MapComponent = ({ selectedPlace }) => {
           />)}
 
       </MapView>
+      
+       	<Modal
+        animationIn="slideInUp"
+        animationOut="slideOutDown"
+        transparent={true}
+        visible={isModalVisible}
+        onRequestClose={closeModal}
+      >
+      
+      <SelectedLocation
+        isVisible={isModalVisible}
+        selectedMarker={selectedMarker}
+        closeModal={closeModal}
+      />
+      </Modal>
 
     </View>
   );
@@ -414,22 +444,6 @@ const styles = StyleSheet.create({
   },
   darkText: {
     color: '#fff'
-  },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  modalContent: {
-    backgroundColor: '#fff',
-    padding: 20,
-    borderRadius: 10,
-    alignItems: 'center',
-  },
-  closeButton: {
-    marginTop: 10,
-    color: 'blue', // You can customize the color
   },
 });
 
