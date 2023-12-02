@@ -1,7 +1,7 @@
 //mapcomponent.js
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from "react-native-maps";
-import { StyleSheet, View, Text, TouchableOpacity, Modal } from "react-native";
+import { StyleSheet, View, Text, Modal } from "react-native";
 // import CustomRoad from './CustomRoad';
 import { useTheme } from "./ThemeContext";
 import { placesArray } from './data';
@@ -410,13 +410,12 @@ const MapComponent = ({ selectedPlace }) => {
        	<Modal
         animationIn="slideInUp"
         animationOut="slideOutDown"
-        transparent={true}
         visible={isModalVisible}
         onRequestClose={closeModal}
+        backdropOpacity={0.5}
       >
       
       <SelectedLocation
-        isVisible={isModalVisible}
         selectedMarker={selectedMarker}
         closeModal={closeModal}
       />
