@@ -1,8 +1,7 @@
 //mapcomponent.js
 import React, { useRef, useState, useEffect } from 'react';
 import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from "react-native-maps";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import { StyleSheet, View, Text, TouchableOpacity, Modal } from "react-native";
 // import CustomRoad from './CustomRoad';
 import { useTheme } from "./ThemeContext";
 import { placesArray } from './data';
@@ -306,7 +305,7 @@ const MapComponent = ({ selectedPlace }) => {
   ];
 
   const selectedMapStyle = isDarkMode ? customDarkMapStyle : customMapStyle;
-  
+
   const initialRegion = selectedPlace
     ? {
       latitude: selectedPlace.coordinates[0],
@@ -320,19 +319,19 @@ const MapComponent = ({ selectedPlace }) => {
       latitudeDelta: 0.00922,
       longitudeDelta: 0.00421,
     };
-    
-      const north = 6.88934;
+
+  const north = 6.88934;
   const east = 79.88693;
   const south = 6.88231;
-  const west = 79.88059;
+  const west = 79.87867;
 
   const mapViewRef = useRef(null);
 
   const [region, setRegion] = useState({
     latitude: (north + south) / 2,
     longitude: (east + west) / 2,
-    latitudeDelta: Math.abs(north - south) * 0.5,
-    longitudeDelta: Math.abs(east - west) * 0.5,
+    latitudeDelta: Math.abs(north - south) * 1.2,
+    longitudeDelta: Math.abs(east - west) * 1.2,
   });
 
   const onRegionChangeComplete = (newRegion) => {
@@ -344,55 +343,27 @@ const MapComponent = ({ selectedPlace }) => {
       newRegion.longitude > east
     ) {
       // If outside the boundaries, update the map to the last valid region
-      mapViewRef.current.animateToRegion(region, 500); // You can adjust the duration as needed
+      mapViewRef.current.animateToRegion(region, 10); // You can adjust the duration as needed
     } else {
       // If inside the boundaries, update the region state
+      mapViewRef.current.animateToRegion(newRegion, 3000);
       setRegion(newRegion);
     }
   };
 
+
+
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          top: 0,
-          position: "absolute",
-          marginTop: 60,
-          marginRight: 18,
-          right: 0,
-          borderRadius: 180,
-          backgroundColor: "#FFF",
-          shadowColor: "rgba(0, 0, 0, 0.25)",
-          shadowOffset: { width: 0, height: 0 },
-          shadowOpacity: 0.25,
-          shadowRadius: 3,
-          elevation: 3,
-        }}
-      >
-        <View
-          style={{
-            width: 35,
-            height: 35,
-            flexShrink: 0,
-            borderRadius: 180,
-            backgroundColor: "#FFF",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Icon name="navigation" size={24} color="#FF0000" />
-        </View>
-      </View>
       <MapView
         ref={mapViewRef}
         style={styles.map}
         region={initialRegion}
         provider={PROVIDER_GOOGLE}
         customMapStyle={selectedMapStyle}
-        minZoomLevel={18}
+        minZoomLevel={19}
         onRegionChangeComplete={onRegionChangeComplete}
         showsUserLocation
-        followsUserLocation
       >
         {placesArray.map((place, index) => (
           <Marker
@@ -401,7 +372,7 @@ const MapComponent = ({ selectedPlace }) => {
               latitude: place.coordinates[0],
               longitude: place.coordinates[1],
             }}
-            title={place.name} // Display the name as the marker title
+            // Display the name as the marker title
           // You can also use description={place.name} if you want a description
           >
             <View style={styles.markerContainer}>
@@ -412,7 +383,7 @@ const MapComponent = ({ selectedPlace }) => {
         {selectedPlace && (
           <Marker
             coordinate={{
-              latitude: selectedPlace.coordinates[0],
+              latitude: selectedPlace.coordinates[0] + 0.00001,
               longitude: selectedPlace.coordinates[1],
             }}
             title={selectedPlace.name}
@@ -437,11 +408,28 @@ const styles = StyleSheet.create({
   },
   markerText: {
     fontSize: 11,
-    color: '#000'
+    color: '#000',
+    width: 130,
+    textAlign: 'center'
   },
   darkText: {
-    fontSize: 11,
     color: '#fff'
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    backgroundColor: '#fff',
+    padding: 20,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  closeButton: {
+    marginTop: 10,
+    color: 'blue', // You can customize the color
   },
 });
 
