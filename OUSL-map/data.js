@@ -2,10 +2,12 @@
 export const placesArray = [
     //Main Entrance
     { name: 'CRC Office', coordinates: [6.883372107318636, 79.88659121489017],description:'' },
-    { name: 'Department of Health Sciences', coordinates: [6.883282102069653, 79.88623860640834], description:'' },
+    { name: 'Department of Health Sciences', coordinates: [6.883521897279724, 79.88633399162427], description:'' },
     { name: 'Stores', coordinates: [6.883178609173903, 79.88621187711726], description:'' },
     { name: 'CRC class room', coordinates: [6.883152072530323, 79.88629741084871], description:'' },
     { name: 'Student Registration Office', coordinates: [6.883205677532922, 79.88653622960813], description:'' },
+    { name: 'Student Information Center', coordinates: [6.883012786780624, 79.8865106578698], description:'' },
+
 
     //Bridge Left Side
     { name: 'Open University Bridge', coordinates: [6.888954, 79.881006], description:'' },
@@ -56,7 +58,7 @@ export const placesArray = [
     { name: 'Center for Environmental Studies and Sustainable Development', coordinates: [6.883104681918063, 79.8847454658258], description:'' },
     { name: 'Block 05', coordinates: [6.882928677767263, 79.88471464847393], description:'' },
     { name: 'Textile & Apparel Technology Laboratories', coordinates: [6.882684316555971, 79.88472576183624], description:'' },
-    { name: 'Auditorium', coordinates: [6.883685959240148, 79.88513704970991], description:'' },
+    { name: 'Auditorium', coordinates: [6.883617325984266, 79.88514025138433], description:'' },
     { name: 'Block 8 Lecture Halls', coordinates: [6.883416485038406, 79.88499007022119], description:'' },
     { name: 'Block 9 Lecture Halls', coordinates: [6.883192612644453, 79.88496405125429], description:'' },
     { name: 'Block 10 Lecture Halls', coordinates: [6.88298437311032, 79.88495297450413], description:'' },
@@ -72,6 +74,7 @@ export const placesArray = [
     { name: 'Block 20', coordinates: [6.882858903851017, 79.8855435810603], description:'' },
     { name: 'BOC ATM', coordinates: [6.8828221635785924, 79.88587039648], description:'' },
     { name: "People's Bank Atm", coordinates: [6.882840594779502, 79.88592074658834], description:'' },
+    { name: 'Computer Science Lab', coordinates: [6.883792452234939, 79.88501654380495], description:'' },
     // ... other places
   ];
   
