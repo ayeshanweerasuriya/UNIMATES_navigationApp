@@ -71,7 +71,7 @@ export const placesArray = [
     { name: 'Block 19', coordinates: [6.882993125443476, 79.88555244082521], description:'' },
     { name: 'Block 20', coordinates: [6.882858903851017, 79.8855435810603], description:'' },
     { name: 'BOC ATM', coordinates: [6.8828221635785924, 79.88587039648], description:'' },
-    { name: 'People's Bank Atm', coordinates: [6.882840594779502, 79.88592074658834], description:'' },
+    { name: "People's Bank Atm", coordinates: [6.882840594779502, 79.88592074658834], description:'' },
     // ... other places
   ];
   
