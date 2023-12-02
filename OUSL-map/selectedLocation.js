@@ -17,7 +17,7 @@ export default function App() {
           <View style={styles.contentContainer}>
             <View style={styles.imageContainer}>
               <Image
-                source={require('./images/libraryimg2.jpg')}
+                source={require('./assets/libraryimg2.jpg')}
                 style={styles.roundImage}
               />
             </View>
@@ -42,15 +42,15 @@ export default function App() {
         <View style={styles.section}>
           <View style={styles.imageRow}>
             <Image
-              source={require('./images/libraryimg3.jpeg')}
+              source={require('./assets/libraryimg3.jpeg')}
               style={styles.smallImage}
             />
             <Image
-              source={require('./images/libraryimg4.jpg')}
+              source={require('./assets/libraryimg4.jpg')}
               style={styles.smallImage}
             />
             <Image
-              source={require('./images/libraryimg5.jpg')}
+              source={require('./assets/libraryimg5.jpg')}
               style={styles.smallImage}
             />
           </View>
