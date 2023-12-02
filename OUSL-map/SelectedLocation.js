@@ -1,16 +1,20 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, Text, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Entypo';
+import { useTheme } from './ThemeContext';
 
 export default function SelectedLocation({ selectedMarker, closeModal }) {
+
+  const { isDarkMode } = useTheme();
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <View style={styles.whiteRectangle}>
+      <View style={[styles.whiteRectangle, isDarkMode && styles.darkTheme]}>
         {/* Section 1: Selected Location */}
         <View style={styles.section}>
-          <Text style={styles.selectedLocationText}>Selected Location</Text>
-          <Icon name="chevron-thin-down" size={25} color="#333" onPress={closeModal}/>
+          <Text style={[styles.selectedLocationText, isDarkMode && styles.darkText]}>Selected Location</Text>
+          <Icon name="chevron-thin-down" size={25} color={isDarkMode ? '#fff' : '#333'} onPress={closeModal}/>
         </View>
 
         {/* Section 2: Image, Title, and Topic */}
@@ -23,7 +27,7 @@ export default function SelectedLocation({ selectedMarker, closeModal }) {
               />
             </View>
             <View style={styles.textContainer}>
-              <Text style={styles.titleText}>{selectedMarker}</Text>
+              <Text style={[styles.titleText, isDarkMode && styles.darkText]}>{selectedMarker}</Text>
               <Text style={styles.topicText}>ABS12SF54</Text>
             </View>
           </View>
@@ -32,8 +36,8 @@ export default function SelectedLocation({ selectedMarker, closeModal }) {
         {/* Section 3: Description */}
         <View style={styles.section}>
           <View style={styles.descriptionContainer}>
-            <Text style={styles.descriptionText}>Description</Text>
-            <Text style={styles.smallDescriptionText}>
+            <Text style={[styles.descriptionText, isDarkMode && styles.darkText]}>Description</Text>
+            <Text style={[styles.smallDescriptionText, isDarkMode && styles.darkText]}>
               A library is a collection of pre-written and reusable code, functions, classes, or modules that provide specific functionality or features.
             </Text>
           </View>
@@ -167,5 +171,11 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 10,
+  },
+  darkTheme: {
+    backgroundColor: "#1E1E1E",
+  },
+  darkText: {
+    color: '#fff',
   },
 });
