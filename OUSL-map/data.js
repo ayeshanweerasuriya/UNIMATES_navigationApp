@@ -7,6 +7,7 @@ export const placesArray = [
     { name: 'CRC class room', coordinates: [6.883152072530323, 79.88629741084871], description:'' },
     { name: 'Student Registration Office', coordinates: [6.883205677532922, 79.88653622960813], description:'' },
     { name: 'Student Information Center', coordinates: [6.883012786780624, 79.8865106578698], description:'' },
+    { name: 'Industry Liaison Centre', coordinates: [6.882910149838334 79.88650683027568], description:'' },
 
 
     //Bridge Left Side
