@@ -23,7 +23,7 @@ export const placesArray = [
     { name: 'Science and Technology Building', coordinates: [6.884384057058018, 79.88366727731977], description:'' },
     { name: 'Exam Hall NO.03', coordinates: [6.885093390879016, 79.88336989020088], description:'' },
     { name: 'Exam Hall NO.01.b', coordinates: [6.88514132247153, 79.88379367919707], description:'' },
-    { name: 'Software Engineering Laboratory', coordinates: [6.883373054177451, 79.88539978726443], description:'' },
+    
     { name: 'Zoology Biodiversity Museum', coordinates: [6.883141194987321, 79.88458784522956], description:'' },
     { name: 'Open University student car park', coordinates: [6.883095958528819, 79.88387206446387], description:'' },
     { name: 'Exam Hall NO.02', coordinates: [6.883424274683942, 79.8842590012181], description:'' },
@@ -61,7 +61,7 @@ export const placesArray = [
     { name: 'Block 9 Lecture Halls', coordinates: [6.883192612644453, 79.88496405125429], description:'' },
     { name: 'Block 10 Lecture Halls', coordinates: [6.88298437311032, 79.88495297450413], description:'' },
     { name: 'Block 11', coordinates: [6.882767478704119, 79.88494304410244], description:'' },
-    { name: 'Block 12', coordinates: [6.883379373098002, 79.88539910867004], description:'' },
+    { name: 'Software Engineering Laboratory', coordinates: [6.883373054177451, 79.88539978726443], description:'' },
     { name: 'Block 13', coordinates: [6.883160120789381, 79.8853487608004], description:'' },
     { name: 'Faculty of Health Sciences', coordinates: [6.882944276449441, 79.88535104933757], description:'' },
     { name: 'Block 15', coordinates: [6.8827272959882695, 79.88528124888386], description:'' },
