@@ -2,7 +2,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from "react-native-maps";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
-import Icon from "react-native-vector-icons/MaterialIcons";
 // import CustomRoad from './CustomRoad';
 import { useTheme } from "./ThemeContext";
 import { placesArray } from './data';
@@ -353,36 +352,6 @@ const MapComponent = ({ selectedPlace }) => {
 
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          top: 0,
-          position: "absolute",
-          marginTop: 60,
-          marginRight: 18,
-          right: 0,
-          borderRadius: 180,
-          backgroundColor: "#FFF",
-          shadowColor: "rgba(0, 0, 0, 0.25)",
-          shadowOffset: { width: 0, height: 0 },
-          shadowOpacity: 0.25,
-          shadowRadius: 3,
-          elevation: 3,
-        }}
-      >
-        <View
-          style={{
-            width: 35,
-            height: 35,
-            flexShrink: 0,
-            borderRadius: 180,
-            backgroundColor: "#FFF",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Icon name="navigation" size={24} color="#FF0000" />
-        </View>
-      </View>
       <MapView
         ref={mapViewRef}
         style={styles.map}
@@ -392,7 +361,6 @@ const MapComponent = ({ selectedPlace }) => {
         minZoomLevel={19}
         onRegionChangeComplete={onRegionChangeComplete}
         showsUserLocation
-        followsUserLocation
       >
         {placesArray.map((place, index) => (
           <Marker
