@@ -1,11 +1,11 @@
 // data.js
 export const placesArray = [
     //Main Entrance
-    { name: 'CRC Office', coordinates: [6.88347498868237, 79.88655932522124],description:'' },
+    { name: 'CRC Office', coordinates: [6.883372107318636, 79.88659121489017],description:'' },
     { name: 'Department of Health Sciences', coordinates: [6.883282102069653, 79.88623860640834], description:'' },
     { name: 'Stores', coordinates: [6.883178609173903, 79.88621187711726], description:'' },
     { name: 'CRC class room', coordinates: [6.883152072530323, 79.88629741084871], description:'' },
-    { name: 'Student Registration Office', coordinates: [6.883137551188019, 79.88628892959879], description:'' },
+    { name: 'Student Registration Office', coordinates: [6.883205677532922, 79.88653622960813], description:'' },
 
     //Bridge Left Side
     { name: 'Open University Bridge', coordinates: [6.888954, 79.881006], description:'' },
@@ -71,6 +71,7 @@ export const placesArray = [
     { name: 'Block 19', coordinates: [6.882993125443476, 79.88555244082521], description:'' },
     { name: 'Block 20', coordinates: [6.882858903851017, 79.8855435810603], description:'' },
     { name: 'BOC ATM', coordinates: [6.8828221635785924, 79.88587039648], description:'' },
+    { name: 'People's Bank Atm', coordinates: [6.882840594779502, 79.88592074658834], description:'' },
     // ... other places
   ];
   
