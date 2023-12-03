@@ -9,6 +9,19 @@ import {
 import CustomHeader from "./Header";
 import { useTheme } from "./ThemeContext";
 
+const policy = (subHeading, paragraph, isDarkMode) => {
+  return (
+    <View style={styles.policy}>
+      <Text style={[styles.subHeading, isDarkMode && styles.darkText]}>
+        {subHeading}
+      </Text>
+      <Text style={[styles.paragraph, isDarkMode && styles.darkText]}>
+        {paragraph}
+      </Text>
+    </View>
+  );
+};
+
 const PrivacyPolicy = ({ navigation }) => {
   const { isDarkMode } = useTheme();
   return (
@@ -21,74 +34,39 @@ const PrivacyPolicy = ({ navigation }) => {
         <ScrollView
           style={[styles.ScrollView, isDarkMode && styles.darkThemeForScroll]}
         >
+          {/* The policy content */}
           <View style={styles.policy}>
-            <Text style={[styles.subHeading, isDarkMode && styles.darkText]}>
-              1. Information We Collect
-            </Text>
-            <Text style={[styles.paragraph, isDarkMode && styles.darkText]}>
-              information about how you use the App, including your interactions
-              with the App, the routes you take, and other navigation-related
-              data.
-            </Text>
-            <Text style={[styles.subHeading, isDarkMode && styles.darkText]}>
-              2. How We Use Your Information
-            </Text>
-            <Text style={[styles.paragraph, isDarkMode && styles.darkText]}>
-              We use your location information to provide navigation and
-              location-based services.
-            </Text>
-            <Text style={[styles.subHeading, isDarkMode && styles.darkText]}>
-              3. Contact Us
-            </Text>
-            <Text style={[styles.paragraph, isDarkMode && styles.darkText]}>
-              If you have any questions or concerns about this Privacy Policy or
-              your data, please contact us at [email].
-            </Text>
-            {/* Duplicate Content to Check Scroll View | Delete After This */}
-            <Text style={[styles.subHeading, isDarkMode && styles.darkText]}>
-              1. Information We Collect
-            </Text>
-            <Text style={[styles.paragraph, isDarkMode && styles.darkText]}>
-              information about how you use the App, including your interactions
-              with the App, the routes you take, and other navigation-related
-              data.
-            </Text>
-            <Text style={[styles.subHeading, isDarkMode && styles.darkText]}>
-              2. How We Use Your Information
-            </Text>
-            <Text style={[styles.paragraph, isDarkMode && styles.darkText]}>
-              We use your location information to provide navigation and
-              location-based services.
-            </Text>
-            <Text style={[styles.subHeading, isDarkMode && styles.darkText]}>
-              3. Contact Us
-            </Text>
-            <Text style={[styles.paragraph, isDarkMode && styles.darkText]}>
-              If you have any questions or concerns about this Privacy Policy or
-              your data, please contact us at [email].
-            </Text>
-            <Text style={[styles.subHeading, isDarkMode && styles.darkText]}>
-              1. Information We Collect
-            </Text>
-            <Text style={[styles.paragraph, isDarkMode && styles.darkText]}>
-              information about how you use the App, including your interactions
-              with the App, the routes you take, and other navigation-related
-              data.
-            </Text>
-            <Text style={[styles.subHeading, isDarkMode && styles.darkText]}>
-              2. How We Use Your Information
-            </Text>
-            <Text style={[styles.paragraph, isDarkMode && styles.darkText]}>
-              We use your location information to provide navigation and
-              location-based services.
-            </Text>
-            <Text style={[styles.subHeading, isDarkMode && styles.darkText]}>
-              3. Contact Us
-            </Text>
-            <Text style={[styles.paragraph, isDarkMode && styles.darkText]}>
-              If you have any questions or concerns about this Privacy Policy or
-              your data, please contact us at [email].
-            </Text>
+            {policy(
+              "1. Information We Collect",
+              "information about how you use the App, including your interactions with the App, the routes you take, and other navigation-related data.",
+              isDarkMode
+            )}
+            {policy(
+              "1. Information We Collect",
+              "information about how you use the App, including your interactions with the App, the routes you take, and other navigation-related data.",
+              isDarkMode
+            )}
+            {policy(
+              "1. Information We Collect",
+              "information about how you use the App, including your interactions with the App, the routes you take, and other navigation-related data.",
+              isDarkMode
+            )}
+            {policy(
+              "1. Information We Collect",
+              "information about how you use the App, including your interactions with the App, the routes you take, and other navigation-related data.",
+              isDarkMode
+            )}
+            {policy(
+              "1. Information We Collect",
+              "information about how you use the App, including your interactions with the App, the routes you take, and other navigation-related data.",
+              isDarkMode
+            )}
+            {policy(
+              "1. Information We Collect",
+              "information about how you use the App, including your interactions with the App, the routes you take, and other navigation-related data.",
+              isDarkMode
+            )}
+
             <Text
               style={[styles.AgreeParagraph, isDarkMode && styles.darkText]}
             >
@@ -121,12 +99,10 @@ const styles = StyleSheet.create({
   },
 
   policy: {
-    marginTop: 1,
-    margin: 20,
+    marginBottom: 15,
   },
 
   subHeading: {
-    marginTop: 20,
     fontSize: 12,
     fontWeight: "500",
   },
@@ -136,20 +112,16 @@ const styles = StyleSheet.create({
   },
 
   AgreeParagraph: {
-    marginTop: 40,
     fontSize: 12,
     textAlign: "justify",
-  },
-
-  permission: {
-    textAlign: "justify",
+    marginVertical: 20,
   },
 
   ScrollView: {
+    padding: 20,
     borderRadius: 10,
     backgroundColor: "#f2f2f2",
-    marginTop: 30,
-    marginBottom: 30,
+    marginVertical: 30,
   },
 
   agreeBtn: {
@@ -157,11 +129,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFA500",
     width: 100,
     borderRadius: 5,
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    alignItems: "center",
-    justifyContent: "center",
+    padding: 10,
     alignSelf: "center",
+    alignItems: "center",
   },
 
   btnText: {
