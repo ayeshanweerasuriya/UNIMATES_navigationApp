@@ -1,7 +1,7 @@
 // SearchBar.js
 
 import React, { useState } from 'react';
-import { SafeAreaView, Text, TextInput, FlatList, StyleSheet, TouchableOpacity, Dimensions, StatusBar } from 'react-native';
+import { SafeAreaView, View, Text, TextInput, FlatList, StyleSheet, TouchableOpacity, Dimensions, StatusBar } from 'react-native';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import { placesArray } from './data';
 import { useTheme } from './ThemeContext';

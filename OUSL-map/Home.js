@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, View, Text, StatusBar } from 'react-native';
+import { SafeAreaView, View, Text, StatusBar, StyleSheet } from 'react-native';
 import MapComponent from './MapComponent';
 import BottomToolbar from './BottomToolbar';
 import { useTheme } from './ThemeContext';
@@ -20,8 +20,8 @@ const Home = ({ route, navigation }) => {
         <MapComponent />
       )}
 
-      <View style={style.container}>
-        <Text style={[style.lightText, isDarkMode && styles.darkText]}>UNIMATES</Text>
+      <View style={styles.container}>
+        <Text style={[styles.lightText, isDarkMode && styles.darkText]}>UNIMATES</Text>
         <Text style={isDarkMode && styles.darkText}>&copy; 2023</Text>
       </View>
 
@@ -34,14 +34,14 @@ const styles = StyleSheet.create({
   container: {
  	bottom: 0, 
  	position: 'absolute', 
- 	marginBottom: 120, 
+ 	marginBottom: "20%", 
  	marginLeft: 18
   },
   lightText: {
   	color: '#333',
   	fontWeight: 500, 
   	fontSize: 14, 
-  }
+  },
   darkText: {
     color: '#fff',
   },
