@@ -104,7 +104,7 @@ const createStyles = (isDarkMode) =>
       borderRadius: 20,
       marginVertical: 10,
       width: 250, // Set an absolute width in pixels
-      backgroundColor: isDarkMode ? "#2e2e2e" : "#2e2e2e",
+      backgroundColor: isDarkMode ? "#2e2e2e" : "#f2f2f2",
       textAlign: "center", // Center the text
       color: isDarkMode ? "#ffffff" : "#1E1E1E",
     },
@@ -113,7 +113,7 @@ const createStyles = (isDarkMode) =>
       padding: 20,
       paddingTop: 15,
       borderRadius: 20,
-      backgroundColor: isDarkMode ? "#2e2e2e" : "#2e2e2e",
+      backgroundColor: isDarkMode ? "#2e2e2e" : "#f2f2f2",
       minHeight: 100,
       maxHeight: 200,
       textAlignVertical: "top",
