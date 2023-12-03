@@ -10,7 +10,7 @@ import {
   Platform,
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
-import * as MailComposer from "expo-mail-composer"; // Import expo-mail-composer
+import * as MailComposer from "expo-mail-composer";
 import { useTheme } from "./ThemeContext";
 
 const BugReport = ({ onClose }) => {
@@ -18,7 +18,8 @@ const BugReport = ({ onClose }) => {
   const styles = createStyles(isDarkMode);
 
   const [description, setDescription] = useState("");
-  const [userEmail, setUserEmail] = useState(""); // Added state for user email
+  const [userEmail, setUserEmail] = useState("");
+  const [showThankYou, setShowThankYou] = useState(false);
 
   const handleDismissKeyboard = () => {
     Keyboard.dismiss();
@@ -33,9 +34,18 @@ const BugReport = ({ onClose }) => {
       if (isAvailable) {
         await MailComposer.composeAsync({
           subject: emailSubject,
-          recipients: ["support@example.com"], // Replace with your support email
+          recipients: ["uamsankalpana@gmail.com"],
           body: `User Email: ${userEmail}\nDescription: ${description}`,
         });
+
+        // Show the "thank you" message
+        setShowThankYou(true);
+
+        // Close the BugReport component after 2 seconds
+        setTimeout(() => {
+          setShowThankYou(false);
+          onClose();
+        }, 2000);
       } else {
         console.warn("Mail Composer is not available on this device");
       }
@@ -55,37 +65,51 @@ const BugReport = ({ onClose }) => {
         style={styles.popupContainer}
       >
         <View style={styles.popup}>
-          <View style={styles.heading}>
-            <TouchableOpacity onPress={onClose}>
-              <Entypo name="cross" size={24} style={styles.cross} />
-            </TouchableOpacity>
-            <Text style={styles.headingText}>Bug Report</Text>
-            <TouchableOpacity onPress={handleSendEmail}>
-              <Entypo name="paper-plane" size={15} style={styles.paperPlane} />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.titleBorder} />
-          <View>
-            <TextInput
-              style={styles.userEmail}
-              placeholder="Your email"
-              value={userEmail}
-              onChangeText={(text) => setUserEmail(text)}
-              onSubmitEditing={handleDismissKeyboard}
-              placeholderTextColor="#888"
-              maxLength={25}
-            />
-            <TextInput
-              style={styles.description}
-              placeholder="Description.. Please be as detailed as possible. What did you expect and what happened instead?"
-              multiline={true}
-              value={description}
-              onChangeText={(text) => setDescription(text)}
-              onSubmitEditing={handleDismissKeyboard}
-              placeholderTextColor="#888"
-              maxLength={300}
-            />
-          </View>
+          {showThankYou ? (
+            <View style={styles.thankYouContainer}>
+              <Text style={styles.thankYouText}>
+                Thank you for your feedback!
+              </Text>
+            </View>
+          ) : (
+            <>
+              <View style={styles.heading}>
+                <TouchableOpacity onPress={onClose}>
+                  <Entypo name="cross" size={24} style={styles.cross} />
+                </TouchableOpacity>
+                <Text style={styles.headingText}>Bug Report</Text>
+                <TouchableOpacity onPress={handleSendEmail}>
+                  <Entypo
+                    name="paper-plane"
+                    size={15}
+                    style={styles.paperPlane}
+                  />
+                </TouchableOpacity>
+              </View>
+              <View style={styles.titleBorder} />
+              <View>
+                <TextInput
+                  style={styles.userEmail}
+                  placeholder="Your email"
+                  value={userEmail}
+                  onChangeText={(text) => setUserEmail(text)}
+                  onSubmitEditing={handleDismissKeyboard}
+                  placeholderTextColor="#888"
+                  maxLength={35}
+                />
+                <TextInput
+                  style={styles.description}
+                  placeholder="Description.. Please be as detailed as possible. What did you expect and what happened instead?"
+                  multiline={true}
+                  value={description}
+                  onChangeText={(text) => setDescription(text)}
+                  onSubmitEditing={handleDismissKeyboard}
+                  placeholderTextColor="#888"
+                  maxLength={300}
+                />
+              </View>
+            </>
+          )}
         </View>
       </KeyboardAvoidingView>
     </TouchableOpacity>
@@ -130,12 +154,11 @@ const createStyles = (isDarkMode) =>
       padding: 20,
       borderRadius: 20,
       marginVertical: 10,
-      width: 250, // Set an absolute width in pixels
+      width: 250,
       backgroundColor: isDarkMode ? "#2e2e2e" : "#f2f2f2",
-      textAlign: "center", // Center the text
+      textAlign: "center",
       color: isDarkMode ? "#ffffff" : "#1E1E1E",
     },
-
     description: {
       padding: 20,
       paddingTop: 15,
@@ -144,15 +167,22 @@ const createStyles = (isDarkMode) =>
       minHeight: 100,
       maxHeight: 200,
       textAlignVertical: "top",
-      width: 250, // Set an absolute width in pixels
+      width: 250,
       color: isDarkMode ? "#ffffff" : "#1E1E1E",
     },
-
     cross: {
       color: isDarkMode ? "#FFFFFF" : "#343434",
     },
-
     paperPlane: {
+      color: isDarkMode ? "#FFFFFF" : "#343434",
+    },
+    thankYouContainer: {
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    thankYouText: {
+      fontSize: 18,
+      fontWeight: "bold",
       color: isDarkMode ? "#FFFFFF" : "#343434",
     },
   });
