@@ -5,15 +5,24 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  Keyboard,
 } from "react-native";
 import { Entypo, FontAwesome } from "@expo/vector-icons";
 
-const BugReport = () => {
+const BugReport = ({ onClose }) => {
+  const handleDismissKeyboard = () => {
+    Keyboard.dismiss();
+  };
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      activeOpacity={1}
+      onPress={handleDismissKeyboard}
+    >
       <View style={styles.popup}>
         <View style={styles.heading}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={onClose}>
             <Entypo name="cross" size={24} color="black" />
           </TouchableOpacity>
           <Text style={styles.headingText}>Bug Report</Text>
@@ -22,16 +31,21 @@ const BugReport = () => {
         {/* Add a border below the title */}
         <View style={styles.titleBorder} />
         <View>
-          <TextInput style={styles.userEmail} placeholder="Your email" />
+          <TextInput
+            style={styles.userEmail}
+            placeholder="Your email"
+            onSubmitEditing={handleDismissKeyboard}
+            placeholderTextColor="#888"
+          />
           <TextInput
             style={styles.description}
             placeholder="Description.. Please be as detailed as possible. What did you expect and what happened instead?"
             multiline={true}
-            numberOfLines={2}
+            onSubmitEditing={handleDismissKeyboard}
           />
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -73,11 +87,12 @@ const styles = StyleSheet.create({
 
   description: {
     padding: 20,
-    paddingTop: 15, // Adjust the top padding to align the placeholder
+    paddingTop: 15,
     borderRadius: 20,
     backgroundColor: "#f2f2f2",
-    minHeight: 100, // Set a minimum height to prevent it from collapsing
-    textAlignVertical: "top", // Start typing from the top
+    minHeight: 100,
+    maxHeight: 200,
+    textAlignVertical: "top",
   },
 });
 

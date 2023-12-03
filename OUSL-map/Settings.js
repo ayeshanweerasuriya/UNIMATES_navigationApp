@@ -7,12 +7,14 @@ import {
   Animated,
   Easing,
   Appearance,
+  Modal,
 } from "react-native";
 import { Dimensions } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useTheme } from "./ThemeContext";
 import CustomHeader from "./Header";
 import { BlurView } from "expo-blur";
+import BugReport from "./BugReport";
 
 const { width, height } = Dimensions.get("window");
 
@@ -21,6 +23,12 @@ const Settings = ({ navigation }) => {
   const styles = createStyles(isDarkMode);
   const [isEnabled, setIsEnabled] = useState(isDarkMode);
   const toggleAnim = useRef(new Animated.Value(isDarkMode ? 1 : 0)).current;
+  const [showBugReport, setShowBugReport] = useState(false); // State to control BugReport visibility
+
+  // Callback function to close the BugReport modal
+  const closeBugReport = () => {
+    setShowBugReport(false);
+  };
 
   useEffect(() => {
     const colorSchemeChangeListener = Appearance.addChangeListener(
@@ -58,6 +66,40 @@ const Settings = ({ navigation }) => {
     navigation.navigate(screenName);
   };
 
+  const renderOption = (optionText, screenName) => {
+    return (
+      <View style={styles.otherContainers}>
+        <TouchableOpacity
+          style={styles.otherContainersAlign}
+          onPress={() => navigateToScreen(screenName)}
+        >
+          <Text style={[styles.optionText, isDarkMode && styles.darkText]}>
+            {optionText}
+          </Text>
+          <Icon
+            name="chevron-right"
+            size={20}
+            color={isDarkMode ? "#FFFFFF" : "#000000"}
+          />
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
+  const renderBugReport = () => {
+    return (
+      <TouchableOpacity
+        style={styles.bug}
+        onPress={() => setShowBugReport(true)}
+      >
+        <Icon name="bug" size={15} color={isDarkMode ? "#FFFFFF" : "#000000"} />
+        <Text style={[styles.bugText, isDarkMode && styles.darkText]}>
+          Report a Bug
+        </Text>
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <>
       <CustomHeader title="Settings" navigation={navigation} />
@@ -84,49 +126,27 @@ const Settings = ({ navigation }) => {
         </View>
         {renderOption("About Us", "AboutUs")}
         {renderOption("Privacy Policy", "PrivacyPolicy")}
-
-        {renderBugReport("Bug Report", "BugReport")}
+        {renderBugReport()}
 
         <Text style={[styles.versionNum, isDarkMode && styles.darkText]}>
           V 0.1
         </Text>
+        {/* Modal for BugReport */}
+        <Modal
+          transparent={true}
+          visible={showBugReport}
+          onRequestClose={() => setShowBugReport(false)}
+        >
+          <BlurView
+            style={StyleSheet.absoluteFill}
+            blurType="light"
+            blurAmount={10}
+          />
+          <BugReport onClose={closeBugReport} />
+        </Modal>
       </View>
     </>
   );
-
-  function renderOption(optionText, screenName) {
-    return (
-      <View style={styles.otherContainers}>
-        <TouchableOpacity
-          style={styles.otherContainersAlign}
-          onPress={() => navigateToScreen(screenName)}
-        >
-          <Text style={[styles.optionText, isDarkMode && styles.darkText]}>
-            {optionText}
-          </Text>
-          <Icon
-            name="chevron-right"
-            size={20}
-            color={isDarkMode ? "#FFFFFF" : "#000000"}
-          />
-        </TouchableOpacity>
-      </View>
-    );
-  }
-
-  function renderBugReport() {
-    return (
-      <TouchableOpacity
-        style={styles.bug}
-        onPress={() => navigateToScreen("BugReport")}
-      >
-        <Icon name="bug" size={15} color={isDarkMode ? "#FFFFFF" : "#000000"} />
-        <Text style={[styles.bugText, isDarkMode && styles.darkText]}>
-          Report a Bug
-        </Text>
-      </TouchableOpacity>
-    );
-  }
 };
 
 const createStyles = (isDarkMode) =>
