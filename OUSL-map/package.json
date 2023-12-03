@@ -23,12 +23,14 @@
     "react-native-gesture-handler": "^2.14.0",
     "react-native-google-places-autocomplete": "^2.5.6",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
+    "react-native-mail": "^6.1.1",
     "react-native-maps": "1.7.1",
     "react-native-modal": "^13.0.1",
     "react-native-reanimated": "~3.3.0",
     "react-native-svg": "13.9.0",
     "react-native-vector-icons": "^10.0.2",
-    "react-native-web": "~0.19.6"
+    "react-native-web": "~0.19.6",
+    "expo-mail-composer": "~12.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"

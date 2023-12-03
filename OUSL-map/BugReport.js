@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   View,
@@ -9,15 +9,39 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
-import { Entypo, FontAwesome } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
+import * as MailComposer from "expo-mail-composer"; // Import expo-mail-composer
 import { useTheme } from "./ThemeContext";
 
 const BugReport = ({ onClose }) => {
   const { isDarkMode } = useTheme();
   const styles = createStyles(isDarkMode);
 
+  const [description, setDescription] = useState("");
+  const [userEmail, setUserEmail] = useState(""); // Added state for user email
+
   const handleDismissKeyboard = () => {
     Keyboard.dismiss();
+  };
+
+  const handleSendEmail = async () => {
+    const emailSubject = "Bug Report";
+
+    try {
+      const isAvailable = await MailComposer.isAvailableAsync();
+
+      if (isAvailable) {
+        await MailComposer.composeAsync({
+          subject: emailSubject,
+          recipients: ["support@example.com"], // Replace with your support email
+          body: `User Email: ${userEmail}\nDescription: ${description}`,
+        });
+      } else {
+        console.warn("Mail Composer is not available on this device");
+      }
+    } catch (error) {
+      console.error("Could not send email", error);
+    }
   };
 
   return (
@@ -36,16 +60,17 @@ const BugReport = ({ onClose }) => {
               <Entypo name="cross" size={24} style={styles.cross} />
             </TouchableOpacity>
             <Text style={styles.headingText}>Bug Report</Text>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={handleSendEmail}>
               <Entypo name="paper-plane" size={15} style={styles.paperPlane} />
             </TouchableOpacity>
           </View>
-          {/* Add a border below the title */}
           <View style={styles.titleBorder} />
           <View>
             <TextInput
               style={styles.userEmail}
               placeholder="Your email"
+              value={userEmail}
+              onChangeText={(text) => setUserEmail(text)}
               onSubmitEditing={handleDismissKeyboard}
               placeholderTextColor="#888"
               maxLength={25}
@@ -54,6 +79,8 @@ const BugReport = ({ onClose }) => {
               style={styles.description}
               placeholder="Description.. Please be as detailed as possible. What did you expect and what happened instead?"
               multiline={true}
+              value={description}
+              onChangeText={(text) => setDescription(text)}
               onSubmitEditing={handleDismissKeyboard}
               placeholderTextColor="#888"
               maxLength={300}
