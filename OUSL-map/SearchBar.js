@@ -1,7 +1,7 @@
 // SearchBar.js
 
 import React, { useState } from 'react';
-import { View, Text, TextInput, FlatList, StyleSheet, TouchableOpacity, Dimensions, StatusBar } from 'react-native';
+import { SafeAreaView, View, Text, TextInput, FlatList, StyleSheet, TouchableOpacity, Dimensions, StatusBar } from 'react-native';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import { placesArray } from './data';
 import { useTheme } from './ThemeContext';
@@ -44,7 +44,7 @@ const SearchBar = ({ onClose, navigation }) => {
   );
 
   return (
-    <View style={[styles.container, isDarkMode && styles.darkInput]}>
+    <SafeAreaView style={[styles.container, isDarkMode && styles.darkInput]}>
       <StatusBar backgroundColor="#FFA500" barStyle="light-content" />
 	<Icon
        onPress={onClose}
@@ -76,7 +76,7 @@ const SearchBar = ({ onClose, navigation }) => {
           style={styles.autocompleteList}
         />
       )}
-    </View>
+    </SafeAreaView>
   );
 };
 

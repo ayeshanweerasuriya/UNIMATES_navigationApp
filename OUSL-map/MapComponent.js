@@ -328,8 +328,8 @@ const MapComponent = ({ selectedPlace }) => {
       longitudeDelta: 0.005,
     }
     : {
-      latitude: 6.883,
-      longitude: 79.8868,
+      latitude: 6.883421,
+      longitude: 79.884448,
       latitudeDelta: 0.00922,
       longitudeDelta: 0.00421,
     };
