@@ -50,10 +50,14 @@ const Settings = ({ navigation }) => {
     extrapolate: "clamp",
   });
 
+  const navigateToScreen = (screenName) => {
+    navigation.navigate(screenName);
+  };
+
   return (
     <>
       <CustomHeader title="Settings" navigation={navigation} />
-      <View style={[styles.container, isEnabled && styles.darkTheme]}>
+      <View style={[styles.container, isDarkMode && styles.darkTheme]}>
         <View style={styles.darkModeContainer}>
           <Text style={styles.optionText}>Dark Mode</Text>
           <TouchableOpacity
