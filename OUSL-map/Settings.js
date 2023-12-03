@@ -5,16 +5,19 @@ import {
   Text,
   TouchableOpacity,
   Animated,
-  useColorScheme,
   Easing,
   Appearance,
 } from "react-native";
+import { Dimensions } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useTheme } from "./ThemeContext";
 import CustomHeader from "./Header";
 
+const { width, height } = Dimensions.get("window");
+
 const Settings = ({ navigation }) => {
   const { isDarkMode, toggleDarkMode } = useTheme();
+  const styles = createStyles(isDarkMode);
   const [isEnabled, setIsEnabled] = useState(isDarkMode);
   const toggleAnim = useRef(new Animated.Value(isDarkMode ? 1 : 0)).current;
 
@@ -125,88 +128,85 @@ const Settings = ({ navigation }) => {
   }
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 50,
-    padding: 20,
-    backgroundColor: "#ffffff",
-  },
+const createStyles = (isDarkMode) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      paddingTop: height * 0.1,
+      padding: width * 0.05,
+      backgroundColor: isDarkMode ? "#1E1E1E" : "#ffffff",
+    },
 
-  darkTheme: {
-    backgroundColor: "#1E1E1E",
-  },
+    darkModeContainer: {
+      backgroundColor: "#F4F4F4",
+      padding: 20,
+      borderRadius: 10,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      marginBottom: 40,
+    },
 
-  darkModeContainer: {
-    backgroundColor: "#F4F4F4",
-    padding: 20,
-    borderRadius: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 40,
-  },
+    optionText: {
+      fontWeight: "bold",
+      fontSize: 15,
+    },
 
-  optionText: {
-    fontWeight: "bold",
-    fontSize: 15,
-  },
+    darkText: {
+      color: "#FFFFFF",
+    },
 
-  darkText: {
-    color: "#FFFFFF",
-  },
+    switchStyle: {
+      width: 50,
+      height: 30,
+      borderRadius: 15,
+      justifyContent: "center",
+      paddingHorizontal: 5,
+    },
 
-  switchStyle: {
-    width: 50,
-    height: 30,
-    borderRadius: 15,
-    justifyContent: "center",
-    paddingHorizontal: 5,
-  },
+    toggleContainer: {
+      flex: 1,
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
 
-  toggleContainer: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
+    toggleButton: {
+      width: 20,
+      height: 20,
+      borderRadius: 10,
+      backgroundColor: "#fff",
+    },
 
-  toggleButton: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    backgroundColor: "#fff",
-  },
+    otherContainersAlign: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+    },
+    otherContainers: {
+      padding: 20,
+      borderRadius: 10,
+    },
 
-  otherContainersAlign: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  otherContainers: {
-    padding: 20,
-    borderRadius: 10,
-  },
+    versionNum: {
+      textAlign: "center",
+      fontSize: 10,
+      fontWeight: "bold",
+      color: "#343434",
+      opacity: 0.5,
+    },
 
-  versionNum: {
-    textAlign: "center",
-    fontSize: 10,
-    fontWeight: "bold",
-    color: "#343434",
-    opacity: 0.5,
-  },
+    bug: {
+      marginTop: 300,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      opacity: 0.5,
+    },
 
-  bug: {
-    marginTop: 300,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    opacity: 0.5,
-  },
-
-  bugText: {
-    marginLeft: 5,
-  },
-});
+    bugText: {
+      marginLeft: 5,
+    },
+  });
 
 export default Settings;
