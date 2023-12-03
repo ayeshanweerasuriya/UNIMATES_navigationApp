@@ -12,6 +12,7 @@ import { Dimensions } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useTheme } from "./ThemeContext";
 import CustomHeader from "./Header";
+import { BlurView } from "expo-blur";
 
 const { width, height } = Dimensions.get("window");
 
@@ -84,7 +85,7 @@ const Settings = ({ navigation }) => {
         {renderOption("About Us", "AboutUs")}
         {renderOption("Privacy Policy", "PrivacyPolicy")}
 
-        {renderBugReport()}
+        {renderBugReport("Bug Report", "BugReport")}
 
         <Text style={[styles.versionNum, isDarkMode && styles.darkText]}>
           V 0.1

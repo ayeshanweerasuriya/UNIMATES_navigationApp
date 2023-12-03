@@ -31,6 +31,7 @@ import Settings from "./Settings";
 import PrivacyPolicy from "./Privacy_Policy";
 import AboutUs from "./AboutUs";
 import MapComponent from "./MapComponent";
+import BugReport from "./BugReport";
 // import Direction from './Direction';
 // import Settings from './Settings';
 // import AboutUs from './AboutUs';
@@ -76,6 +77,11 @@ const AppNavigator = () => {
           <Stack.Screen
             name="AboutUs"
             component={AboutUs}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="BugReport"
+            component={BugReport}
             options={{ headerShown: false }}
           />
           {/* <Stack.Screen name="Direction" component={Direction} options={{headerShown: false}} />
