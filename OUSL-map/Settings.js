@@ -5,7 +5,9 @@ import {
   Text,
   TouchableOpacity,
   Animated,
+  useColorScheme,
   Easing,
+  Appearance,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useTheme } from "./ThemeContext";
@@ -14,7 +16,19 @@ import CustomHeader from "./Header";
 const Settings = ({ navigation }) => {
   const { isDarkMode, toggleDarkMode } = useTheme();
   const [isEnabled, setIsEnabled] = useState(isDarkMode);
-  const toggleAnim = useRef(new Animated.Value(0)).current;
+  const toggleAnim = useRef(new Animated.Value(isDarkMode ? 1 : 0)).current;
+
+  useEffect(() => {
+    const colorSchemeChangeListener = Appearance.addChangeListener(
+      ({ colorScheme }) => {
+        setIsEnabled(colorScheme === "dark");
+      }
+    );
+
+    return () => {
+      colorSchemeChangeListener.remove();
+    };
+  }, []);
 
   useEffect(() => {
     Animated.timing(toggleAnim, {
@@ -36,14 +50,10 @@ const Settings = ({ navigation }) => {
     extrapolate: "clamp",
   });
 
-  const navigateToScreen = (screenName) => {
-    navigation.navigate(screenName);
-  };
-
   return (
     <>
       <CustomHeader title="Settings" navigation={navigation} />
-      <View style={[styles.container, isDarkMode && styles.darkTheme]}>
+      <View style={[styles.container, isEnabled && styles.darkTheme]}>
         <View style={styles.darkModeContainer}>
           <Text style={styles.optionText}>Dark Mode</Text>
           <TouchableOpacity
