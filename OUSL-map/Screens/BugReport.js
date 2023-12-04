@@ -8,6 +8,7 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
+  Alert,
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import * as MailComposer from "expo-mail-composer";
@@ -34,6 +35,12 @@ const BugReport = ({ onClose }) => {
   }, [showThankYou, onClose]);
 
   const handleSendEmail = async () => {
+    if (userEmail.trim() === "" || description.trim() === "") {
+      // Display an alert or some UI feedback indicating that both fields are required
+      Alert.alert("Error", "Both email and description are required");
+      return;
+    }
+
     const emailSubject = "Bug Report";
 
     try {
@@ -100,12 +107,13 @@ const BugReport = ({ onClose }) => {
                   onSubmitEditing={() => Keyboard.dismiss()}
                   placeholderTextColor="#888"
                   maxLength={35}
-                  keyboardType="email-address"
                   autoCapitalize="none"
+                  keyboardType="email-address"
+                  fontWeight="bold"
                 />
                 <TextInput
                   style={[styles.input, styles.description]}
-                  placeholder="Description.. Please be as detailed as possible. What did you expect and what happened instead?"
+                  placeholder="Please be as detailed as possible. What did you expect and what happened instead?"
                   multiline={true}
                   value={description}
                   onChangeText={(text) => setDescription(text)}
