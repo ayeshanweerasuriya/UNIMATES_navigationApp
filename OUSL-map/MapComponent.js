@@ -1,10 +1,10 @@
 //mapcomponent.js
-import React, { useRef, useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from "react-native-maps";
-import { StyleSheet, View, Text, Modal } from "react-native";
+import { StyleSheet, View, Text, Modal, InteractionManager} from "react-native";
 // import CustomRoad from './CustomRoad';
-import { useTheme } from "./ThemeContext";
 import { placesArray } from './data';
+import { useTheme } from "./ThemeContext";
 import SelectedLocation from './SelectedLocation';
 
 const MapComponent = ({ selectedPlace }) => {
@@ -12,8 +12,8 @@ const MapComponent = ({ selectedPlace }) => {
   const [selectedMarker, setSelectedMarker] = useState(null);
 
   const { isDarkMode } = useTheme();
-  
-    // Function to handle marker press
+
+  // Function to handle marker press
   const handleMarkerPress = (marker) => {
     setSelectedMarker(marker);
     setModalVisible(true);
@@ -359,67 +359,82 @@ const MapComponent = ({ selectedPlace }) => {
       // If outside the boundaries, update the map to the last valid region
       mapViewRef.current.animateToRegion(region, 10); // You can adjust the duration as needed
     } else {
-      // If inside the boundaries, update the region state
-      mapViewRef.current.animateToRegion(newRegion, 3000);
+      // If inside the boundaries, update the region state and handle markers
       setRegion(newRegion);
+      handleMarkers(newRegion);
     }
   };
 
+  const [visibleMarkers, setVisibleMarkers] = useState([]);
+
+  const handleMarkers = (region) => {
+    // Filter the markers based on the current visible region of the map
+    const markersInRegion = placesArray.filter(
+      (place) =>
+        place.coordinates[0] >= region.latitude - region.latitudeDelta / 2 &&
+        place.coordinates[0] <= region.latitude + region.latitudeDelta / 2 &&
+        place.coordinates[1] >= region.longitude - region.longitudeDelta / 2 &&
+        place.coordinates[1] <= region.longitude + region.longitudeDelta / 2
+    );
+
+    // Set the visible markers
+    setVisibleMarkers(markersInRegion);
+  };
 
 
   return (
     <View style={styles.container}>
-      <MapView
-        ref={mapViewRef}
-        style={styles.map}
-        region={initialRegion}
-        provider={PROVIDER_GOOGLE}
-        customMapStyle={selectedMapStyle}
-        minZoomLevel={19}
-        onRegionChangeComplete={onRegionChangeComplete}
-        showsUserLocation
-      >
-        {placesArray.map((place, index) => (
-          <Marker
-            key={index}
-            coordinate={{
-              latitude: place.coordinates[0],
-              longitude: place.coordinates[1],
-            }}
-            onPress={() => handleMarkerPress(place.name)}
+        <MapView
+          ref={mapViewRef}
+          style={styles.map}
+          region={initialRegion}
+          provider={PROVIDER_GOOGLE}
+          customMapStyle={selectedMapStyle}
+          minZoomLevel={19}
+          onRegionChangeComplete={onRegionChangeComplete}
+          showsUserLocation
+        >
+          {visibleMarkers.map((place, index) => (
+            <Marker
+              key={index}
+              coordinate={{
+                latitude: place.coordinates[0],
+                longitude: place.coordinates[1],
+              }}
+              onPress={() => handleMarkerPress(place.name)}
             // Display the name as the marker title
-          // You can also use description={place.name} if you want a description
-          >
-            <View style={styles.markerContainer}>
-              <Text style={[styles.markerText, isDarkMode && styles.darkText]}>{place.name}</Text>
-            </View>
-          </Marker>
-        ))}
-        {selectedPlace && (
-          <Marker
-            coordinate={{
-              latitude: selectedPlace.coordinates[0] + 0.00001,
-              longitude: selectedPlace.coordinates[1],
-            }}
-            title={selectedPlace.name}
-            pinColor="orange"
-          />)}
+            // You can also use description={place.name} if you want a description
+            >
+              <View style={styles.markerContainer}>
+                <Text style={[styles.markerText, isDarkMode && styles.darkText]}>{place.name}</Text>
+              </View>
+            </Marker>
+          ))}
+          {selectedPlace && (
+            <Marker
+              coordinate={{
+                latitude: selectedPlace.coordinates[0] + 0.00001,
+                longitude: selectedPlace.coordinates[1],
+              }}
+              title={selectedPlace.name}
+              pinColor="orange"
+            />)}
 
-      </MapView>
-      
-       	<Modal
-        animationIn="slideInUp"
-        animationOut="slideOutDown"
-        visible={isModalVisible}
-        onRequestClose={closeModal}
-        backdropOpacity={0.5}
-      >
-      
-      <SelectedLocation
-        selectedMarker={selectedMarker}
-        closeModal={closeModal}
-      />
-      </Modal>
+        </MapView>
+
+        <Modal
+          animationIn="slideInUp"
+          animationOut="slideOutDown"
+          visible={isModalVisible}
+          onRequestClose={closeModal}
+          backdropOpacity={0.5}
+        >
+
+          <SelectedLocation
+            selectedMarker={selectedMarker}
+            closeModal={closeModal}
+          />
+        </Modal>
 
     </View>
   );
