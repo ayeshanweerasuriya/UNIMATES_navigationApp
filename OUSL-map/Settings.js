@@ -1,4 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useMemo,
+  lazy,
+  Suspense,
+} from "react";
 import {
   View,
   StyleSheet,
@@ -8,19 +15,28 @@ import {
   Easing,
   Appearance,
   Modal,
+  ActivityIndicator,
 } from "react-native";
 import { Dimensions } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { useTheme } from "./ThemeContext";
 import CustomHeader from "./Header";
 import { BlurView } from "expo-blur";
-import BugReport from "./BugReport";
+// Lazy loading BugReport component
+const BugReport = lazy(() => import("./BugReport"));
 
 const { width, height } = Dimensions.get("window");
 
+// Loading component placeholder
+const LoadingComponent = () => (
+  <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+    <ActivityIndicator size="large" color="#0000ff" />
+  </View>
+);
+
 const Settings = ({ navigation }) => {
   const { isDarkMode, toggleDarkMode } = useTheme();
-  const styles = createStyles(isDarkMode);
+  const styles = useMemo(() => createStyles(isDarkMode), [isDarkMode]);
   const [isEnabled, setIsEnabled] = useState(isDarkMode);
   const toggleAnim = useRef(new Animated.Value(isDarkMode ? 1 : 0)).current;
   const [showBugReport, setShowBugReport] = useState(false); // State to control BugReport visibility
@@ -87,12 +103,17 @@ const Settings = ({ navigation }) => {
   };
 
   const renderBugReport = () => {
+    const bugReportStyles = [
+      styles.bug,
+      { color: isDarkMode ? "#FFFFFF" : "#000000" },
+    ];
+
     return (
       <TouchableOpacity
-        style={styles.bug}
+        style={bugReportStyles}
         onPress={() => setShowBugReport(true)}
       >
-        <Icon name="bug" size={15} color={isDarkMode ? "#FFFFFF" : "#000000"} />
+        <Icon name="bug" size={15} color={isDarkMode ? "#FFFFFF" : "#707070"} />
         <Text style={[styles.bugText, isDarkMode && styles.darkText]}>
           Report a Bug
         </Text>
@@ -142,7 +163,10 @@ const Settings = ({ navigation }) => {
             blurType="light"
             blurAmount={10}
           />
-          <BugReport onClose={closeBugReport} />
+          {/* Lazy loaded BugReport component */}
+          <Suspense fallback={<LoadingComponent />}>
+            <BugReport onClose={closeBugReport} />
+          </Suspense>
         </Modal>
       </View>
     </>
@@ -222,7 +246,7 @@ const createStyles = (isDarkMode) =>
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
-      opacity: 0.5,
+      // opacity: 0.5,
     },
 
     bugText: {
