@@ -40,14 +40,16 @@ const BugReport = ({ onClose }) => {
       const isAvailable = await MailComposer.isAvailableAsync();
 
       if (isAvailable) {
-        await MailComposer.composeAsync({
+        const result = await MailComposer.composeAsync({
           subject: emailSubject,
           recipients: ["uamsankalpana@gmail.com"],
           body: `User Email: ${userEmail}\nDescription: ${description}`,
         });
 
-        // Show the "thank you" message
-        setShowThankYou(true);
+        // Show the "thank you" message only if the email was sent (result.status === 'sent')
+        if (result.status === "sent") {
+          setShowThankYou(true);
+        }
       } else {
         console.warn("Mail Composer is not available on this device");
       }
