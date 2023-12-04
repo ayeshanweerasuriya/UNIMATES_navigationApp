@@ -37,7 +37,10 @@ export default function LaunchScreen({ navigation }) {
         },
       ]}
     >
-      <Image source={require("./assets/Logo-OUSL.png")} style={styles.img} />
+      <Image
+        source={require("./assets/Designed_Logo.png")}
+        style={styles.img}
+      />
       <Text style={[styles.text, isDarkMode && styles.darkText]}>
         OPEN UNIVERSITY OF SRI LANKA
       </Text>
@@ -54,13 +57,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   img: {
-    height: 148,
-    width: 104,
+    height: 108,
+    // width: 104,
+    // Updated logo width
+    width: 108,
   },
   text: {
     // Updated style for text
     fontWeight: "bold", // Use 'bold' instead of 700
-    margin: 5,
+    margin: 10, // Increase the margin size by 5 for new logo
   },
 
   darkTheme: {
