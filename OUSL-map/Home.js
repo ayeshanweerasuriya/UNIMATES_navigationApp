@@ -1,17 +1,24 @@
-import React from 'react';
-import { SafeAreaView, View, Text, StatusBar, StyleSheet } from 'react-native';
+//Home.js
+
+import React, { useState } from 'react';
+import { SafeAreaView, View, Text, StatusBar, StyleSheet, KeyboardAvoidingView } from 'react-native';
 import MapComponent from './MapComponent';
 import BottomToolbar from './BottomToolbar';
 import { useTheme } from './ThemeContext';
+import { BlurView } from "expo-blur";
 
 const Home = ({ route, navigation }) => {
   const { isDarkMode } = useTheme();
   const selectedPlace = route.params?.selectedPlace;
 
   return (
+    <KeyboardAvoidingView
+    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    style={{ flex: 1 }}
+    keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : -100}
+  >
     <SafeAreaView style={{ flex: 1 }}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-
       {selectedPlace ? (
         // Render MapComponent with the selected place if available
         <MapComponent selectedPlace={selectedPlace} />
@@ -25,8 +32,9 @@ const Home = ({ route, navigation }) => {
         <Text style={isDarkMode && styles.darkText}>&copy; 2023</Text>
       </View>
 
-      <BottomToolbar navigation={navigation} />
+      <BottomToolbar navigation={navigation}/>
     </SafeAreaView>
+    </KeyboardAvoidingView> 
   );
 };
 

@@ -1,7 +1,7 @@
 // BottomToolbar.js
 
 import React, { useState } from "react";
-import { View, TouchableOpacity, StyleSheet, Platform } from "react-native";
+import { View, TouchableOpacity, StyleSheet, Platform, KeyboardAvoidingView, ImageBackground } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 import Modal from "react-native-modal";
 import SearchBar from "./SearchBar";
@@ -27,24 +27,29 @@ const BottomToolbar = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.toolbar}>
-        <Tool onPress={toggleSearchModal} iconName="search" />
-        <Tool onPress={toggleSearchModal} iconName="navigation" />
-        <Tool onPress={toggleSearchModal} iconName="bookmark" />
-        <Tool onPress={() => navigation.navigate("Settings")} iconName="settings" />
-      </View>
+        {isSearchModalVisible ? null : (
+          <View style={styles.toolbar}>
+            <Tool onPress={toggleSearchModal} iconName="search" />
+            <Tool onPress={toggleSearchModal} iconName="navigation" />
+            <Tool onPress={toggleSearchModal} iconName="bookmark" />
+            <Tool onPress={() => navigation.navigate("Settings")} iconName="settings" />
+          </View>
+        )}
 
-      <Modal
-        isVisible={isSearchModalVisible}
-        onBackdropPress={toggleSearchModal}
-        animationIn="slideInUp"
-        animationOut="slideOutDown"
-        backdropColor={isDarkMode ? '#333333' : '#FDF5E6'}
-        backdropOpacity={0.9}
-      >
-        <SearchBar onClose={toggleSearchModal} navigation={navigation} />
-      </Modal>
+        <Modal
+          isVisible={isSearchModalVisible}
+          animationIn="slideInUp"
+          animationOut="slideOutDown"
+          backdropColor={isDarkMode ? 'rgba(51,51,51,0.7)' : 'rgba(253,245,230,0.7)'}
+          blurRadius={4}
+        >
+
+          <SearchBar onClose={toggleSearchModal} navigation={navigation} />
+
+        </Modal>
+
     </View>
+
   );
 };
 
