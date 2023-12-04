@@ -38,7 +38,7 @@ export default function LaunchScreen({ navigation }) {
       ]}
     >
       <Image
-        source={require("./assets/Designed_Logo.png")}
+        source={require("../assets/Designed_Logo.png")}
         style={styles.img}
       />
       <Text style={[styles.text, isDarkMode && styles.darkText]}>

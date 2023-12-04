@@ -12,7 +12,7 @@ const AboutUs = ({ navigation }) => {
   return (
     <View style={[styles.container, styles.wrapper]}>
       <Image
-        source={require("./assets/coverPhoto.jpg")}
+        source={require("../assets/coverPhoto.jpg")}
         style={styles.aboutUsImage}
       />
       <Text style={styles.aboutUsText}>About Us</Text>

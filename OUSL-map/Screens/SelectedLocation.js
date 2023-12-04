@@ -1,10 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, Text, Image } from 'react-native';
-import Icon from 'react-native-vector-icons/Entypo';
-import { useTheme } from './ThemeContext';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, View, Text, Image } from "react-native";
+import Icon from "react-native-vector-icons/Entypo";
+import { useTheme } from "./ThemeContext";
 
 export default function SelectedLocation({ selectedMarker, closeModal }) {
-
   const { isDarkMode } = useTheme();
 
   return (
@@ -13,8 +12,17 @@ export default function SelectedLocation({ selectedMarker, closeModal }) {
       <View style={[styles.whiteRectangle, isDarkMode && styles.darkTheme]}>
         {/* Section 1: Selected Location */}
         <View style={styles.section}>
-          <Text style={[styles.selectedLocationText, isDarkMode && styles.darkText]}>Selected Location</Text>
-          <Icon name="chevron-thin-down" size={25} color={isDarkMode ? '#fff' : '#333'} onPress={closeModal}/>
+          <Text
+            style={[styles.selectedLocationText, isDarkMode && styles.darkText]}
+          >
+            Selected Location
+          </Text>
+          <Icon
+            name="chevron-thin-down"
+            size={25}
+            color={isDarkMode ? "#fff" : "#333"}
+            onPress={closeModal}
+          />
         </View>
 
         {/* Section 2: Image, Title, and Topic */}
@@ -22,12 +30,14 @@ export default function SelectedLocation({ selectedMarker, closeModal }) {
           <View style={styles.contentContainer}>
             <View style={styles.imageContainer}>
               <Image
-                source={require('./assets/libraryimg2.jpg')}
+                source={require("../assets/libraryimg2.jpg")}
                 style={styles.roundImage}
               />
             </View>
             <View style={styles.textContainer}>
-              <Text style={[styles.titleText, isDarkMode && styles.darkText]}>{selectedMarker}</Text>
+              <Text style={[styles.titleText, isDarkMode && styles.darkText]}>
+                {selectedMarker}
+              </Text>
               <Text style={styles.topicText}>ABS12SF54</Text>
             </View>
           </View>
@@ -36,9 +46,20 @@ export default function SelectedLocation({ selectedMarker, closeModal }) {
         {/* Section 3: Description */}
         <View style={styles.section}>
           <View style={styles.descriptionContainer}>
-            <Text style={[styles.descriptionText, isDarkMode && styles.darkText]}>Description</Text>
-            <Text style={[styles.smallDescriptionText, isDarkMode && styles.darkText]}>
-              A library is a collection of pre-written and reusable code, functions, classes, or modules that provide specific functionality or features.
+            <Text
+              style={[styles.descriptionText, isDarkMode && styles.darkText]}
+            >
+              Description
+            </Text>
+            <Text
+              style={[
+                styles.smallDescriptionText,
+                isDarkMode && styles.darkText,
+              ]}
+            >
+              A library is a collection of pre-written and reusable code,
+              functions, classes, or modules that provide specific functionality
+              or features.
             </Text>
           </View>
         </View>
@@ -47,27 +68,26 @@ export default function SelectedLocation({ selectedMarker, closeModal }) {
         <View style={styles.section}>
           <View style={styles.imageRow}>
             <Image
-              source={require('./assets/libraryimg3.jpeg')}
+              source={require("../assets/libraryimg3.jpeg")}
               style={styles.smallImage}
             />
             <Image
-              source={require('./assets/libraryimg4.jpg')}
+              source={require("../assets/libraryimg4.jpg")}
               style={styles.smallImage}
             />
             <Image
-              source={require('./assets/libraryimg5.jpg')}
+              source={require("../assets/libraryimg5.jpg")}
               style={styles.smallImage}
             />
           </View>
         </View>
 
-{/* Section 5: Button Section */}
-<View style={styles.section}>
-  <View style={styles.buttonContainer}>
-    <Text style={styles.buttonText}>Direction for the Location</Text>
-  </View>
-</View>
-
+        {/* Section 5: Button Section */}
+        <View style={styles.section}>
+          <View style={styles.buttonContainer}>
+            <Text style={styles.buttonText}>Direction for the Location</Text>
+          </View>
+        </View>
       </View>
     </View>
   );
@@ -76,34 +96,34 @@ export default function SelectedLocation({ selectedMarker, closeModal }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'gray',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "gray",
+    alignItems: "center",
+    justifyContent: "center",
   },
   whiteRectangle: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
-    width: '100%',
-    height: '50%',
-    backgroundColor: 'white',
+    width: "100%",
+    height: "50%",
+    backgroundColor: "white",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     paddingLeft: 15,
     paddingTop: 15,
   },
   selectedLocationText: {
-    color: 'black',
+    color: "black",
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   section: {
     marginBottom: 15,
-    flexDirection: 'row',
+    flexDirection: "row",
     marginRight: 15,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
   },
   contentContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginTop: 10,
     marginLeft: 15,
   },
@@ -116,38 +136,38 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
   textContainer: {
-    flexDirection: 'column',
-    alignItems: 'flex-start',
+    flexDirection: "column",
+    alignItems: "flex-start",
   },
   titleText: {
-    color: 'black',
+    color: "black",
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   topicText: {
-    color: 'gray',
+    color: "gray",
     fontSize: 14,
     marginTop: 5,
   },
   descriptionContainer: {
     marginLeft: 15,
-    alignItems: 'flex-start',
+    alignItems: "flex-start",
     flex: 1,
   },
   descriptionText: {
-    color: 'gray',
+    color: "gray",
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginTop: 10,
   },
   smallDescriptionText: {
-    color: 'black',
+    color: "black",
     fontSize: 14,
     marginTop: 5,
   },
   imageRow: {
-    flexDirection: 'row',
-    justifyContent: 'center', // Center the images horizontally
+    flexDirection: "row",
+    justifyContent: "center", // Center the images horizontally
     marginTop: 15,
   },
   smallImage: {
@@ -159,15 +179,15 @@ const styles = StyleSheet.create({
   },
 
   buttonContainer: {
-    alignItems: 'center',
-  //  marginTop: 20,
-  marginBottom: 20,
+    alignItems: "center",
+    //  marginTop: 20,
+    marginBottom: 20,
   },
   buttonText: {
-    color: 'white',
+    color: "white",
     fontSize: 18,
-    fontWeight: 'bold',
-    backgroundColor: '#FFA500',
+    fontWeight: "bold",
+    backgroundColor: "#FFA500",
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 10,
@@ -176,6 +196,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#1E1E1E",
   },
   darkText: {
-    color: '#fff',
+    color: "#fff",
   },
 });

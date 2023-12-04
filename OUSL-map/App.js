@@ -1,41 +1,18 @@
-// import { StatusBar } from "expo-status-bar";
-// import { StyleSheet, Text, View } from "react-native";
-
-// export default function App() {
-//   return (
-//     <View style={styles.container}>
-//       <Text>Open up App.js to start working on your app!</Text>
-//       <StatusBar style="auto" />
-//     </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#fff",
-//     alignItems: "center",
-//     justifyContent: "center",
-//   },
-// });
-
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { ThemeProvider } from "./ThemeContext";
+import { ThemeProvider } from "./Screens/ThemeContext";
 
-import LaunchScreen from "./LaunchScreen";
-import Home from "./Home";
-import SearchBar from "./SearchBar";
-import Settings from "./Settings";
-import PrivacyPolicy from "./Privacy_Policy";
-import AboutUs from "./AboutUs";
-import MapComponent from "./MapComponent";
-import BugReport from "./BugReport";
-// import Direction from './Direction';
-// import Settings from './Settings';
-// import AboutUs from './AboutUs';
-// import SavedLocations from './SavedLocations';
+import LaunchScreen from "./Screens/LaunchScreen";
+import Home from "./Screens/Home";
+import SearchBar from "./Screens/SearchBar";
+import Settings from "./Screens/Settings";
+import PrivacyPolicy from "./Screens/Privacy_Policy";
+import AboutUs from "./Screens/AboutUs";
+import MapComponent from "./Screens/MapComponent";
+import BugReport from "./Screens/BugReport";
+// import Direction from './Screens/Direction';
+// import SavedLocations from './Screens/SavedLocations';
 
 const Stack = createNativeStackNavigator();
 
