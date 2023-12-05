@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     position: "absolute",
     width: "92%",
-    height: 85,
+    height: "10%",
     flexDirection: "row",
     justifyContent: "space-between",
     backgroundColor: "#FFA500",
