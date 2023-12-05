@@ -11,6 +11,7 @@ import MapComponent from "./MapComponent";
 import BottomToolbar from "./BottomToolbar";
 import { useTheme } from "./ThemeContext";
 import { BlurView } from "expo-blur";
+import { Svg } from "react-native-svg";
 
 const Home = ({ route, navigation }) => {
   const { isDarkMode } = useTheme();
@@ -32,6 +33,12 @@ const Home = ({ route, navigation }) => {
           <MapComponent />
         )}
 
+        {/* <Svg height="40" width="150">
+          <Text fill="none" stroke="#FFA500" fontSize="15" fontWeight="bold" textAnchor="middle" x="100" y="20">
+            UNIMATES
+          </Text>
+        </Svg> */}
+
         <View style={styles.container}>
           <Text style={[styles.lightText, isDarkMode && styles.darkText]}>
             UNIMATES
@@ -49,13 +56,18 @@ const styles = StyleSheet.create({
   container: {
     bottom: 0,
     position: "absolute",
-    marginBottom: "20%",
-    marginLeft: 18,
+    marginBottom: "18%",
+    marginLeft: "4%",
   },
   lightText: {
-    color: "#333",
+    color: "#FFA500",
     fontWeight: 500,
     fontSize: 14,
+    textShadowColor: '#333',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 1,
+    position: 'relative'
+    
   },
   darkText: {
     color: "#fff",

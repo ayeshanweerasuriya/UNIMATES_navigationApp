@@ -90,7 +90,7 @@ const SearchBar = ({ onClose, navigation }) => {
         </TouchableOpacity>
       )}
 
-      {filteredData.length > 0 && (
+      {(filteredData.length > 0 && searchText !== "") && (
         <FlatList
           data={filteredData}
           renderItem={renderAutocompleteItem}
