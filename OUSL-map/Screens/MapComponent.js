@@ -406,8 +406,6 @@ const MapComponent = ({ selectedPlace }) => {
               longitude: place.coordinates[1],
             }}
             onPress={() => handleMarkerPress(place.name)}
-            // Display the name as the marker title
-            // You can also use description={place.name} if you want a description
           >
             <View style={styles.markerContainer}>
               <Text style={[styles.markerText, isDarkMode && styles.darkText]}>

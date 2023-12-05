@@ -1,70 +1,28 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import { ThemeProvider } from "./Screens/ThemeContext";
 
 import LaunchScreen from "./Screens/LaunchScreen";
 import Home from "./Screens/Home";
-import SearchBar from "./Screens/SearchBar";
 import Settings from "./Screens/Settings";
 import PrivacyPolicy from "./Screens/Privacy_Policy";
 import AboutUs from "./Screens/AboutUs";
 import MapComponent from "./Screens/MapComponent";
-import BugReport from "./Screens/BugReport";
-// import Direction from './Screens/Direction';
-// import SavedLocations from './Screens/SavedLocations';
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 const AppNavigator = () => {
   return (
     <ThemeProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="LaunchScreen">
-          <Stack.Screen
-            name="LaunchScreen"
-            component={LaunchScreen}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Home"
-            component={Home}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="SearchBar"
-            component={SearchBar}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="MapComponent"
-            component={MapComponent}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Settings"
-            component={Settings}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="PrivacyPolicy"
-            component={PrivacyPolicy}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="AboutUs"
-            component={AboutUs}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="BugReport"
-            component={BugReport}
-            options={{ headerShown: false }}
-          />
-          {/* <Stack.Screen name="Direction" component={Direction} options={{headerShown: false}} />
-        <Stack.Screen name="Settings" component={Settings} options={{headerShown: false}} />
-        <Stack.Screen name="AboutUs" component={AboutUs} options={{headerShown: false}} />
-        <Stack.Screen name="SavedLocations" component={SavedLocations} options={{headerShown: false}} /> */}
+        <Stack.Navigator initialRouteName="LaunchScreen" screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="LaunchScreen" component={LaunchScreen} />
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="MapComponent" component={MapComponent} />
+          <Stack.Screen name="Settings" component={Settings} />
+          <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
+          <Stack.Screen name="AboutUs" component={AboutUs} />
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>
