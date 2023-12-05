@@ -70,7 +70,7 @@ const createStyles = (isDarkMode) =>
     },
 
     button: {
-      marginTop: 60,
+      marginTop: 30,
       backgroundColor: "#FFA500",
       width: 100,
       borderRadius: 5,
