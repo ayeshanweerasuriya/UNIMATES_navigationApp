@@ -11,8 +11,6 @@ import PrivacyPolicy from "./Screens/Privacy_Policy";
 import AboutUs from "./Screens/AboutUs";
 import MapComponent from "./Screens/MapComponent";
 import BugReport from "./Screens/BugReport";
-// import Direction from './Screens/Direction';
-// import SavedLocations from './Screens/SavedLocations';
 
 const Stack = createNativeStackNavigator();
 
@@ -61,10 +59,6 @@ const AppNavigator = () => {
             component={BugReport}
             options={{ headerShown: false }}
           />
-          {/* <Stack.Screen name="Direction" component={Direction} options={{headerShown: false}} />
-        <Stack.Screen name="Settings" component={Settings} options={{headerShown: false}} />
-        <Stack.Screen name="AboutUs" component={AboutUs} options={{headerShown: false}} />
-        <Stack.Screen name="SavedLocations" component={SavedLocations} options={{headerShown: false}} /> */}
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>

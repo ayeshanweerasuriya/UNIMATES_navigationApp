@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   SafeAreaView,
   View,
@@ -10,8 +9,6 @@ import {
 import MapComponent from "./MapComponent";
 import BottomToolbar from "./BottomToolbar";
 import { useTheme } from "./ThemeContext";
-import { BlurView } from "expo-blur";
-import { Svg } from "react-native-svg";
 
 const Home = ({ route, navigation }) => {
   const { isDarkMode } = useTheme();
@@ -63,11 +60,10 @@ const styles = StyleSheet.create({
     color: "#FFA500",
     fontWeight: 500,
     fontSize: 14,
-    textShadowColor: '#333',
+    textShadowColor: "#333",
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 1,
-    position: 'relative'
-    
+    position: "relative",
   },
   darkText: {
     color: "#fff",
