@@ -18,7 +18,10 @@ const AppNavigator = () => {
   return (
     <ThemeProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="LaunchScreen" screenOptions={{ headerShown: false }}>
+        <Stack.Navigator
+          initialRouteName="LaunchScreen"
+          screenOptions={{ headerShown: false }}
+        >
           <Stack.Screen name="LaunchScreen" component={LaunchScreen} />
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="MapComponent" component={MapComponent} />
