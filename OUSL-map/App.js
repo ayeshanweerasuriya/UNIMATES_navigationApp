@@ -9,6 +9,8 @@ import Settings from "./Screens/Settings";
 import PrivacyPolicy from "./Screens/Privacy_Policy";
 import AboutUs from "./Screens/AboutUs";
 import MapComponent from "./Screens/MapComponent";
+import BugReport from "./Screens/BugReport";
+
 
 const Stack = createStackNavigator();
 
@@ -26,6 +28,7 @@ const AppNavigator = () => {
           <Stack.Screen name="Settings" component={Settings} />
           <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
           <Stack.Screen name="AboutUs" component={AboutUs} />
+          <Stack.Screen name="BugReport" component={BugReport} />
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>
