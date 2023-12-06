@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from "react-native-maps";
+import MapView, { Marker, Polyline, PROVIDER_HUAWEI } from "react-native-maps";
 import {
   StyleSheet,
   View,
@@ -392,7 +392,7 @@ const MapComponent = ({ selectedPlace }) => {
         ref={mapViewRef}
         style={styles.map}
         region={initialRegion}
-        provider={PROVIDER_GOOGLE}
+        provider={PROVIDER_HUAWEI}
         customMapStyle={selectedMapStyle}
         minZoomLevel={19}
         onRegionChangeComplete={onRegionChangeComplete}
