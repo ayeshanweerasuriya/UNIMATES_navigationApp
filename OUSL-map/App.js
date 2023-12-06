@@ -8,8 +8,6 @@ import Home from "./Screens/Home";
 import Settings from "./Screens/Settings";
 import PrivacyPolicy from "./Screens/Privacy_Policy";
 import AboutUs from "./Screens/AboutUs";
-import MapComponent from "./Screens/MapComponent";
-import BugReport from "./Screens/BugReport"; // Keep this line or the one below based on your preference
 
 const Stack = createStackNavigator();
 
@@ -28,7 +26,6 @@ const AppNavigator = () => {
           <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
           <Stack.Screen name="AboutUs" component={AboutUs} />
           <Stack.Screen name="BugReport" component={BugReport} />{" "}
-          {/* Keep this line or the one above based on your preference */}
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>
