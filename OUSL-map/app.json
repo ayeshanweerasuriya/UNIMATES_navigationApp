@@ -17,14 +17,14 @@
     "ios": {
       "config": {
         "googleMaps": {
-          "apiKey": "AIzaSyCCQ2tKSN128P80i8AKV53AYqjIPnLpxTk"
+          "apiKey": "AIzaSyBkQhPw_gxF6WBytPhJkijdZo3lsbs91mw"
         }
       }
     },
     "android": {
       "config": {
         "googleMaps": {
-          "apiKey": "AIzaSyCCQ2tKSN128P80i8AKV53AYqjIPnLpxTk"
+          "apiKey": "AIzaSyBkQhPw_gxF6WBytPhJkijdZo3lsbs91mw"
         }
       },
       "package": "com.zombieface229.OUSLmap"

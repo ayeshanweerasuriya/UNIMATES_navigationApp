@@ -251,6 +251,7 @@ const createStyles = (isDarkMode) =>
 
     bugText: {
       marginLeft: 5,
+      color: "#707070",
     },
   });
 
