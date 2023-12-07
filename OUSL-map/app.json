@@ -15,29 +15,26 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCCQ2tKSN128P80i8AKV53AYqjIPnLpxTk"
+        }
+      }
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCCQ2tKSN128P80i8AKV53AYqjIPnLpxTk"
+        }
+      },
+      "package": "com.zombieface229.OUSLmap"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-     "android": {
-      "config": {
-        "googleMaps": {
-          "apiKey": "AIzaSyCCQ2tKSN128P80i8AKV53AYqjIPnLpxTk"
-        }
-      }
-    },
-    "ios": {
-      "config": {
-        "googleMaps": {
-          "apiKey": "AIzaSyCCQ2tKSN128P80i8AKV53AYqjIPnLpxTk"
-        }
+    "extra": {
+      "eas": {
+        "projectId": "668de852-90a0-4188-b993-aba69ec0130c"
       }
     }
   }
