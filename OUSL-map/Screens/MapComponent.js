@@ -386,19 +386,18 @@ const MapComponent = ({ selectedPlace }) => {
     setVisibleMarkers(markersInRegion);
   };
   
-    const imageSource = require('../assets/map.png');
+    //const imageSource = require('../assets/map.png');
     
-    const overlayBounds = [
-    [6.88238, 79.87886], // Bottom-left corner
-    [6.88916, 79.88756], // Top-right corner
-    ];
+    //const overlayBounds = [
+    //[6.88238, 79.87886], // Bottom-left corner
+    //[6.88916, 79.88756], // Top-right corner
+    //];
 
   return (
     <View style={styles.container}>
       <MapView
         ref={mapViewRef}
         style={styles.map}
-        mapType={MAP_TYPES.NONE}
         region={initialRegion}
         provider={PROVIDER_GOOGLE}
         customMapStyle={selectedMapStyle}
@@ -414,6 +413,7 @@ const MapComponent = ({ selectedPlace }) => {
               longitude: place.coordinates[1],
             }}
             onPress={() => handleMarkerPress(place.name)}
+            tracksViewChanges={false}
             // Display the name as the marker title
             // You can also use description={place.name} if you want a description
           >
@@ -434,11 +434,6 @@ const MapComponent = ({ selectedPlace }) => {
             pinColor="orange"
           />
         )}
-        <Overlay
-          image={imageSource}
-          bounds={overlayBounds}
-          tappable={true}
-        />
       </MapView>
 
       <Modal
@@ -479,4 +474,5 @@ const styles = StyleSheet.create({
 });
 
 export default MapComponent;
+
 
