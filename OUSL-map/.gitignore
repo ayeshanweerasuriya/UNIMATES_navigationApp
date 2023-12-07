@@ -1,4 +1,4 @@
 node_modules/
 .expo/
 app.json
-Screens/data.js
+./Screens/data.js
