@@ -22,10 +22,23 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.ayeshan_weerasuriya.OUSLmap"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
+     "android": {
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCCQ2tKSN128P80i8AKV53AYqjIPnLpxTk"
+        }
+      }
+    },
+    "ios": {
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCCQ2tKSN128P80i8AKV53AYqjIPnLpxTk"
+        }
+      }
+    }
   }
 }

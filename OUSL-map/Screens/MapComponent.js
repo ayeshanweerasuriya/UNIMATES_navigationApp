@@ -1,13 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
-import MapView, { Marker, Polyline, PROVIDER_GOOGLE } from "react-native-maps";
-import {
-  StyleSheet,
-  View,
-  Text,
-  Modal,
-  InteractionManager,
-} from "react-native";
-// import CustomRoad from './CustomRoad';
+import React, { useState, useRef, useCallback, useMemo } from "react";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import { StyleSheet, View, Text, Modal } from "react-native";
 import { placesArray } from "./data";
 import { useTheme } from "./ThemeContext";
 import SelectedLocation from "./SelectedLocation";
@@ -18,314 +11,12 @@ const MapComponent = ({ selectedPlace }) => {
 
   const { isDarkMode } = useTheme();
 
-  // Function to handle marker press
-  const handleMarkerPress = (marker) => {
+  const handleMarkerPress = useCallback((marker) => {
     setSelectedMarker(marker);
     setModalVisible(true);
-  };
-
-  // Function to close the modal
-  const closeModal = () => {
-    setModalVisible(false);
-  };
-
-  const customMapStyle = [
-    {
-      featureType: "poi",
-      elementType: "labels",
-      stylers: [
-        {
-          visibility: "off",
-        },
-      ],
-    },
-
-    {
-      elementType: "labels",
-      stylers: [
-        {
-          visibility: "off",
-        },
-      ],
-    },
-    {
-      featureType: "transit",
-      elementType: "labels",
-      stylers: [
-        {
-          visibility: "off",
-        },
-      ],
-    },
-    {
-      featureType: "road",
-      elementType: "labels",
-      stylers: [
-        {
-          visibility: "off",
-        },
-      ],
-    },
-    {
-      featureType: "poi.business",
-      elementType: "labels",
-      stylers: [{ visibility: "off" }],
-    },
-  ];
-
-  const customDarkMapStyle = [
-    {
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#1d2c4d",
-        },
-      ],
-    },
-    {
-      elementType: "labels",
-      stylers: [
-        {
-          visibility: "off",
-        },
-      ],
-    },
-    {
-      elementType: "labels.text.fill",
-      stylers: [
-        {
-          color: "#8ec3b9",
-        },
-      ],
-    },
-    {
-      elementType: "labels.text.stroke",
-      stylers: [
-        {
-          color: "#1a3646",
-        },
-      ],
-    },
-    {
-      featureType: "administrative.country",
-      elementType: "geometry.stroke",
-      stylers: [
-        {
-          color: "#4b6878",
-        },
-      ],
-    },
-    {
-      featureType: "administrative.land_parcel",
-      elementType: "labels.text.fill",
-      stylers: [
-        {
-          color: "#64779e",
-        },
-      ],
-    },
-    {
-      featureType: "administrative.neighborhood",
-      stylers: [
-        {
-          visibility: "off",
-        },
-      ],
-    },
-    {
-      featureType: "administrative.province",
-      elementType: "geometry.stroke",
-      stylers: [
-        {
-          color: "#4b6878",
-        },
-      ],
-    },
-    {
-      featureType: "landscape.man_made",
-      elementType: "geometry.stroke",
-      stylers: [
-        {
-          color: "#334e87",
-        },
-      ],
-    },
-    {
-      featureType: "landscape.natural",
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#023e58",
-        },
-      ],
-    },
-    {
-      featureType: "poi",
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#283d6a",
-        },
-      ],
-    },
-    {
-      featureType: "poi",
-      elementType: "labels.text.fill",
-      stylers: [
-        {
-          color: "#6f9ba5",
-        },
-      ],
-    },
-    {
-      featureType: "poi",
-      elementType: "labels.text.stroke",
-      stylers: [
-        {
-          color: "#1d2c4d",
-        },
-      ],
-    },
-    {
-      featureType: "poi.park",
-      elementType: "geometry.fill",
-      stylers: [
-        {
-          color: "#023e58",
-        },
-      ],
-    },
-    {
-      featureType: "poi.park",
-      elementType: "labels.text.fill",
-      stylers: [
-        {
-          color: "#3C7680",
-        },
-      ],
-    },
-    {
-      featureType: "road",
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#304a7d",
-        },
-      ],
-    },
-    {
-      featureType: "road",
-      elementType: "labels.text.fill",
-      stylers: [
-        {
-          color: "#98a5be",
-        },
-      ],
-    },
-    {
-      featureType: "road",
-      elementType: "labels.text.stroke",
-      stylers: [
-        {
-          color: "#1d2c4d",
-        },
-      ],
-    },
-    {
-      featureType: "road.highway",
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#2c6675",
-        },
-      ],
-    },
-    {
-      featureType: "road.highway",
-      elementType: "geometry.stroke",
-      stylers: [
-        {
-          color: "#255763",
-        },
-      ],
-    },
-    {
-      featureType: "road.highway",
-      elementType: "labels.text.fill",
-      stylers: [
-        {
-          color: "#b0d5ce",
-        },
-      ],
-    },
-    {
-      featureType: "road.highway",
-      elementType: "labels.text.stroke",
-      stylers: [
-        {
-          color: "#023e58",
-        },
-      ],
-    },
-    {
-      featureType: "transit",
-      elementType: "labels.text.fill",
-      stylers: [
-        {
-          color: "#98a5be",
-        },
-      ],
-    },
-    {
-      featureType: "transit",
-      elementType: "labels.text.stroke",
-      stylers: [
-        {
-          color: "#1d2c4d",
-        },
-      ],
-    },
-    {
-      featureType: "transit.line",
-      elementType: "geometry.fill",
-      stylers: [
-        {
-          color: "#283d6a",
-        },
-      ],
-    },
-    {
-      featureType: "transit.station",
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#3a4762",
-        },
-      ],
-    },
-    {
-      featureType: "water",
-      elementType: "geometry",
-      stylers: [
-        {
-          color: "#0e1626",
-        },
-      ],
-    },
-    {
-      featureType: "water",
-      elementType: "labels.text.fill",
-      stylers: [
-        {
-          color: "#4e6d70",
-        },
-      ],
-    },
-  ];
-
-  const selectedMapStyle = isDarkMode ? customDarkMapStyle : customMapStyle;
-
-  const initialRegion = selectedPlace
+  }, []);
+  
+    const initialRegion = selectedPlace
     ? {
         latitude: selectedPlace.coordinates[0],
         longitude: selectedPlace.coordinates[1],
@@ -339,10 +30,73 @@ const MapComponent = ({ selectedPlace }) => {
         longitudeDelta: 0.00421,
       };
 
-  const north = 6.88934;
-  const east = 79.88693;
-  const south = 6.88231;
-  const west = 79.87867;
+
+  const closeModal = useCallback(() => {
+    setModalVisible(false);
+  }, []);
+
+  const customMapStyle = useMemo(() => {
+    return isDarkMode ? customDarkMapStyle : customMapStyle;
+  }, [isDarkMode]);
+
+const markersInRegion = useMemo(() => {
+  return placesArray.filter(
+    (place) =>
+      place.coordinates[0] >= newRegion.latitude - newRegion.latitudeDelta / 2 &&
+      place.coordinates[0] <= newRegion.latitude + newRegion.latitudeDelta / 2 &&
+      place.coordinates[1] >= newRegion.longitude - newRegion.longitudeDelta / 2 &&
+      place.coordinates[1] <= newRegion.longitude + newRegion.longitudeDelta / 2
+  );
+}, [newRegion]);
+
+
+  const mappedMarkers = useMemo(() => {
+    return markersInRegion.map((place, index) => (
+      <Marker
+        key={index}
+        coordinate={{
+          latitude: place.coordinates[0],
+          longitude: place.coordinates[1],
+        }}
+        onPress={() => handleMarkerPress(place.name)}
+      >
+        <View style={styles.markerContainer}>
+          <Text style={[styles.markerText, isDarkMode && styles.darkText]}>
+            {place.name}
+          </Text>
+        </View>
+      </Marker>
+    ));
+  }, [markersInRegion, handleMarkerPress, isDarkMode]);
+
+  const selectedPlaceMarker =
+    selectedPlace && (
+      <Marker
+        coordinate={{
+          latitude: selectedPlace.coordinates[0] + 0.00001,
+          longitude: selectedPlace.coordinates[1],
+        }}
+        title={selectedPlace.name}
+        pinColor="orange"
+      />
+    );
+
+  const onRegionChangeComplete = useCallback(
+    (newRegion) => {
+      if (
+        newRegion.latitude < south ||
+        newRegion.latitude > north ||
+        newRegion.longitude < west ||
+        newRegion.longitude > east
+      ) {
+        mapViewRef.current.animateToRegion(region, 10);
+      } else {
+        setRegion(newRegion);
+        handleMarkers(newRegion);
+      }
+    },
+    [region, handleMarkers]
+  );
 
   const mapViewRef = useRef(null);
 
@@ -353,79 +107,25 @@ const MapComponent = ({ selectedPlace }) => {
     longitudeDelta: Math.abs(east - west) * 1.2,
   });
 
-  const onRegionChangeComplete = (newRegion) => {
-    // Check if the new region is within the allowed boundaries
-    if (
-      newRegion.latitude < south ||
-      newRegion.latitude > north ||
-      newRegion.longitude < west ||
-      newRegion.longitude > east
-    ) {
-      // If outside the boundaries, update the map to the last valid region
-      mapViewRef.current.animateToRegion(region, 10); // You can adjust the duration as needed
-    } else {
-      // If inside the boundaries, update the region state and handle markers
-      setRegion(newRegion);
-      handleMarkers(newRegion);
-    }
-  };
+  const handleMarkers = useCallback((region) => {
+    setVisibleMarkers(markersInRegion);
+  }, [markersInRegion]);
 
   const [visibleMarkers, setVisibleMarkers] = useState([]);
-
-  const handleMarkers = (region) => {
-    // Filter the markers based on the current visible region of the map
-    const markersInRegion = placesArray.filter(
-      (place) =>
-        place.coordinates[0] >= region.latitude - region.latitudeDelta / 2 &&
-        place.coordinates[0] <= region.latitude + region.latitudeDelta / 2 &&
-        place.coordinates[1] >= region.longitude - region.longitudeDelta / 2 &&
-        place.coordinates[1] <= region.longitude + region.longitudeDelta / 2
-    );
-
-    // Set the visible markers
-    setVisibleMarkers(markersInRegion);
-  };
 
   return (
     <View style={styles.container}>
       <MapView
         ref={mapViewRef}
         style={styles.map}
-        region={initialRegion}
+        region={initialRegion} // Use `region` instead of `initialRegion`
         provider={PROVIDER_GOOGLE}
-        customMapStyle={selectedMapStyle}
+        customMapStyle={customMapStyle}
         minZoomLevel={19}
         onRegionChangeComplete={onRegionChangeComplete}
-        // showsUserLocation
       >
-        {visibleMarkers.map((place, index) => (
-          <Marker
-            key={index}
-            coordinate={{
-              latitude: place.coordinates[0],
-              longitude: place.coordinates[1],
-            }}
-            onPress={() => handleMarkerPress(place.name)}
-            // Display the name as the marker title
-            // You can also use description={place.name} if you want a description
-          >
-            <View style={styles.markerContainer}>
-              <Text style={[styles.markerText, isDarkMode && styles.darkText]}>
-                {place.name}
-              </Text>
-            </View>
-          </Marker>
-        ))}
-        {selectedPlace && (
-          <Marker
-            coordinate={{
-              latitude: selectedPlace.coordinates[0] + 0.00001,
-              longitude: selectedPlace.coordinates[1],
-            }}
-            title={selectedPlace.name}
-            pinColor="orange"
-          />
-        )}
+        {mappedMarkers}
+        {selectedPlaceMarker}
       </MapView>
 
       <Modal
@@ -454,6 +154,9 @@ const styles = StyleSheet.create({
   map: {
     ...StyleSheet.absoluteFillObject,
   },
+  markerContainer: {
+    // Add styles for the marker container if needed
+  },
   markerText: {
     fontSize: 11,
     color: "#000",
@@ -466,3 +169,4 @@ const styles = StyleSheet.create({
 });
 
 export default MapComponent;
+
