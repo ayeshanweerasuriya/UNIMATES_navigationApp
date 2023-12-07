@@ -15,14 +15,19 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBkQhPw_gxF6WBytPhJkijdZo3lsbs91mw"
+        }
+      }
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBkQhPw_gxF6WBytPhJkijdZo3lsbs91mw"
+        }
       },
-      "package": "com.ayeshan_weerasuriya.OUSLmap"
+      "package": "com.zombieface229.OUSLmap"
     },
     "web": {
       "favicon": "./assets/favicon.png"
