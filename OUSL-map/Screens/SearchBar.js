@@ -81,14 +81,23 @@ const SearchBar = ({ onClose, navigation }) => {
       />
       <TextInput
         ref={inputRef}
+        enterKeyHint={'search'}
         style={[styles.input, isDarkMode && styles.darkText]}
         placeholder="Search..."
         placeholderTextColor={isDarkMode ? "#fff" : "#000"}
         value={searchText}
-        autoFocus={true} 
+        returnKeyType={'search'}
+        selectionColor="#FFA500"
         onChangeText={(text) => {
           handleInputChange(text);
           setSearchText(text);
+        }}
+        onSubmitEditing={() => {
+          if (filteredData.length > 0) {
+            handlePlaceSelect(filteredData[0]);
+          } else {
+            onClose();
+          }
         }}
       />
       {searchText !== "" && (
@@ -124,7 +133,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    marginTop: "4%",
+    marginTop: "3%",
     margin: 1,
     elevation: 5,
     position: "absolute",
