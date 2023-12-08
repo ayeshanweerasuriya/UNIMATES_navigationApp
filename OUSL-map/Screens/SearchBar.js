@@ -23,15 +23,30 @@ const SearchBar = ({ onClose, navigation }) => {
   const { isDarkMode } = useTheme();
 
   const handleInputChange = (text) => {
-    // Filter suggestions based on the first letter the user typed
-    const filtered = placesArray.filter(
-      (place) =>
-        place.name.toLowerCase().startsWith(text.toLowerCase()) &&
-        place.name.toLowerCase().includes(text.toLowerCase()) //this need to change with place.description
+    const filtered = placesArray.filter((place) =>
+      place.name.toLowerCase().includes(text.toLowerCase())
     );
-    setFilteredData(filtered);
+  
+    // Sort the filtered array to prioritize results that start with the input
+    filtered.sort((a, b) => {
+      const aStartsWith = a.name.toLowerCase().startsWith(text.toLowerCase());
+      const bStartsWith = b.name.toLowerCase().startsWith(text.toLowerCase());
+  
+      // Sort in descending order based on whether the name starts with the input
+      if (aStartsWith && !bStartsWith) {
+        return -1;
+      } else if (!aStartsWith && bStartsWith) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  
+    const limitedSuggestions = filtered.slice(0, 10);
+  
+    setFilteredData(limitedSuggestions);
     setQuery(text);
-  };
+  };  
 
   const clearSearch = () => {
     setSearchText("");
@@ -81,14 +96,23 @@ const SearchBar = ({ onClose, navigation }) => {
       />
       <TextInput
         ref={inputRef}
+        enterKeyHint={'search'}
         style={[styles.input, isDarkMode && styles.darkText]}
         placeholder="Search..."
         placeholderTextColor={isDarkMode ? "#fff" : "#000"}
         value={searchText}
-        autoFocus={true} 
+        returnKeyType={'search'}
+        selectionColor="#FFA500"
         onChangeText={(text) => {
           handleInputChange(text);
           setSearchText(text);
+        }}
+        onSubmitEditing={() => {
+          if (filteredData.length > 0) {
+            handlePlaceSelect(filteredData[0]);
+          } else {
+            onClose();
+          }
         }}
       />
       {searchText !== "" && (
@@ -124,7 +148,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    marginTop: "4%",
+    marginTop: "3%",
     margin: 1,
     elevation: 5,
     position: "absolute",
