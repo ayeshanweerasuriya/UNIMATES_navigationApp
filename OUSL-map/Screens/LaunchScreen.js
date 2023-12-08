@@ -41,9 +41,9 @@ export default function LaunchScreen({ navigation }) {
         source={require("../assets/Designed_Logo.png")}
         style={styles.img}
       />
-      <Text style={[styles.text, isDarkMode && styles.darkText]}>
+      {/* <Text style={[styles.text, isDarkMode && styles.darkText]}>
         OPEN UNIVERSITY OF SRI LANKA
-      </Text>
+      </Text> */}
       <StatusBar style="auto" />
     </Animated.View>
   );
@@ -57,10 +57,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   img: {
-    height: 108,
+    height: 124,
     // width: 104,
     // Updated logo width
-    width: 108,
+    width: 124,
   },
   text: {
     // Updated style for text
