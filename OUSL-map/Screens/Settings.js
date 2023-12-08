@@ -63,7 +63,7 @@ const Settings = ({ navigation }) => {
       toValue: isEnabled ? 1 : 0,
       duration: 300,
       easing: Easing.linear,
-      useNativeDriver: false,
+      useNativeDriver: true,
     }).start();
   }, [isEnabled, toggleAnim]);
 
@@ -109,14 +109,12 @@ const Settings = ({ navigation }) => {
     ];
 
     return (
-      <TouchableOpacity
-        style={bugReportStyles}
-        onPress={() => setShowBugReport(true)}
-      >
-        <Icon name="bug" size={15} color={isDarkMode ? "#FFFFFF" : "#707070"} />
-        <Text style={[styles.bugText, isDarkMode && styles.darkText]}>
-          Report a Bug
-        </Text>
+      <TouchableOpacity onPress={() => setShowBugReport(true)}>
+        <View style={bugReportStyles}>
+          <Icon name="bug" size={15} color="#707070" />
+          <Text style={styles.bugText}>Report a Bug</Text>
+        </View>
+        <Text style={styles.versionNum}>V 0.1</Text>
       </TouchableOpacity>
     );
   };
@@ -149,9 +147,6 @@ const Settings = ({ navigation }) => {
         {renderOption("Privacy Policy", "PrivacyPolicy")}
         {renderBugReport()}
 
-        <Text style={[styles.versionNum, isDarkMode && styles.darkText]}>
-          V 0.1
-        </Text>
         {/* Modal for BugReport */}
         <Modal
           transparent={true}
@@ -230,23 +225,20 @@ const createStyles = (isDarkMode) =>
     },
     otherContainers: {
       padding: 20,
-      borderRadius: 10,
     },
 
     versionNum: {
       textAlign: "center",
       fontSize: 10,
       fontWeight: "bold",
-      color: "#343434",
-      opacity: 0.5,
+      color: "#707070",
     },
 
     bug: {
-      marginTop: 300,
+      marginTop: height * 0.3,
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
-      // opacity: 0.5,
     },
 
     bugText: {
