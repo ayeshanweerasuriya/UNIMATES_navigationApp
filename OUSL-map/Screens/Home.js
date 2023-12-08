@@ -1,3 +1,4 @@
+import React from "react";
 import {
   SafeAreaView,
   View,
@@ -5,6 +6,7 @@ import {
   StatusBar,
   StyleSheet,
   KeyboardAvoidingView,
+  ScrollView,
 } from "react-native";
 import MapComponent from "./MapComponent";
 import BottomToolbar from "./BottomToolbar";
@@ -22,28 +24,27 @@ const Home = ({ route, navigation }) => {
     >
       <SafeAreaView style={{ flex: 1 }}>
         <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
-        {selectedPlace ? (
-          // Render MapComponent with the selected place if available
-          <MapComponent selectedPlace={selectedPlace} />
-        ) : (
-          // Render the default MapComponent without a selected place
-          <MapComponent />
-        )}
+        <ScrollView
+          contentContainerStyle={{ flexGrow: 1 }}
+          keyboardShouldPersistTaps="handled"
+        >
+          {selectedPlace ? (
+            // Render MapComponent with the selected place if available
+            <MapComponent selectedPlace={selectedPlace} />
+          ) : (
+            // Render the default MapComponent without a selected place
+            <MapComponent />
+          )}
 
-        {/* <Svg height="40" width="150">
-          <Text fill="none" stroke="#FFA500" fontSize="15" fontWeight="bold" textAnchor="middle" x="100" y="20">
-            UNIMATES
-          </Text>
-        </Svg> */}
+          <View style={styles.container}>
+            <Text style={[styles.lightText, isDarkMode && styles.darkText]}>
+              UNIMATES
+            </Text>
+            <Text style={isDarkMode && styles.darkText}>&copy; 2023</Text>
+          </View>
 
-        <View style={styles.container}>
-          <Text style={[styles.lightText, isDarkMode && styles.darkText]}>
-            UNIMATES
-          </Text>
-          <Text style={isDarkMode && styles.darkText}>&copy; 2023</Text>
-        </View>
-
-        <BottomToolbar navigation={navigation} />
+          <BottomToolbar navigation={navigation} />
+        </ScrollView>
       </SafeAreaView>
     </KeyboardAvoidingView>
   );
@@ -71,3 +72,4 @@ const styles = StyleSheet.create({
 });
 
 export default Home;
+

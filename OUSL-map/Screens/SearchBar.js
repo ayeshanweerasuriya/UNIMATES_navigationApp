@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   SafeAreaView,
   View,
@@ -57,6 +57,18 @@ const SearchBar = ({ onClose, navigation }) => {
       </View>
     </TouchableOpacity>
   );
+  
+    const inputRef = useRef(null);
+
+  useEffect(() => {
+    const delayFocus = setTimeout(() => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    }, 1000); // Set the delay time in milliseconds
+
+    return () => clearTimeout(delayFocus);
+  }, []);
 
   return (
     <SafeAreaView style={[styles.container, isDarkMode && styles.darkInput]}>
@@ -68,10 +80,12 @@ const SearchBar = ({ onClose, navigation }) => {
         style={styles.backIcon}
       />
       <TextInput
+        ref={inputRef}
         style={[styles.input, isDarkMode && styles.darkText]}
         placeholder="Search..."
         placeholderTextColor={isDarkMode ? "#fff" : "#000"}
         value={searchText}
+        autoFocus={true} 
         onChangeText={(text) => {
           handleInputChange(text);
           setSearchText(text);
@@ -110,7 +124,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    marginTop: "5%",
+    marginTop: "4%",
     margin: 1,
     elevation: 5,
     position: "absolute",
