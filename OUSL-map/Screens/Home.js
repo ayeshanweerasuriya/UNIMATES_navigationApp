@@ -37,10 +37,10 @@ const Home = ({ route, navigation }) => {
           )}
 
           <View style={styles.container}>
-            <Text style={[styles.lightText, isDarkMode && styles.darkText]}>
+            <Text style={styles.lightText}>
               UNIMATES
             </Text>
-            <Text style={isDarkMode && styles.darkText}>&copy; 2023</Text>
+            <Text style={{ color: isDarkMode ? '#ADD8E6' : '#000099' }}>&copy; 2023</Text>
           </View>
 
           <BottomToolbar navigation={navigation} />
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   },
   lightText: {
     color: "#FFA500",
-    fontWeight: 500,
+    fontWeight: 'bold',
     fontSize: 14,
     textShadowColor: "#333",
     textShadowOffset: { width: 1, height: 1 },

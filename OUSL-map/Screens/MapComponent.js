@@ -4,8 +4,7 @@ import {
   StyleSheet,
   View,
   Text,
-  Modal,
-  InteractionManager,
+  Modal
 } from "react-native";
 // import CustomRoad from './CustomRoad';
 import { placesArray } from "./data";
@@ -414,8 +413,6 @@ const MapComponent = ({ selectedPlace }) => {
             }}
             onPress={() => handleMarkerPress(place.name)}
             tracksViewChanges={false}
-            // Display the name as the marker title
-            // You can also use description={place.name} if you want a description
           >
             <View style={styles.markerContainer}>
               <Text style={[styles.markerText, isDarkMode && styles.darkText]}>
