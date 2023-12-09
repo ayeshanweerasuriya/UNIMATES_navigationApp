@@ -329,17 +329,17 @@ const MapComponent = ({ selectedPlace }) => {
 
   const initialRegion = selectedPlace
     ? {
-        latitude: selectedPlace.coordinates[0],
-        longitude: selectedPlace.coordinates[1],
-        latitudeDelta: 0.005, // Adjust the zoom level as needed
-        longitudeDelta: 0.005,
-      }
+      latitude: selectedPlace.coordinates[0],
+      longitude: selectedPlace.coordinates[1],
+      latitudeDelta: 0.005, // Adjust the zoom level as needed
+      longitudeDelta: 0.005,
+    }
     : {
-        latitude: 6.883421,
-        longitude: 79.884448,
-        latitudeDelta: 0.00922,
-        longitudeDelta: 0.00421,
-      };
+      latitude: 6.883421,
+      longitude: 79.884448,
+      latitudeDelta: 0.00922,
+      longitudeDelta: 0.00421,
+    };
 
   const north = 6.88934;
   const east = 79.88693;
@@ -364,7 +364,7 @@ const MapComponent = ({ selectedPlace }) => {
       newRegion.longitude > east
     ) {
       // If outside the boundaries, update the map to the last valid region
-      mapViewRef.current.animateToRegion(region, 10); // You can adjust the duration as needed
+      mapViewRef.current.animateToRegion(region, 10);
     } else {
       // If inside the boundaries, update the region state and handle markers
       setRegion(newRegion);
@@ -374,59 +374,52 @@ const MapComponent = ({ selectedPlace }) => {
 
   const [visibleMarkers, setVisibleMarkers] = useState([]);
 
-let shuffledMarkersCache = null;
+  let shuffledMarkersCache = null;
 
-const handleMarkers = (region, lazy) => {
-  const { longitudeDelta } = region;
+  const handleMarkers = (region, lazy) => {
+    const { longitudeDelta } = region;
 
-  // Calculate the zoom level based on longitudeDelta
-  const zoomLevel = Math.log2(360 / longitudeDelta);
+    const zoomLevel = Math.log2(360 / longitudeDelta);
 
-  // Set your specific requirements
-  const maxMarkersAtMaxZoom = 30;
-  const minMarkersAtMinZoom = 5;
+    const maxMarkersAtMaxZoom = 30;
+    const minMarkersAtMinZoom = 5;
 
-  // Check if the user is at zoom level 18, show all markers
-  if (zoomLevel >= 18) {
-    setVisibleMarkers(placesArray);
-    return;
-  }
-
-  // Check if the user is at or below zoom level 17, randomize markers
-  if (zoomLevel <= 17.6) {
-    // Use the cached shuffled array if available
-    const shuffledMarkers = shuffledMarkersCache || shuffleArray(placesArray);
-
-    // Cache the shuffled array to avoid unnecessary recalculation
-    if (!shuffledMarkersCache) {
-      shuffledMarkersCache = shuffledMarkers;
+    if (zoomLevel >= 18) {
+      setVisibleMarkers(placesArray);
+      return;
     }
 
-    // Show a subset of the shuffled array based on specific requirements
-    const markersToShow = shuffledMarkers.slice(0, minMarkersAtMinZoom);
-    setVisibleMarkers(markersToShow);
-  } else {
-    // For zoom levels between 17 and 18 (exclusive), show a subset of markers based on specific requirements
+    if (zoomLevel <= 17.6) {
+      // Use the cached shuffled array if available
+      const shuffledMarkers = shuffledMarkersCache || shuffleArray(placesArray);
 
-  }
-};
+      // Cache the shuffled array to avoid unnecessary recalculation
+      if (!shuffledMarkersCache) {
+        shuffledMarkersCache = shuffledMarkers;
+      }
+      const markersToShow = shuffledMarkers.slice(0, minMarkersAtMinZoom);
+      setVisibleMarkers(markersToShow);
+    } else {
 
-// Fisher-Yates shuffle function
-const shuffleArray = (array, lazy) => {
-  const shuffledArray = [...array];
-  for (let i = shuffledArray.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
-  }
-  return shuffledArray;
-};
+    }
+  };
 
-    //const imageSource = require('../assets/map.png');
-    
-    //const overlayBounds = [
-    //[6.88238, 79.87886], // Bottom-left corner
-    //[6.88916, 79.88756], // Top-right corner
-    //];
+  // Fisher-Yates shuffle function
+  const shuffleArray = (array, lazy) => {
+    const shuffledArray = [...array];
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+    }
+    return shuffledArray;
+  };
+
+  //const imageSource = require('../assets/map.png');
+
+  //const overlayBounds = [
+  //[6.88238, 79.87886], // Bottom-left corner
+  //[6.88916, 79.88756], // Top-right corner
+  //];
 
   return (
     <View style={styles.container}>
@@ -437,16 +430,16 @@ const shuffleArray = (array, lazy) => {
         provider={PROVIDER_GOOGLE}
         customMapStyle={selectedMapStyle}
         minZoomLevel={16}
-        mapType={'satellite'}
+        mapType={'standard'}
         onRegionChangeComplete={onRegionChangeComplete}
         mapPadding={{
-        left: 20,
-        bottom: 20
+          left: 20,
+          bottom: 20
         }}
         paddingAdjustmentBehavior={'never'}
         showsIndoors={false}
         toolbarEnabled={false}
-        // showsUserLocation
+      // showsUserLocation
       >
         {visibleMarkers.map((place, index) => (
           <Marker
@@ -465,7 +458,7 @@ const shuffleArray = (array, lazy) => {
             </View>
           </Marker>
         ))}
-        {selectedPlace &&  (
+        {selectedPlace && (
           <Marker
             coordinate={{
               latitude: selectedPlace.coordinates[0] + 0.00001,
