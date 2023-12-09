@@ -1,15 +1,17 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, lazy } from "react";
 import MapView, { Marker, Polyline, PROVIDER_GOOGLE, Overlay, MAP_TYPES } from "react-native-maps";
 import {
   StyleSheet,
   View,
   Text,
-  Modal
+  Modal,
+  Dimensions
 } from "react-native";
 // import CustomRoad from './CustomRoad';
 import { placesArray } from "./data";
 import { useTheme } from "./ThemeContext";
 import SelectedLocation from "./SelectedLocation";
+
 
 const MapComponent = ({ selectedPlace }) => {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -23,9 +25,10 @@ const MapComponent = ({ selectedPlace }) => {
     setModalVisible(true);
   };
 
-  // Function to close the modal
+  // Function to close the modal and hide the selected marker
   const closeModal = () => {
     setModalVisible(false);
+    setSelectedMarker(null);
   };
 
   const customMapStyle = [
@@ -326,17 +329,17 @@ const MapComponent = ({ selectedPlace }) => {
 
   const initialRegion = selectedPlace
     ? {
-        latitude: selectedPlace.coordinates[0],
-        longitude: selectedPlace.coordinates[1],
-        latitudeDelta: 0.005, // Adjust the zoom level as needed
-        longitudeDelta: 0.005,
-      }
+      latitude: selectedPlace.coordinates[0],
+      longitude: selectedPlace.coordinates[1],
+      latitudeDelta: 0.005, // Adjust the zoom level as needed
+      longitudeDelta: 0.005,
+    }
     : {
-        latitude: 6.883421,
-        longitude: 79.884448,
-        latitudeDelta: 0.00922,
-        longitudeDelta: 0.00421,
-      };
+      latitude: 6.883421,
+      longitude: 79.884448,
+      latitudeDelta: 0.00922,
+      longitudeDelta: 0.00421,
+    };
 
   const north = 6.88934;
   const east = 79.88693;
@@ -361,7 +364,7 @@ const MapComponent = ({ selectedPlace }) => {
       newRegion.longitude > east
     ) {
       // If outside the boundaries, update the map to the last valid region
-      mapViewRef.current.animateToRegion(region, 10); // You can adjust the duration as needed
+      mapViewRef.current.animateToRegion(region, 10);
     } else {
       // If inside the boundaries, update the region state and handle markers
       setRegion(newRegion);
@@ -371,26 +374,52 @@ const MapComponent = ({ selectedPlace }) => {
 
   const [visibleMarkers, setVisibleMarkers] = useState([]);
 
-  const handleMarkers = (region) => {
-    // Filter the markers based on the current visible region of the map
-    const markersInRegion = placesArray.filter(
-      (place) =>
-        place.coordinates[0] >= region.latitude - region.latitudeDelta / 2 &&
-        place.coordinates[0] <= region.latitude + region.latitudeDelta / 2 &&
-        place.coordinates[1] >= region.longitude - region.longitudeDelta / 2 &&
-        place.coordinates[1] <= region.longitude + region.longitudeDelta / 2
-    );
+  let shuffledMarkersCache = null;
 
-    // Set the visible markers
-    setVisibleMarkers(markersInRegion);
+  const handleMarkers = (region, lazy) => {
+    const { longitudeDelta } = region;
+
+    const zoomLevel = Math.log2(360 / longitudeDelta);
+
+    const maxMarkersAtMaxZoom = 30;
+    const minMarkersAtMinZoom = 5;
+
+    if (zoomLevel >= 18) {
+      setVisibleMarkers(placesArray);
+      return;
+    }
+
+    if (zoomLevel <= 17.6) {
+      // Use the cached shuffled array if available
+      const shuffledMarkers = shuffledMarkersCache || shuffleArray(placesArray);
+
+      // Cache the shuffled array to avoid unnecessary recalculation
+      if (!shuffledMarkersCache) {
+        shuffledMarkersCache = shuffledMarkers;
+      }
+      const markersToShow = shuffledMarkers.slice(0, minMarkersAtMinZoom);
+      setVisibleMarkers(markersToShow);
+    } else {
+
+    }
   };
-  
-    //const imageSource = require('../assets/map.png');
-    
-    //const overlayBounds = [
-    //[6.88238, 79.87886], // Bottom-left corner
-    //[6.88916, 79.88756], // Top-right corner
-    //];
+
+  // Fisher-Yates shuffle function
+  const shuffleArray = (array, lazy) => {
+    const shuffledArray = [...array];
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+    }
+    return shuffledArray;
+  };
+
+  //const imageSource = require('../assets/map.png');
+
+  //const overlayBounds = [
+  //[6.88238, 79.87886], // Bottom-left corner
+  //[6.88916, 79.88756], // Top-right corner
+  //];
 
   return (
     <View style={styles.container}>
@@ -400,9 +429,17 @@ const MapComponent = ({ selectedPlace }) => {
         region={initialRegion}
         provider={PROVIDER_GOOGLE}
         customMapStyle={selectedMapStyle}
-        minZoomLevel={19}
+        minZoomLevel={16}
+        mapType={'standard'}
         onRegionChangeComplete={onRegionChangeComplete}
-        // showsUserLocation
+        mapPadding={{
+          left: 20,
+          bottom: 20
+        }}
+        paddingAdjustmentBehavior={'never'}
+        showsIndoors={false}
+        toolbarEnabled={false}
+      // showsUserLocation
       >
         {visibleMarkers.map((place, index) => (
           <Marker
@@ -429,6 +466,7 @@ const MapComponent = ({ selectedPlace }) => {
             }}
             title={selectedPlace.name}
             pinColor="orange"
+            tracksViewChanges={false}
           />
         )}
       </MapView>
@@ -455,9 +493,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-end",
     alignItems: "center",
+    minHeight: Dimensions.get('screen').height,
   },
   map: {
     ...StyleSheet.absoluteFillObject,
+    height: "110%"
   },
   markerText: {
     fontSize: 11,
@@ -471,5 +511,3 @@ const styles = StyleSheet.create({
 });
 
 export default MapComponent;
-
-
