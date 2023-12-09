@@ -1,15 +1,17 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, lazy } from "react";
 import MapView, { Marker, Polyline, PROVIDER_GOOGLE, Overlay, MAP_TYPES } from "react-native-maps";
 import {
   StyleSheet,
   View,
   Text,
-  Modal
+  Modal,
+  Dimensions
 } from "react-native";
 // import CustomRoad from './CustomRoad';
 import { placesArray } from "./data";
 import { useTheme } from "./ThemeContext";
 import SelectedLocation from "./SelectedLocation";
+
 
 const MapComponent = ({ selectedPlace }) => {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -23,9 +25,10 @@ const MapComponent = ({ selectedPlace }) => {
     setModalVisible(true);
   };
 
-  // Function to close the modal
+  // Function to close the modal and hide the selected marker
   const closeModal = () => {
     setModalVisible(false);
+    setSelectedMarker(null);
   };
 
   const customMapStyle = [
@@ -371,20 +374,53 @@ const MapComponent = ({ selectedPlace }) => {
 
   const [visibleMarkers, setVisibleMarkers] = useState([]);
 
-  const handleMarkers = (region) => {
-    // Filter the markers based on the current visible region of the map
-    const markersInRegion = placesArray.filter(
-      (place) =>
-        place.coordinates[0] >= region.latitude - region.latitudeDelta / 2 &&
-        place.coordinates[0] <= region.latitude + region.latitudeDelta / 2 &&
-        place.coordinates[1] >= region.longitude - region.longitudeDelta / 2 &&
-        place.coordinates[1] <= region.longitude + region.longitudeDelta / 2
-    );
+let shuffledMarkersCache = null;
 
-    // Set the visible markers
-    setVisibleMarkers(markersInRegion);
-  };
-  
+const handleMarkers = (region, lazy) => {
+  const { longitudeDelta } = region;
+
+  // Calculate the zoom level based on longitudeDelta
+  const zoomLevel = Math.log2(360 / longitudeDelta);
+
+  // Set your specific requirements
+  const maxMarkersAtMaxZoom = 30;
+  const minMarkersAtMinZoom = 5;
+
+  // Check if the user is at zoom level 18, show all markers
+  if (zoomLevel >= 18) {
+    setVisibleMarkers(placesArray);
+    return;
+  }
+
+  // Check if the user is at or below zoom level 17, randomize markers
+  if (zoomLevel <= 17.6) {
+    // Use the cached shuffled array if available
+    const shuffledMarkers = shuffledMarkersCache || shuffleArray(placesArray);
+
+    // Cache the shuffled array to avoid unnecessary recalculation
+    if (!shuffledMarkersCache) {
+      shuffledMarkersCache = shuffledMarkers;
+    }
+
+    // Show a subset of the shuffled array based on specific requirements
+    const markersToShow = shuffledMarkers.slice(0, minMarkersAtMinZoom);
+    setVisibleMarkers(markersToShow);
+  } else {
+    // For zoom levels between 17 and 18 (exclusive), show a subset of markers based on specific requirements
+
+  }
+};
+
+// Fisher-Yates shuffle function
+const shuffleArray = (array, lazy) => {
+  const shuffledArray = [...array];
+  for (let i = shuffledArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+  }
+  return shuffledArray;
+};
+
     //const imageSource = require('../assets/map.png');
     
     //const overlayBounds = [
@@ -400,8 +436,16 @@ const MapComponent = ({ selectedPlace }) => {
         region={initialRegion}
         provider={PROVIDER_GOOGLE}
         customMapStyle={selectedMapStyle}
-        minZoomLevel={19}
+        minZoomLevel={16}
+        mapType={'satellite'}
         onRegionChangeComplete={onRegionChangeComplete}
+        mapPadding={{
+        left: 20,
+        bottom: 20
+        }}
+        paddingAdjustmentBehavior={'never'}
+        showsIndoors={false}
+        toolbarEnabled={false}
         // showsUserLocation
       >
         {visibleMarkers.map((place, index) => (
@@ -421,7 +465,7 @@ const MapComponent = ({ selectedPlace }) => {
             </View>
           </Marker>
         ))}
-        {selectedPlace && (
+        {selectedPlace &&  (
           <Marker
             coordinate={{
               latitude: selectedPlace.coordinates[0] + 0.00001,
@@ -429,6 +473,7 @@ const MapComponent = ({ selectedPlace }) => {
             }}
             title={selectedPlace.name}
             pinColor="orange"
+            tracksViewChanges={false}
           />
         )}
       </MapView>
@@ -455,9 +500,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-end",
     alignItems: "center",
+    minHeight: Dimensions.get('screen').height,
   },
   map: {
     ...StyleSheet.absoluteFillObject,
+    height: "110%"
   },
   markerText: {
     fontSize: 11,
@@ -471,5 +518,3 @@ const styles = StyleSheet.create({
 });
 
 export default MapComponent;
-
-
