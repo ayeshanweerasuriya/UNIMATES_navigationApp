@@ -47,7 +47,7 @@ const BottomToolbar = ({ navigation }) => {
       <Modal
         isVisible={isSearchModalVisible}
         animationIn="slideInUp"
-        animationOut="slideOutDown"
+        animationOut="slideOutUp"
         backdropColor={
           isDarkMode ? "rgba(51,51,51,0.7)" : "rgba(253,245,230,0.7)"
         }
