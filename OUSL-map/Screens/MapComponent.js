@@ -331,20 +331,20 @@ const MapComponent = ({ selectedPlace }) => {
     ? {
       latitude: selectedPlace.coordinates[0],
       longitude: selectedPlace.coordinates[1],
-      latitudeDelta: 0.005, // Adjust the zoom level as needed
-      longitudeDelta: 0.005,
+      latitudeDelta: 0.000922,
+      longitudeDelta: 0.000922,
     }
     : {
       latitude: 6.883421,
       longitude: 79.884448,
-      latitudeDelta: 0.00922,
-      longitudeDelta: 0.00421,
+      latitudeDelta: 0.000922,
+      longitudeDelta: 0.000922,
     };
 
-  const north = 6.88934;
-  const east = 79.88693;
-  const south = 6.88231;
-  const west = 79.87867;
+  const north = 6.8933;
+  const east = 79.8928;
+  const south = 6.8764;
+  const west = 79.8746;
 
   const mapViewRef = useRef(null);
 
@@ -389,7 +389,7 @@ const MapComponent = ({ selectedPlace }) => {
       return;
     }
 
-    if (zoomLevel <= 17.6) {
+    if (zoomLevel <= 16.6) {
       // Use the cached shuffled array if available
       const shuffledMarkers = shuffledMarkersCache || shuffleArray(placesArray);
 
@@ -399,8 +399,6 @@ const MapComponent = ({ selectedPlace }) => {
       }
       const markersToShow = shuffledMarkers.slice(0, minMarkersAtMinZoom);
       setVisibleMarkers(markersToShow);
-    } else {
-
     }
   };
 
