@@ -23,7 +23,11 @@ const Home = ({ route, navigation }) => {
       keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -100}
     >
       <SafeAreaView style={{ flex: 1 }}>
-      <StatusBar translucent={true} backgroundColor={'transparent'} />
+      <StatusBar 
+      translucent={true} 
+      backgroundColor={'transparent'} 
+      barStyle= {isDarkMode ? "light-content" : "dark-content"}
+      />
         <ScrollView
           contentContainerStyle={{ flexGrow: 1 }}
           keyboardShouldPersistTaps="handled"
