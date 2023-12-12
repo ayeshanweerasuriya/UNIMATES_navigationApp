@@ -3,8 +3,8 @@ import {
   SafeAreaView,
   View,
   Text,
-  StatusBar,
   StyleSheet,
+  StatusBar,
   KeyboardAvoidingView,
   ScrollView,
 } from "react-native";
@@ -23,7 +23,11 @@ const Home = ({ route, navigation }) => {
       keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -100}
     >
       <SafeAreaView style={{ flex: 1 }}>
-        <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
+      <StatusBar 
+      translucent={true} 
+      backgroundColor={'transparent'} 
+      barStyle= {isDarkMode ? "light-content" : "dark-content"}
+      />
         <ScrollView
           contentContainerStyle={{ flexGrow: 1 }}
           keyboardShouldPersistTaps="handled"
