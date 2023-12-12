@@ -1,78 +1,85 @@
-import React, { useEffect, useRef } from "react"; // import useEffect
+import React, { useRef, useEffect, useState } from "react";
+import { StyleSheet, View, Animated, Dimensions } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Image, Animated } from "react-native";
-import { useTheme } from "./ThemeContext";
+import LottieView from "lottie-react-native";
+import Svg, { Circle } from "react-native-svg";
+
+const { width, height } = Dimensions.get("window");
 
 export default function LaunchScreen({ navigation }) {
-  const fadeAnim = useRef(new Animated.Value(1)).current;
-  const { isDarkMode } = useTheme();
+  const animation = useRef(null);
+  const maskRadius = useRef(new Animated.Value(0)).current;
+  const [isAnimationComplete, setAnimationComplete] = useState(false);
 
   useEffect(() => {
-    // This will run only once after the component mounts
-    // Wait for 5 seconds before starting the fade out animation
-    const timer = setTimeout(() => {
-      // Animate the opacity from 1 to 0 over a duration of 1000 milliseconds (1 second)
-      Animated.timing(fadeAnim, {
-        toValue: 0,
-        duration: 1000,
-        useNativeDriver: true, // Add this line to ensure that native driver is used for better performance
-      }).start(() => {
-        // After the animation is done, navigate to the Home screen
-        navigation.navigate("Home");
-      });
-    }, 4000); // Start fading out after 4 seconds
+    const timeout = setTimeout(() => {
+      animateMask();
+    }, 2000);
 
-    // Clear the timer when the component unmounts
-    return () => clearTimeout(timer);
-  }, [fadeAnim, navigation]);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  const animateMask = () => {
+    Animated.timing(maskRadius, {
+      toValue: Math.sqrt(width * width + height * height),
+      duration: 1000,
+      useNativeDriver: false,
+    }).start(() => {
+      setAnimationComplete(true);
+    });
+  };
 
   return (
-    <Animated.View
-      style={[
-        styles.container,
-        isDarkMode && styles.darkTheme,
-        {
-          // Bind the animated value to the opacity property
-          opacity: fadeAnim,
-        },
-      ]}
-    >
-      <Image
-        source={require("../assets/Designed_Logo.png")}
-        style={styles.img}
-      />
-      {/* <Text style={[styles.text, isDarkMode && styles.darkText]}>
-        OPEN UNIVERSITY OF SRI LANKA
-      </Text> */}
+    <View style={styles.animationContainer}>
+      <View style={styles.logo}>
+        <LottieView
+          autoPlay
+          ref={animation}
+          style={{
+            width: 100,
+            height: 100,
+            borderRadius: 20,
+          }}
+          source={require("../assets/data.json")}
+          onAnimationFinish={() => {
+            if (isAnimationComplete) {
+              // Red color animation is complete, perform any additional actions
+              navigation.navigate("Home");
+            }
+          }}
+        />
+      </View>
+      <View style={styles.overlayContainer}>
+        <Svg height={height} width={width}>
+          <AnimatedCircle
+            cx={width / 2}
+            cy={height / 2}
+            r={maskRadius}
+            fill="red"
+          />
+        </Svg>
+      </View>
       <StatusBar style="auto" />
-    </Animated.View>
+    </View>
   );
 }
 
+const AnimatedCircle = Animated.createAnimatedComponent(Circle);
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
+  animationContainer: {
     alignItems: "center",
     justifyContent: "center",
+    flex: 1,
   },
-  img: {
-    height: 124,
-    // width: 104,
-    // Updated logo width
-    width: 124,
+  logo: {
+    position: "absolute",
+    zIndex: 1,
   },
-  text: {
-    // Updated style for text
-    fontWeight: "bold", // Use 'bold' instead of 700
-    margin: 10, // Increase the margin size by 5 for new logo
+  overlayContainer: {
+    ...StyleSheet.absoluteFillObject,
   },
-
-  darkTheme: {
-    backgroundColor: "#1E1E1E",
-  },
-
-  darkText: {
-    color: "#FFFFFF",
+  buttonContainer: {
+    paddingTop: 20,
   },
 });
