@@ -3,12 +3,15 @@ import { StyleSheet, View, Text, Image } from "react-native";
 import Icon from "react-native-vector-icons/Entypo";
 import { useTheme } from "./ThemeContext";
 
-export default function SelectedLocation({ selectedMarker, closeModal }) {
+export default function SelectedLocation({ selectedMarker, onClose }) {
   const { isDarkMode } = useTheme();
 
+  const handleClose = () => {
+    // Call the onClose callback to close the bottom sheet
+    onClose && onClose();
+  };
+
   return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
       <View style={[styles.whiteRectangle, isDarkMode && styles.darkTheme]}>
         {/* Section 1: Selected Location */}
         <View style={styles.section}>
@@ -17,12 +20,12 @@ export default function SelectedLocation({ selectedMarker, closeModal }) {
           >
             Selected Location
           </Text>
-          <Icon
+           <Icon
             name="chevron-thin-down"
             size={25}
             color={isDarkMode ? "#fff" : "#333"}
-            onPress={closeModal}
-          />
+            onPress={handleClose}
+          /> 
         </View>
 
         {/* Section 2: Image, Title, and Topic */}
@@ -89,22 +92,11 @@ export default function SelectedLocation({ selectedMarker, closeModal }) {
           </View>
         </View>
       </View>
-    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "gray",
-    alignItems: "center",
-    justifyContent: "center",
-  },
   whiteRectangle: {
-    position: "absolute",
-    bottom: 0,
-    width: "100%",
-    height: "50%",
     backgroundColor: "white",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,

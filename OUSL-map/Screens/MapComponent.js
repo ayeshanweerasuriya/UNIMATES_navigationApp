@@ -12,21 +12,24 @@ import { placesArray } from "./data";
 import { useTheme } from "./ThemeContext";
 import SelectedLocation from "./SelectedLocation";
 import { customMapStyle, customDarkMapStyle } from './MapStyles';
+import BottomSheet from './BottomSheet';
 
 
 const MapComponent = ({ selectedPlace }) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedMarker, setSelectedMarker] = useState(null);
+  const [bottomSheetVisible, setBottomSheetVisible] = useState(false);
+  const [visibleMarkers, setVisibleMarkers] = useState([]);
 
   const { isDarkMode } = useTheme();
 
   const handleMarkerPress = (marker) => {
     setSelectedMarker(marker);
-    setModalVisible(true);
+    setBottomSheetVisible(true);
   };
 
-  const closeModal = () => {
-    setModalVisible(false);
+  const closeBottomSheet = () => {
+    setBottomSheetVisible(false);
     setSelectedMarker(null);
   };
   
@@ -131,7 +134,7 @@ const MapComponent = ({ selectedPlace }) => {
               latitude: place.coordinates[0],
               longitude: place.coordinates[1],
             }}
-            onPress={() => handleMarkerPress(place.name)}
+            onPress={() => handleMarkerPress(place)}
             tracksViewChanges={false}
           >
             <View style={styles.markerContainer}>
@@ -152,21 +155,23 @@ const MapComponent = ({ selectedPlace }) => {
             tracksViewChanges={false}
           />
         )}
+        
+        {selectedMarker && (
+          <Marker
+            coordinate={{
+              latitude: selectedMarker.coordinates[0] + 0.00001,
+              longitude: selectedMarker.coordinates[1],
+            }}
+            pinColor="orange"
+            tracksViewChanges={false}
+          />
+        )}
+        
       </MapView>
 
       {selectedMarker && (
-        <BottomSheet selectedMarker={selectedMarker} isVisible={bottomSheetVisible} onClose={closeBottomSheet}/>
+        <BottomSheet selectedMarker={selectedMarker.name} isVisible={bottomSheetVisible} onClose={closeBottomSheet}/>
       )}
-      
-      {selectedPlace && (
-  <BottomSheet
-    selectedMarker={selectedMarker}
-    isVisible={bottomSheetVisible}
-    onClose={closeBottomSheet}
-    placeName={selectedPlace.name}
-  />
-)}
-
     </View>
   );
 };
