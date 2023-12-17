@@ -12,28 +12,27 @@ import { placesArray } from "./data";
 import { useTheme } from "./ThemeContext";
 import SelectedLocation from "./SelectedLocation";
 import { customMapStyle, customDarkMapStyle } from './MapStyles';
+import BottomSheet from './BottomSheet';
 
 
 const MapComponent = ({ selectedPlace }) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedMarker, setSelectedMarker] = useState(null);
+  const [bottomSheetVisible, setBottomSheetVisible] = useState(false);
+  const [visibleMarkers, setVisibleMarkers] = useState([]);
 
   const { isDarkMode } = useTheme();
 
-  // Function to handle marker press
   const handleMarkerPress = (marker) => {
     setSelectedMarker(marker);
-    setModalVisible(true);
+    setBottomSheetVisible(true);
   };
 
-  // Function to close the modal and hide the selected marker
-  const closeModal = () => {
-    setModalVisible(false);
+  const closeBottomSheet = () => {
+    setBottomSheetVisible(false);
     setSelectedMarker(null);
   };
   
-  const selectedMapStyle = isDarkMode ? customDarkMapStyle : customMapStyle;
-
   const initialRegion = selectedPlace
     ? {
       latitude: selectedPlace.coordinates[0],
@@ -63,54 +62,44 @@ const MapComponent = ({ selectedPlace }) => {
   });
 
   const onRegionChangeComplete = (newRegion) => {
-    // Check if the new region is within the allowed boundaries
     if (
       newRegion.latitude < south ||
       newRegion.latitude > north ||
       newRegion.longitude < west ||
       newRegion.longitude > east
     ) {
-      // If outside the boundaries, update the map to the last valid region
       mapViewRef.current.animateToRegion(region, 10);
     } else {
-      // If inside the boundaries, update the region state and handle markers
       setRegion(newRegion);
       handleMarkers(newRegion);
     }
   };
 
-  const [visibleMarkers, setVisibleMarkers] = useState([]);
-
   let shuffledMarkersCache = null;
 
-  const handleMarkers = (region, lazy) => {
+  const handleMarkers = (region) => {
     const { longitudeDelta } = region;
-
     const zoomLevel = Math.log2(360 / longitudeDelta);
-
-    const maxMarkersAtMaxZoom = 30;
     const minMarkersAtMinZoom = 5;
 
     if (zoomLevel >= 18) {
       setVisibleMarkers(placesArray);
       return;
-    }
-
-    if (zoomLevel <= 16.6) {
-      // Use the cached shuffled array if available
+    }    
+    else if (zoomLevel <= 16.5) {
+    
       const shuffledMarkers = shuffledMarkersCache || shuffleArray(placesArray);
 
-      // Cache the shuffled array to avoid unnecessary recalculation
       if (!shuffledMarkersCache) {
         shuffledMarkersCache = shuffledMarkers;
       }
+
       const markersToShow = shuffledMarkers.slice(0, minMarkersAtMinZoom);
       setVisibleMarkers(markersToShow);
     }
   };
 
-  // Fisher-Yates shuffle function
-  const shuffleArray = (array, lazy) => {
+  const shuffleArray = (array) => {
     const shuffledArray = [...array];
     for (let i = shuffledArray.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -119,13 +108,6 @@ const MapComponent = ({ selectedPlace }) => {
     return shuffledArray;
   };
 
-  //const imageSource = require('../assets/map.png');
-
-  //const overlayBounds = [
-  //[6.88238, 79.87886], // Bottom-left corner
-  //[6.88916, 79.88756], // Top-right corner
-  //];
-
   return (
     <View style={styles.container}>
       <MapView
@@ -133,7 +115,7 @@ const MapComponent = ({ selectedPlace }) => {
         style={styles.map}
         region={initialRegion}
         provider={PROVIDER_GOOGLE}
-        customMapStyle={selectedMapStyle}
+        customMapStyle={isDarkMode ? customDarkMapStyle : customMapStyle}
         minZoomLevel={16}
         mapType={'standard'}
         onRegionChangeComplete={onRegionChangeComplete}
@@ -144,7 +126,6 @@ const MapComponent = ({ selectedPlace }) => {
         paddingAdjustmentBehavior={'never'}
         showsIndoors={false}
         toolbarEnabled={false}
-      // showsUserLocation
       >
         {visibleMarkers.map((place, index) => (
           <Marker
@@ -153,7 +134,7 @@ const MapComponent = ({ selectedPlace }) => {
               latitude: place.coordinates[0],
               longitude: place.coordinates[1],
             }}
-            onPress={() => handleMarkerPress(place.name)}
+            onPress={() => handleMarkerPress(place)}
             tracksViewChanges={false}
           >
             <View style={styles.markerContainer}>
@@ -174,20 +155,23 @@ const MapComponent = ({ selectedPlace }) => {
             tracksViewChanges={false}
           />
         )}
+        
+        {selectedMarker && (
+          <Marker
+            coordinate={{
+              latitude: selectedMarker.coordinates[0] + 0.00001,
+              longitude: selectedMarker.coordinates[1],
+            }}
+            pinColor="orange"
+            tracksViewChanges={false}
+          />
+        )}
+        
       </MapView>
 
-      <Modal
-        animationIn="slideInUp"
-        animationOut="slideOutDown"
-        visible={isModalVisible}
-        onRequestClose={closeModal}
-        backdropOpacity={0.5}
-      >
-        <SelectedLocation
-          selectedMarker={selectedMarker}
-          closeModal={closeModal}
-        />
-      </Modal>
+      {selectedMarker && (
+        <BottomSheet selectedMarker={selectedMarker.name} isVisible={bottomSheetVisible} onClose={closeBottomSheet}/>
+      )}
     </View>
   );
 };
