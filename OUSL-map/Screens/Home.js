@@ -28,10 +28,6 @@ const Home = ({ route, navigation }) => {
       backgroundColor={'transparent'} 
       barStyle= {isDarkMode ? "light-content" : "dark-content"}
       />
-        <ScrollView
-          contentContainerStyle={{ flexGrow: 1 }}
-          keyboardShouldPersistTaps="handled"
-        >
           {selectedPlace ? (
             // Render MapComponent with the selected place if available
             <MapComponent selectedPlace={selectedPlace} />
@@ -48,7 +44,6 @@ const Home = ({ route, navigation }) => {
           </View>
 
           <BottomToolbar navigation={navigation} />
-        </ScrollView>
       </SafeAreaView>
     </KeyboardAvoidingView>
   );
