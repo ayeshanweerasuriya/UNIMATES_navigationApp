@@ -52,7 +52,7 @@ const BottomToolbar = ({ navigation }) => {
           isDarkMode ? "rgba(51,51,51,0.7)" : "rgba(253,245,230,0.7)"
         }
         onBackdropPress={toggleSearchModal}
-        blurRadius={4}
+        backdropOpacity={10}
       >
         <SearchBar onClose={toggleSearchModal} navigation={navigation} />
       </Modal>
