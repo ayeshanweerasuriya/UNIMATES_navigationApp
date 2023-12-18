@@ -50,6 +50,7 @@ import MapComponent from './Screens/MapComponent';
 import BugReport from './Screens/BugReport';
 import { StyleSheet, View, Image, Text } from 'react-native';
 import * as SplashScreen from 'expo-splash-screen';
+import LaunchScreen from './Screens/LaunchScreen';
 
 SplashScreen.hideAsync();
 
@@ -79,14 +80,7 @@ const App = () => {
 
   if (!appIsReady && splashVisible) {
     return (
-    <View style={styles.container}>
-      <Image
-        source={require("./assets/Designed_Logo.png")}
-        style={styles.img}
-      />
-        <Text style={styles.ouslText}>OPEN UNIVERSITY OF SRI LANKA</Text>
-        <Text style={styles.nawalaText}>Nawala</Text>
-      </View>
+      <LaunchScreen />
     );
   }
 
@@ -122,22 +116,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  img: {
-    height: 124,
-    width: 124,
-  },
-  ouslText: {
-    // Updated style for text
-    fontWeight: "bold", // Use 'bold' instead of 700
-    margin: 10, // Increase the margin size by 5 for new logo
-  },
-  nawalaText : {
-    bottom: 0, 
-    position: "absolute",
-    marginBottom: "7%",
-    color: 'grey',
-    fontSize: 22
-  }
 });
 
 export default App;

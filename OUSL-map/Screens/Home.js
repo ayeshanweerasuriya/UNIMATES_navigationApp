@@ -23,32 +23,27 @@ const Home = ({ route, navigation }) => {
       keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -100}
     >
       <SafeAreaView style={{ flex: 1 }}>
-      <StatusBar 
-      translucent={true} 
-      backgroundColor={'transparent'} 
-      barStyle= {isDarkMode ? "light-content" : "dark-content"}
-      />
-          {selectedPlace ? (
-            // Render MapComponent with the selected place if available
-            <MapComponent selectedPlace={selectedPlace} />
-          ) : (
-            // Render the default MapComponent without a selected place
-            <MapComponent />
-          )}
-
-          <View style={styles.container}>
-            <Text style={styles.lightText}>
-              UNIMATES
-            </Text>
-            <Text style={{ color: isDarkMode ? '#ADD8E6' : '#000099' }}>&copy; 2023</Text>
-          </View>
-
-          <BottomToolbar navigation={navigation} />
+        <StatusBar
+          translucent={true}
+          backgroundColor={'transparent'}
+          barStyle={isDarkMode ? "light-content" : "dark-content"}
+        />
+        {selectedPlace ? (
+          // Render MapComponent with the selected place if available
+          <MapComponent selectedPlace={selectedPlace} />
+        ) : (
+          // Render the default MapComponent without a selected place
+          <MapComponent />
+        )}
+        <View style={styles.container}>
+          <Text style={styles.lightText}>UNIMATES</Text>
+          <Text style={{ color: isDarkMode ? '#ADD8E6' : '#000099' }}>&copy; 2023</Text>
+        </View>
+        <BottomToolbar navigation={navigation} />
       </SafeAreaView>
     </KeyboardAvoidingView>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     bottom: 0,

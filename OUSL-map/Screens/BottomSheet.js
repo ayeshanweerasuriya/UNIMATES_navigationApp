@@ -51,9 +51,9 @@ const BottomSheet = ({ selectedMarker, onClose, placeName }) => {
 
     return (
         <GestureDetector gesture={gesture}>
-        	<Animated.View style={[styles.bottomSheetContainer, rBottomSheetStyle, isDarkMode && styles.darkTheme]}>
+            <Animated.View style={[styles.bottomSheetContainer, rBottomSheetStyle, isDarkMode && styles.darkTheme]}>
                 <View style={styles.line} />
-                <SelectedLocation placeName={placeName} selectedMarker={selectedMarker}onClose={onClose} />
+                <SelectedLocation placeName={placeName} selectedMarker={selectedMarker} onClose={onClose} />
             </Animated.View>
         </GestureDetector>
     )
@@ -90,8 +90,8 @@ const styles = StyleSheet.create({
         borderRadius: 2,
     },
     darkTheme: {
-    	backgroundColor: "#1E1E1E",
-  },
+        backgroundColor: "#1E1E1E",
+    },
 })
 
 export default BottomSheet;

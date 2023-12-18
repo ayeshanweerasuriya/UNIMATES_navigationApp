@@ -26,12 +26,12 @@ const SearchBar = ({ onClose, navigation }) => {
     const filtered = placesArray.filter((place) =>
       place.name.toLowerCase().includes(text.toLowerCase())
     );
-  
+
     // Sort the filtered array to prioritize results that start with the input
     filtered.sort((a, b) => {
       const aStartsWith = a.name.toLowerCase().startsWith(text.toLowerCase());
       const bStartsWith = b.name.toLowerCase().startsWith(text.toLowerCase());
-  
+
       // Sort in descending order based on whether the name starts with the input
       if (aStartsWith && !bStartsWith) {
         return -1;
@@ -41,12 +41,12 @@ const SearchBar = ({ onClose, navigation }) => {
         return 0;
       }
     });
-  
+
     const limitedSuggestions = filtered.slice(0, 10);
-  
+
     setFilteredData(limitedSuggestions);
     setQuery(text);
-  };  
+  };
 
   const clearSearch = () => {
     setSearchText("");
@@ -72,8 +72,8 @@ const SearchBar = ({ onClose, navigation }) => {
       </View>
     </TouchableOpacity>
   );
-  
-    const inputRef = useRef(null);
+
+  const inputRef = useRef(null);
 
   useEffect(() => {
     const delayFocus = setTimeout(() => {
