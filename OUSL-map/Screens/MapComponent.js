@@ -224,6 +224,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   satelliteText: {
+    color: '#fff',
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 2,
