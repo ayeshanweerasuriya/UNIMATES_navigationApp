@@ -5,7 +5,8 @@ import {
   View,
   Text,
   Modal,
-  Dimensions
+  Dimensions,
+  TouchableOpacity
 } from "react-native";
 // import CustomRoad from './CustomRoad';
 import { placesArray } from "./data";
@@ -14,18 +15,22 @@ import SelectedLocation from "./SelectedLocation";
 import { customMapStyle, customDarkMapStyle } from './MapStyles';
 import BottomSheet from './BottomSheet';
 
-
 const MapComponent = ({ selectedPlace }) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [selectedMarker, setSelectedMarker] = useState(null);
   const [bottomSheetVisible, setBottomSheetVisible] = useState(false);
   const [visibleMarkers, setVisibleMarkers] = useState([]);
+  const [mapType, setMapType] = useState('standard');
 
   const { isDarkMode } = useTheme();
 
   const handleMarkerPress = (marker) => {
     setSelectedMarker(marker);
     setBottomSheetVisible(true);
+  };
+  
+  const toggleMapType = () => {
+    setMapType((prevMapType) => (prevMapType === 'standard' ? 'satellite' : 'standard'));
   };
 
   const closeBottomSheet = () => {
@@ -117,7 +122,7 @@ const MapComponent = ({ selectedPlace }) => {
         provider={PROVIDER_GOOGLE}
         customMapStyle={isDarkMode ? customDarkMapStyle : customMapStyle}
         minZoomLevel={16}
-        mapType={'standard'}
+        mapType={mapType}
         onRegionChangeComplete={onRegionChangeComplete}
         mapPadding={{
           left: 20,
@@ -138,7 +143,7 @@ const MapComponent = ({ selectedPlace }) => {
             tracksViewChanges={false}
           >
             <View style={styles.markerContainer}>
-              <Text style={[styles.markerText, isDarkMode && styles.darkText]}>
+              <Text style={[styles.markerText, isDarkMode && styles.darkText, mapType === 'satellite' && styles.satelliteText]}>
                 {place.name}
               </Text>
             </View>
@@ -166,8 +171,16 @@ const MapComponent = ({ selectedPlace }) => {
             tracksViewChanges={false}
           />
         )}
-        
+  
       </MapView>
+      
+      <View style={styles.mapTypeButton}>
+        <TouchableOpacity onPress={toggleMapType}>
+          <Text style={styles.mapTypeButtonText}>
+            {mapType === 'standard' ? 'Satellite' : 'Standard'}
+          </Text>
+        </TouchableOpacity>
+      </View>
 
       {selectedMarker && (
         <BottomSheet selectedMarker={selectedMarker.name} isVisible={bottomSheetVisible} onClose={closeBottomSheet}/>
@@ -196,6 +209,24 @@ const styles = StyleSheet.create({
   },
   darkText: {
     color: "#fff",
+  },
+  mapTypeButton: {
+    position: 'absolute',
+    top: 30,
+    right: 20,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 10,
+    elevation: 5,
+  },
+  mapTypeButtonText: {
+    color: 'blue',
+    fontWeight: 'bold',
+  },
+   satelliteText: {
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
   },
 });
 
