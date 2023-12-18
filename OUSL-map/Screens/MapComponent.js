@@ -28,7 +28,7 @@ const MapComponent = ({ selectedPlace }) => {
     setSelectedMarker(marker);
     setBottomSheetVisible(true);
   };
-  
+
   const toggleMapType = () => {
     setMapType((prevMapType) => (prevMapType === 'standard' ? 'satellite' : 'standard'));
   };
@@ -37,7 +37,7 @@ const MapComponent = ({ selectedPlace }) => {
     setBottomSheetVisible(false);
     setSelectedMarker(null);
   };
-  
+
   const initialRegion = selectedPlace
     ? {
       latitude: selectedPlace.coordinates[0],
@@ -90,9 +90,9 @@ const MapComponent = ({ selectedPlace }) => {
     if (zoomLevel >= 18) {
       setVisibleMarkers(placesArray);
       return;
-    }    
+    }
     else if (zoomLevel <= 16.5) {
-    
+
       const shuffledMarkers = shuffledMarkersCache || shuffleArray(placesArray);
 
       if (!shuffledMarkersCache) {
@@ -160,7 +160,7 @@ const MapComponent = ({ selectedPlace }) => {
             tracksViewChanges={false}
           />
         )}
-        
+
         {selectedMarker && (
           <Marker
             coordinate={{
@@ -171,9 +171,9 @@ const MapComponent = ({ selectedPlace }) => {
             tracksViewChanges={false}
           />
         )}
-  
+
       </MapView>
-      
+
       <View style={styles.mapTypeButton}>
         <TouchableOpacity onPress={toggleMapType}>
           <Text style={styles.mapTypeButtonText}>
@@ -183,7 +183,7 @@ const MapComponent = ({ selectedPlace }) => {
       </View>
 
       {selectedMarker && (
-        <BottomSheet selectedMarker={selectedMarker.name} isVisible={bottomSheetVisible} onClose={closeBottomSheet}/>
+        <BottomSheet selectedMarker={selectedMarker.name} isVisible={bottomSheetVisible} onClose={closeBottomSheet} />
       )}
     </View>
   );
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     color: 'blue',
     fontWeight: 'bold',
   },
-   satelliteText: {
+  satelliteText: {
     textShadowColor: 'rgba(0, 0, 0, 0.75)',
     textShadowOffset: { width: 1, height: 1 },
     textShadowRadius: 2,

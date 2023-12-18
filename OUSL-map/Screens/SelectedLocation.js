@@ -12,86 +12,86 @@ export default function SelectedLocation({ selectedMarker, onClose }) {
   };
 
   return (
-      <View style={[styles.whiteRectangle, isDarkMode && styles.darkTheme]}>
-        {/* Section 1: Selected Location */}
-        <View style={styles.section}>
-          <Text
-            style={[styles.selectedLocationText, isDarkMode && styles.darkText]}
-          >
-            Selected Location
-          </Text>
-           <Icon
-            name="chevron-thin-down"
-            size={25}
-            color={isDarkMode ? "#fff" : "#333"}
-            onPress={handleClose}
-          /> 
-        </View>
+    <View style={[styles.whiteRectangle, isDarkMode && styles.darkTheme]}>
+      {/* Section 1: Selected Location */}
+      <View style={styles.section}>
+        <Text
+          style={[styles.selectedLocationText, isDarkMode && styles.darkText]}
+        >
+          Selected Location
+        </Text>
+        <Icon
+          name="chevron-thin-down"
+          size={25}
+          color={isDarkMode ? "#fff" : "#333"}
+          onPress={handleClose}
+        />
+      </View>
 
-        {/* Section 2: Image, Title, and Topic */}
-        <View style={styles.section}>
-          <View style={styles.contentContainer}>
-            <View style={styles.imageContainer}>
-              <Image
-                source={require("../assets/libraryimg2.jpg")}
-                style={styles.roundImage}
-              />
-            </View>
-            <View style={styles.textContainer}>
-              <Text style={[styles.titleText, isDarkMode && styles.darkText]}>
-                {selectedMarker}
-              </Text>
-              <Text style={styles.topicText}>ABS12SF54</Text>
-            </View>
+      {/* Section 2: Image, Title, and Topic */}
+      <View style={styles.section}>
+        <View style={styles.contentContainer}>
+          <View style={styles.imageContainer}>
+            <Image
+              source={require("../assets/libraryimg2.jpg")}
+              style={styles.roundImage}
+            />
           </View>
-        </View>
-
-        {/* Section 3: Description */}
-        <View style={styles.section}>
-          <View style={styles.descriptionContainer}>
-            <Text
-              style={[styles.descriptionText, isDarkMode && styles.darkText]}
-            >
-              Description
+          <View style={styles.textContainer}>
+            <Text style={[styles.titleText, isDarkMode && styles.darkText]}>
+              {selectedMarker}
             </Text>
-            <Text
-              style={[
-                styles.smallDescriptionText,
-                isDarkMode && styles.darkText,
-              ]}
-            >
-              A library is a collection of pre-written and reusable code,
-              functions, classes, or modules that provide specific functionality
-              or features.
-            </Text>
-          </View>
-        </View>
-
-        {/* Section 4: Three Images Horizontally */}
-        <View style={styles.section}>
-          <View style={styles.imageRow}>
-            <Image
-              source={require("../assets/libraryimg3.jpeg")}
-              style={styles.smallImage}
-            />
-            <Image
-              source={require("../assets/libraryimg4.jpg")}
-              style={styles.smallImage}
-            />
-            <Image
-              source={require("../assets/libraryimg5.jpg")}
-              style={styles.smallImage}
-            />
-          </View>
-        </View>
-
-        {/* Section 5: Button Section */}
-        <View style={styles.section}>
-          <View style={styles.buttonContainer}>
-            <Text style={styles.buttonText}>Direction for the Location</Text>
+            <Text style={styles.topicText}>ABS12SF54</Text>
           </View>
         </View>
       </View>
+
+      {/* Section 3: Description */}
+      <View style={styles.section}>
+        <View style={styles.descriptionContainer}>
+          <Text
+            style={[styles.descriptionText, isDarkMode && styles.darkText]}
+          >
+            Description
+          </Text>
+          <Text
+            style={[
+              styles.smallDescriptionText,
+              isDarkMode && styles.darkText,
+            ]}
+          >
+            A library is a collection of pre-written and reusable code,
+            functions, classes, or modules that provide specific functionality
+            or features.
+          </Text>
+        </View>
+      </View>
+
+      {/* Section 4: Three Images Horizontally */}
+      <View style={styles.section}>
+        <View style={styles.imageRow}>
+          <Image
+            source={require("../assets/libraryimg3.jpeg")}
+            style={styles.smallImage}
+          />
+          <Image
+            source={require("../assets/libraryimg4.jpg")}
+            style={styles.smallImage}
+          />
+          <Image
+            source={require("../assets/libraryimg5.jpg")}
+            style={styles.smallImage}
+          />
+        </View>
+      </View>
+
+      {/* Section 5: Button Section */}
+      <View style={styles.section}>
+        <View style={styles.buttonContainer}>
+          <Text style={styles.buttonText}>Direction for the Location</Text>
+        </View>
+      </View>
+    </View>
   );
 }
 
