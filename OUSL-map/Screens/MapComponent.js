@@ -129,8 +129,9 @@ const MapComponent = ({ selectedPlace }) => {
         mapType={mapType}
         onRegionChangeComplete={onRegionChangeComplete}
         mapPadding={{
-          left: 20,
-          bottom: 20
+          top: 20,
+          left: 8,
+          bottom: 20,
         }}
         paddingAdjustmentBehavior={'never'}
         showsIndoors={false}
