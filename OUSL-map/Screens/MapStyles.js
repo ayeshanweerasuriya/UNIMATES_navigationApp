@@ -1,46 +1,29 @@
 export const customMapStyle = [
   {
-    featureType: "poi",
-    elementType: "labels",
-    stylers: [
+    "elementType": "labels",
+    "stylers": [
       {
-        visibility: "off",
-      },
-    ],
-  },
-
-  {
-    elementType: "labels",
-    stylers: [
-      {
-        visibility: "off",
-      },
-    ],
+        "visibility": "off"
+      }
+    ]
   },
   {
-    featureType: "transit",
-    elementType: "labels",
-    stylers: [
+    "featureType": "administrative.land_parcel",
+    "stylers": [
       {
-        visibility: "off",
-      },
-    ],
+        "visibility": "off"
+      }
+    ]
   },
   {
-    featureType: "road",
-    elementType: "labels",
-    stylers: [
+    "featureType": "administrative.neighborhood",
+    "stylers": [
       {
-        visibility: "off",
-      },
-    ],
-  },
-  {
-    featureType: "poi.business",
-    elementType: "labels",
-    stylers: [{ visibility: "off" }],
-  },
-];
+        "visibility": "off"
+      }
+    ]
+  }
+]
 
 export const customDarkMapStyle = [
   {
