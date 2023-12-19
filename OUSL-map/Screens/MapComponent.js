@@ -6,7 +6,8 @@ import {
   Text,
   Modal,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from "react-native";
 // import CustomRoad from './CustomRoad';
 import { placesArray } from "./data";
@@ -23,6 +24,9 @@ const MapComponent = ({ selectedPlace }) => {
   const [mapType, setMapType] = useState('standard');
 
   const { isDarkMode } = useTheme();
+
+  const satelliteImage = require('../assets/satellite.jpg');
+  const standardImage = require('../assets/standard.jpg');
 
   const handleMarkerPress = (marker) => {
     setSelectedMarker(marker);
@@ -176,9 +180,10 @@ const MapComponent = ({ selectedPlace }) => {
 
       <View style={styles.mapTypeButton}>
         <TouchableOpacity onPress={toggleMapType}>
-          <Text style={styles.mapTypeButtonText}>
-            {mapType === 'standard' ? 'Satellite' : 'Standard'}
-          </Text>
+          <Image
+            source={mapType === 'standard' ? satelliteImage : standardImage}
+            style={styles.mapTypeButtonImage}
+          />
         </TouchableOpacity>
       </View>
 
@@ -212,16 +217,17 @@ const styles = StyleSheet.create({
   },
   mapTypeButton: {
     position: 'absolute',
-    top: 30,
+    top: 35,
     right: 20,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 10,
-    elevation: 5,
+    backgroundColor: '#fff',
+    borderRadius: 40,
+    padding: 4,
+    elevation: 4,
   },
-  mapTypeButtonText: {
-    color: 'blue',
-    fontWeight: 'bold',
+  mapTypeButtonImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 40,
   },
   satelliteText: {
     color: '#fff',
