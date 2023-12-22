@@ -107,10 +107,6 @@ const styles = StyleSheet.create({
   darkText: {
     color: "#fff",
   },
-  toolbar: {
-    height: '100%',
-    width: '100%'
-  }
 });
 
 export default Home;
