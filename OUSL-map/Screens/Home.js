@@ -19,8 +19,7 @@ const Home = ({ route, navigation }) => {
 
   const [toolbarVisible, setToolbarVisible] = useState(true);
   const slideAnimation = useRef(new Animated.Value(0)).current;
-    const tapCount = useRef(0);
-      const interactionCount = useRef(0);
+  const tapCount = useRef(0);
 
   const toggleToolbar = () => {
     Animated.timing(slideAnimation, {
@@ -35,8 +34,8 @@ const Home = ({ route, navigation }) => {
     inputRange: [0, 1],
     outputRange: [0, 100],
   });
-  
-  
+
+
   const resetTapCount = () => {
     tapCount.current = 0;
   };
@@ -52,40 +51,40 @@ const Home = ({ route, navigation }) => {
 
         resetTapCount();
       }, 250);
-    } else{
+    } else {
       resetTapCount();
     }
   };
 
   return (
-      <KeyboardAvoidingView
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        style={{ flex: 1 }}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -100}
-      >
-        <SafeAreaView style={{ flex: 1 }}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ flex: 1 }}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -100}
+    >
+      <SafeAreaView style={{ flex: 1 }}>
         <StatusBar
           translucent={true}
           backgroundColor={'transparent'}
           barStyle={isDarkMode ? "light-content" : "dark-content"}
         />
-          {selectedPlace ? (
-            <MapComponent selectedPlace={selectedPlace} />
-          ) : (
-            <MapComponent />
-          )}
+        {selectedPlace ? (
+          <MapComponent selectedPlace={selectedPlace} />
+        ) : (
+          <MapComponent />
+        )}
 
-          <TouchableWithoutFeedback onPress={handlePress}>
+        <TouchableWithoutFeedback onPress={handlePress}>
           <Animated.View style={[styles.container, { transform: [{ translateY }] }]}>
-          <Text style={styles.lightText}>UNIMATES</Text>
-          <Text style={{ color: isDarkMode ? '#ADD8E6' : '#000099' }}>&copy; 2023</Text>
+            <Text style={styles.lightText}>UNIMATES</Text>
+            <Text style={{ color: isDarkMode ? '#ADD8E6' : '#000099' }}>&copy; 2023</Text>
           </Animated.View>
-          </TouchableWithoutFeedback>
-	
-          {toolbarVisible && <BottomToolbar navigation={navigation} />}
-        </SafeAreaView>
-        
-      </KeyboardAvoidingView>
+        </TouchableWithoutFeedback>
+          
+        {toolbarVisible && <BottomToolbar navigation={navigation} />}
+      </SafeAreaView>
+
+    </KeyboardAvoidingView>
   );
 };
 
@@ -109,8 +108,8 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   toolbar: {
-  height: '100%',
-  width: '100%'
+    height: '100%',
+    width: '100%'
   }
 });
 
