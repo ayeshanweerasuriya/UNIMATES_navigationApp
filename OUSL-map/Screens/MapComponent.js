@@ -15,6 +15,7 @@ import { useTheme } from "./ThemeContext";
 import SelectedLocation from "./SelectedLocation";
 import { customMapStyle, customDarkMapStyle } from './MapStyles';
 import BottomSheet from './BottomSheet';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 
 const MapComponent = ({ selectedPlace }) => {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -116,6 +117,13 @@ const MapComponent = ({ selectedPlace }) => {
     }
     return shuffledArray;
   };
+  
+    const singleTap = Gesture.Tap()
+    .maxDuration(250)
+    .onStart(() => {
+      console.log('Single tap!');
+    });
+
 
   return (
     <View style={styles.container}>
@@ -226,8 +234,8 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   mapTypeButtonImage: {
-    width: 40,
-    height: 40,
+    width: 35,
+    height: 35,
     borderRadius: 40,
   },
   satelliteText: {
