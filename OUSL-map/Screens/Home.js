@@ -24,7 +24,8 @@ const Home = ({ route, navigation }) => {
   const toggleToolbar = () => {
     Animated.timing(slideAnimation, {
       toValue: toolbarVisible ? 1 : 0,
-      useNativeDriver: false,
+      duration: 200,
+      useNativeDriver: true,
     }).start(() => {
       setToolbarVisible(!toolbarVisible);
     });
