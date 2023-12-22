@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import {
   SafeAreaView,
   View,
   Text,
-  StyleSheet,
   StatusBar,
+  StyleSheet,
   KeyboardAvoidingView,
-  ScrollView,
+  TouchableWithoutFeedback,
+  Animated,
 } from "react-native";
 import MapComponent from "./MapComponent";
 import BottomToolbar from "./BottomToolbar";
@@ -16,34 +17,78 @@ const Home = ({ route, navigation }) => {
   const { isDarkMode } = useTheme();
   const selectedPlace = route.params?.selectedPlace;
 
+  const [toolbarVisible, setToolbarVisible] = useState(true);
+  const slideAnimation = useRef(new Animated.Value(0)).current;
+    const tapCount = useRef(0);
+      const interactionCount = useRef(0);
+
+  const toggleToolbar = () => {
+    Animated.timing(slideAnimation, {
+      toValue: toolbarVisible ? 1 : 0,
+      useNativeDriver: false,
+    }).start(() => {
+      setToolbarVisible(!toolbarVisible);
+    });
+  };
+
+  const translateY = slideAnimation.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 100],
+  });
+  
+  
+  const resetTapCount = () => {
+    tapCount.current = 0;
+  };
+
+  const handlePress = () => {
+    tapCount.current += 1;
+
+    if (tapCount.current === 1) {
+      setTimeout(() => {
+        if (tapCount.current === 1) {
+          toggleToolbar();
+        }
+
+        resetTapCount();
+      }, 250);
+    } else{
+      resetTapCount();
+    }
+  };
+
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={{ flex: 1 }}
-      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -100}
-    >
-      <SafeAreaView style={{ flex: 1 }}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={{ flex: 1 }}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -100}
+      >
+        <SafeAreaView style={{ flex: 1 }}>
         <StatusBar
           translucent={true}
           backgroundColor={'transparent'}
           barStyle={isDarkMode ? "light-content" : "dark-content"}
         />
-        {selectedPlace ? (
-          // Render MapComponent with the selected place if available
-          <MapComponent selectedPlace={selectedPlace} />
-        ) : (
-          // Render the default MapComponent without a selected place
-          <MapComponent />
-        )}
-        <View style={styles.container}>
+          {selectedPlace ? (
+            <MapComponent selectedPlace={selectedPlace} />
+          ) : (
+            <MapComponent />
+          )}
+
+          <TouchableWithoutFeedback onPress={handlePress}>
+          <Animated.View style={[styles.container, { transform: [{ translateY }] }]}>
           <Text style={styles.lightText}>UNIMATES</Text>
           <Text style={{ color: isDarkMode ? '#ADD8E6' : '#000099' }}>&copy; 2023</Text>
-        </View>
-        <BottomToolbar navigation={navigation} />
-      </SafeAreaView>
-    </KeyboardAvoidingView>
+          </Animated.View>
+          </TouchableWithoutFeedback>
+	
+          {toolbarVisible && <BottomToolbar navigation={navigation} />}
+        </SafeAreaView>
+        
+      </KeyboardAvoidingView>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     bottom: 0,
@@ -53,7 +98,7 @@ const styles = StyleSheet.create({
   },
   lightText: {
     color: "#FFA500",
-    fontWeight: 'bold',
+    fontWeight: "500",
     fontSize: 14,
     textShadowColor: "#333",
     textShadowOffset: { width: 1, height: 1 },
@@ -63,7 +108,10 @@ const styles = StyleSheet.create({
   darkText: {
     color: "#fff",
   },
+  toolbar: {
+  height: '100%',
+  width: '100%'
+  }
 });
 
 export default Home;
-
