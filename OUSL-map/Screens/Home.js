@@ -15,7 +15,9 @@ import { useTheme } from "./ThemeContext";
 
 const Home = ({ route, navigation }) => {
   const { isDarkMode } = useTheme();
-  const selectedPlace = route.params?.selectedPlace;
+  //const selectedPlace = route.params?.selectedPlace;
+
+  const [selectedPlace, setSelectedPlace] = useState(null);
 
   const [toolbarVisible, setToolbarVisible] = useState(true);
   const slideAnimation = useRef(new Animated.Value(0)).current;
@@ -70,7 +72,7 @@ const Home = ({ route, navigation }) => {
           barStyle={isDarkMode ? "light-content" : "dark-content"}
         />
         {selectedPlace ? (
-          <MapComponent selectedPlace={selectedPlace} />
+          <MapComponent selectedPlace={selectedPlace} setSelectedPlace={setSelectedPlace}/>
         ) : (
           <MapComponent />
         )}
@@ -81,8 +83,12 @@ const Home = ({ route, navigation }) => {
             <Text style={{ color: isDarkMode ? '#ADD8E6' : '#000099' }}>&copy; 2023</Text>
           </Animated.View>
         </TouchableWithoutFeedback>
-          
-        {toolbarVisible && <BottomToolbar navigation={navigation} />}
+
+        {toolbarVisible && <BottomToolbar
+          navigation={navigation}
+          selectedPlace={selectedPlace}
+          setSelectedPlace={setSelectedPlace}
+        />}
       </SafeAreaView>
 
     </KeyboardAvoidingView>
