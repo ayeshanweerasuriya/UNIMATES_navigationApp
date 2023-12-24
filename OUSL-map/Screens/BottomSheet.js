@@ -9,7 +9,7 @@ const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 const MAX_TRANSLATE_Y = -SCREEN_HEIGHT + 50;
 const DEFAULT_TRANSLATE_Y = -SCREEN_HEIGHT / 5;
 
-const BottomSheet = ({ selectedMarker, onClose, placeName }) => {
+const BottomSheet = ({ selectedMarker, selectedPlace, onClose, placeName }) => {
     const translateY = useSharedValue(0)
     const { isDarkMode } = useTheme();
 
@@ -53,7 +53,7 @@ const BottomSheet = ({ selectedMarker, onClose, placeName }) => {
         <GestureDetector gesture={gesture}>
             <Animated.View style={[styles.bottomSheetContainer, rBottomSheetStyle, isDarkMode && styles.darkTheme]}>
                 <View style={styles.line} />
-                <SelectedLocation placeName={placeName} selectedMarker={selectedMarker} onClose={onClose} />
+                <SelectedLocation placeName={placeName} selectedMarker={selectedMarker || selectedPlace} onClose={onClose} />
             </Animated.View>
         </GestureDetector>
     )

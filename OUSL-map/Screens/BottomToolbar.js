@@ -22,7 +22,7 @@ const Tool = (props) => {
   );
 };
 
-const BottomToolbar = ({ navigation }) => {
+const BottomToolbar = ({ navigation, setSelectedPlace }) => {
   const [isSearchModalVisible, setSearchModalVisible] = useState(false);
   const { isDarkMode } = useTheme();
 
@@ -47,14 +47,17 @@ const BottomToolbar = ({ navigation }) => {
       <Modal
         isVisible={isSearchModalVisible}
         animationIn="slideInUp"
-        animationOut="slideOutUp"
+        animationOut="slideOutDown"
+        animationOutTiming={700}
         backdropColor={
           isDarkMode ? "rgba(51,51,51,0.7)" : "rgba(253,245,230,0.7)"
         }
         onBackdropPress={toggleSearchModal}
         backdropOpacity={10}
       >
-        <SearchBar onClose={toggleSearchModal} navigation={navigation} />
+        <SearchBar onClose={toggleSearchModal}
+          navigation={navigation}
+          setSelectedPlace={setSelectedPlace} />
       </Modal>
     </View>
   );

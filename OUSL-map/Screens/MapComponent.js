@@ -1,33 +1,28 @@
-import React, { useState, useRef, useEffect, lazy } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import MapView, { Marker, Polyline, PROVIDER_GOOGLE, Overlay, MAP_TYPES } from "react-native-maps";
 import {
   StyleSheet,
   View,
   Text,
-  Modal,
   Dimensions,
   TouchableOpacity,
-  Image
+  Image,
 } from "react-native";
 // import CustomRoad from './CustomRoad';
 import { placesArray } from "./data";
 import { useTheme } from "./ThemeContext";
-import SelectedLocation from "./SelectedLocation";
 import { customMapStyle, customDarkMapStyle } from './MapStyles';
 import BottomSheet from './BottomSheet';
-import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import satelliteImage from '../assets/satellite.jpg';
+import standardImage from '../assets/standard.jpg';
 
 const MapComponent = ({ selectedPlace }) => {
-  const [isModalVisible, setModalVisible] = useState(false);
-  const [selectedMarker, setSelectedMarker] = useState(null);
+  const [selectedMarker, setSelectedMarker] = useState(selectedPlace);
   const [bottomSheetVisible, setBottomSheetVisible] = useState(false);
   const [visibleMarkers, setVisibleMarkers] = useState([]);
   const [mapType, setMapType] = useState('standard');
 
   const { isDarkMode } = useTheme();
-
-  const satelliteImage = require('../assets/satellite.jpg');
-  const standardImage = require('../assets/standard.jpg');
 
   const handleMarkerPress = (marker) => {
     setSelectedMarker(marker);
@@ -42,6 +37,10 @@ const MapComponent = ({ selectedPlace }) => {
     setBottomSheetVisible(false);
     setSelectedMarker(null);
   };
+
+  useEffect(() => {
+    setSelectedMarker(selectedPlace);
+  }, [selectedPlace]);
 
   const initialRegion = selectedPlace
     ? {
@@ -117,13 +116,6 @@ const MapComponent = ({ selectedPlace }) => {
     }
     return shuffledArray;
   };
-  
-    const singleTap = Gesture.Tap()
-    .maxDuration(250)
-    .onStart(() => {
-      console.log('Single tap!');
-    });
-
 
   return (
     <View style={styles.container}>
@@ -162,18 +154,6 @@ const MapComponent = ({ selectedPlace }) => {
             </View>
           </Marker>
         ))}
-        {selectedPlace && (
-          <Marker
-            coordinate={{
-              latitude: selectedPlace.coordinates[0] + 0.00001,
-              longitude: selectedPlace.coordinates[1],
-            }}
-            title={selectedPlace.name}
-            pinColor="orange"
-            tracksViewChanges={false}
-          />
-        )}
-
         {selectedMarker && (
           <Marker
             coordinate={{
@@ -197,8 +177,13 @@ const MapComponent = ({ selectedPlace }) => {
       </View>
 
       {selectedMarker && (
-        <BottomSheet selectedMarker={selectedMarker.name} isVisible={bottomSheetVisible} onClose={closeBottomSheet} />
+        <BottomSheet
+          selectedMarker={selectedMarker.name}
+          isVisible={bottomSheetVisible}
+          onClose={closeBottomSheet}
+        />
       )}
+
     </View>
   );
 };

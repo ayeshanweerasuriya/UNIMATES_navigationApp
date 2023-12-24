@@ -9,17 +9,17 @@ import {
   TouchableOpacity,
   Dimensions,
   StatusBar,
+  KeyboardAvoidingView,
 } from "react-native";
 import IconAnt from "react-native-vector-icons/AntDesign";
 import { placesArray } from "./data";
 import { useTheme } from "./ThemeContext";
 import Icon from "react-native-vector-icons/Ionicons";
 
-const SearchBar = ({ onClose, navigation }) => {
+const SearchBar = ({ onClose, setSelectedPlace }) => {
   const [query, setQuery] = useState("");
   const [filteredData, setFilteredData] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const [searchedPlace, setSearchedPlace] = useState(null);
   const { isDarkMode } = useTheme();
 
   const handleInputChange = (text) => {
@@ -53,8 +53,9 @@ const SearchBar = ({ onClose, navigation }) => {
   };
 
   const handlePlaceSelect = (place) => {
-    setSearchedPlace(place);
-    navigation.navigate("Home", { selectedPlace: place });
+    //setSearchedPlace(place);
+    //navigation.navigate("Home", { selectedPlace: place });
+    setSelectedPlace(place);
     onClose();
   };
 
@@ -134,6 +135,7 @@ const SearchBar = ({ onClose, navigation }) => {
           renderItem={renderAutocompleteItem}
           keyExtractor={(item) => item.name}
           style={styles.autocompleteList}
+          keyboardShouldPersistTaps="handled"
         />
       )}
     </SafeAreaView>
